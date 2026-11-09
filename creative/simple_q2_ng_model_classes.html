@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="simpleQ2App">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Exam Q2: ng-model Directive Classes & Validation</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"><\/script>')</script>
+  <style>
+    /* Visual cues corresponding to AngularJS classes */
+    .test-input.ng-valid { border: 2px solid #10b981 !important; }
+    .test-input.ng-invalid.ng-touched { border: 2px solid #ef4444 !important; }
+    .test-input.ng-dirty { background-color: rgba(99, 102, 241, 0.15); }
+    .test-input.ng-pristine { background-color: rgba(15, 23, 42, 0.6); }
+    .state-pill { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; font-family: 'Fira Code', monospace; margin: 4px; }
+    .state-true { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .state-false { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+  </style>
+</head>
+<body ng-controller="ValidationCtrl">
+
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">SIMPLE Q2</span>
+        <div class="header-title">
+          <h1>ng-model Directive Classes & Validation States</h1>
+          <p>Lab Exam Fundamental Question • Covers Program 35</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Creative Hub</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card mb-4" style="background: rgba(15, 23, 42, 0.7);">
+      <strong class="text-info">Lab Exam Question:</strong>
+      <p style="margin-top: 4px; color: #cbd5e1;">
+        "Write an AngularJS code to demonstrate all the CSS classes and validation states that the ng-model directive adds to an input element (ng-valid, ng-invalid, ng-dirty, ng-pristine, ng-touched, ng-untouched)."
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <!-- Input Card -->
+      <div class="card">
+        <div class="card-title">
+          <span>Form Field Under Test</span>
+          <span class="badge badge-info">Type & Click Outside</span>
+        </div>
+
+        <form name="userForm" novalidate>
+          <div class="form-group">
+            <label class="form-label">Email Address (Required & Email Pattern)</label>
+            <input type="email" name="userEmail" class="form-control test-input" ng-model="email" required placeholder="name@domain.com">
+          </div>
+
+          <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-top: 15px;">
+            <p>💡 <strong>Observe:</strong></p>
+            <ul style="padding-left: 20px;">
+              <li>Starts as <code>ng-pristine</code> and <code>ng-untouched</code>.</li>
+              <li>Typing modifies it to <code>ng-dirty</code>.</li>
+              <li>Valid email format activates <code>ng-valid</code> (Green border).</li>
+              <li>Invalid text on blur triggers <code>ng-invalid</code> + <code>ng-touched</code> (Red border).</li>
+            </ul>
+          </div>
+        </form>
+      </div>
+
+      <!-- Live Boolean Classes Card -->
+      <div class="card">
+        <div class="card-title">
+          <span>Live State Inspection Properties</span>
+          <span class="badge badge-success">Form Property Monitor</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="state-pill" ng-class="userForm.userEmail.$valid ? 'state-true' : 'state-false'">
+            $valid: {{ userForm.userEmail.$valid }}
+          </div>
+          <div class="state-pill" ng-class="userForm.userEmail.$invalid ? 'state-false' : 'state-true'">
+            $invalid: {{ userForm.userEmail.$invalid }}
+          </div>
+          <div class="state-pill" ng-class="userForm.userEmail.$pristine ? 'state-true' : 'state-false'">
+            $pristine: {{ userForm.userEmail.$pristine }}
+          </div>
+          <div class="state-pill" ng-class="userForm.userEmail.$dirty ? 'state-true' : 'state-false'">
+            $dirty: {{ userForm.userEmail.$dirty }}
+          </div>
+          <div class="state-pill" ng-class="userForm.userEmail.$touched ? 'state-true' : 'state-false'">
+            $touched: {{ userForm.userEmail.$touched }}
+          </div>
+          <div class="state-pill" ng-class="userForm.userEmail.$untouched ? 'state-true' : 'state-false'">
+            $untouched: {{ userForm.userEmail.$untouched }}
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; padding: 12px; background: rgba(15,23,42,0.6); border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.85rem;">
+          <div><strong>Current Model Value:</strong> <code>{{ email || 'undefined' }}</code></div>
+          <div><strong>Error Object:</strong> <code>{{ userForm.userEmail.$error | json }}</code></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    var app = angular.module('simpleQ2App', []);
+    app.controller('ValidationCtrl', function($scope) {
+      $scope.email = '';
+    });
+  </script>
+</body>
+</html>
+

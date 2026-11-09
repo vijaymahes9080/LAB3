@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="bindApp">
+<head>
+<title>Types of Data Binding</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script></head>
+<body ng-controller="bindCtrl">
+<h2>Types of Data Binding in AngularJS</h2>
+<!-- One-way binding -->
+<h3>1. One-way Binding ({{ }})</h3>
+<p>Hello, {{ name }}</p>
+<!-- Two-way binding -->
+<h3>2. Two-way Binding (ng-model)</h3>
+<input type="text" ng-model="message">
+<p>You typed: {{ message }}</p>
+<script>
+var app = angular.module("bindApp", []);
+app.controller("bindCtrl", function($scope) {
+$scope.name = "Sam";
+$scope.message = "Type something...";
+})
+</script>
+</body>
+</html>

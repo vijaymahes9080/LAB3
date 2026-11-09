@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON in JavaScript & HTML Forms Master Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            📦 <strong>JSON & JavaScript Hub</strong> &bull; parse, stringify, loops & forms
+        </div>
+        <div class="nav-links">
+            <a href="form_to_json.html" class="nav-btn">📝 Form to JSON</a>
+            <a href="display_json.html" class="nav-btn">📊 Display JSON Data</a>
+            <a href="students.json" target="_blank" class="nav-btn" style="background:#2563eb; color:#fff; border-color:#2563eb;">📄 Raw students.json</a>
+            <button type="button" id="themeToggle" class="theme-toggle-btn" onclick="toggleTheme()">🌙</button>
+        </div>
+    </nav>
+
+    <div class="container" style="width: 1050px; max-width: 95%;">
+
+        <header class="form-header">
+            <h1>JSON & JavaScript Practical Guide</h1>
+            <p class="subtitle">Complete implementation of JSON parsing, stringifying, statement & looping access, form-to-JSON storage, and JSON-to-form pre-filling</p>
+        </header>
+
+        <!-- Quick Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('tab-core', this)">⚡ 1. parse & stringify</button>
+            <button class="tab-btn" onclick="switchTab('tab-access', this)">🔍 2. Statements & Loops</button>
+            <button class="tab-btn" onclick="switchTab('tab-form', this)">📝 3. Form &rarr; JSON File</button>
+            <button class="tab-btn" onclick="switchTab('tab-display', this)">📊 4. JSON &rarr; HTML Form & Table</button>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TAB 1: JSON.parse() & JSON.stringify() -->
+        <!-- ============================================================ -->
+        <div id="tab-core" class="tab-content active">
+            <div class="card-grid">
+                <!-- JSON.parse Card -->
+                <div class="feature-card">
+                    <div class="card-header">
+                        <h3>1️⃣ <code>JSON.parse()</code> (String &rarr; Object)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Converts a JSON formatted text string into a native JavaScript Object.</p>
+                        <label for="parseInput">Input JSON String:</label>
+                        <textarea id="parseInput" style="height: 110px; font-family: monospace;">{
+  "id": 101,
+  "name": "Jane Doe",
+  "course": "MCA",
+  "skills": ["JavaScript", "JSON", "PHP"]
+}</textarea>
+                        <button class="btn btn-submit" style="margin-top: 10px; width: 100%;" onclick="runParseDemo()">▶️ Execute JSON.parse()</button>
+                        <div id="parseOutput" class="console-output" style="display:none; margin-top:12px;"></div>
+                    </div>
+                </div>
+
+                <!-- JSON.stringify Card -->
+                <div class="feature-card">
+                    <div class="card-header">
+                        <h3>2️⃣ <code>JSON.stringify()</code> (Object &rarr; String)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Converts a JavaScript Object into a formatted JSON string with optional indentation.</p>
+                        <button class="btn btn-secondary" style="margin-top: 10px; width: 100%;" onclick="runStringifyDemo()">▶️ Execute JSON.stringify()</button>
+                        <div id="stringifyOutput" class="console-output" style="display:none; margin-top:12px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TAB 2: Accessing JSON Values (Statements vs Looping) -->
+        <!-- ============================================================ -->
+        <div id="tab-access" class="tab-content">
+            <div class="card-grid">
+                <!-- Statements Card -->
+                <div class="feature-card">
+                    <div class="card-header">
+                        <h3>📜 Value Access using STATEMENTS</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Using Dot Notation, Bracket Notation, Array Indexing, and Destructuring:</p>
+                        <pre class="code-box" style="font-size: 12.5px;"><code>// Sample Object: student
+student.name                 // Dot notation
+student["email"]             // Bracket notation
+student.address.city         // Nested property
+student.skills[0]            // Array element
+const { name, course } = student; // Destructuring</code></pre>
+                        <button class="btn btn-submit" style="width: 100%; margin-top: 10px;" onclick="runStatementsDemo()">▶️ Test Statement Access</button>
+                        <div id="statementsOutput" class="console-output" style="display:none; margin-top:12px;"></div>
+                    </div>
+                </div>
+
+                <!-- Looping Card -->
+                <div class="feature-card">
+                    <div class="card-header">
+                        <h3>🔁 Value Access using LOOPING</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Iterating through JSON objects and arrays using 5 loop types:</p>
+                        <pre class="code-box" style="font-size: 12.5px;"><code>for (key in student) { ... }      // for...in (keys)
+for (item of studentsList) { ... } // for...of (array)
+studentsList.forEach(s => ... )   // forEach
+studentsList.map(s => s.name)     // map transformation
+studentsList.filter(s => ...)     // filter query</code></pre>
+                        <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;" onclick="runLoopingDemo()">▶️ Test Looping Access</button>
+                        <div id="loopingOutput" class="console-output" style="display:none; margin-top:12px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TAB 3: Send HTML Form Data to JSON File & Separate File -->
+        <!-- ============================================================ -->
+        <div id="tab-form" class="tab-content">
+            <div class="form-header" style="text-align: left; margin-bottom: 15px;">
+                <h2>Send Form Data to JSON File</h2>
+                <p class="subtitle">Submitting this form converts input values into a JSON object, saves to <code>students.json</code>, and saves as a separate JSON file.</p>
+            </div>
+
+            <form id="masterStudentForm" onsubmit="handleFormSubmit(event)">
+                <fieldset>
+                    <legend>👤 Student Information</legend>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="rollNo">Roll Number: <span class="required">*</span></label>
+                            <input type="text" id="rollNo" name="rollNo" placeholder="e.g. CSB-2026" required>
+                        </div>
+                        <div class="form-col">
+                            <label for="name">Full Name: <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" placeholder="e.g. Alex Johnson" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="age">Age: <span class="required">*</span></label>
+                            <input type="number" id="age" name="age" min="15" max="70" placeholder="21" required>
+                        </div>
+                        <div class="form-col">
+                            <label for="dob">Date of Birth: <span class="required">*</span></label>
+                            <input type="date" id="dob" name="dob" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label>Gender: <span class="required">*</span></label>
+                            <div class="options">
+                                <label><input type="radio" name="gender" value="Male" checked> Male</label>
+                                <label><input type="radio" name="gender" value="Female"> Female</label>
+                                <label><input type="radio" name="gender" value="Other"> Other</label>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="course">Degree / Course: <span class="required">*</span></label>
+                            <select id="course" name="course" required>
+                                <option value="">-- Choose Course --</option>
+                                <option value="B.Sc Computer Science">B.Sc Computer Science</option>
+                                <option value="BCA">BCA</option>
+                                <option value="B.Tech IT">B.Tech IT</option>
+                                <option value="MCA">MCA</option>
+                                <option value="M.Sc CS">M.Sc Computer Science</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="email">Email Address: <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="alex@example.com" required>
+                        </div>
+                        <div class="form-col">
+                            <label for="phone">Phone Number: <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" placeholder="9876543210" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="city">Campus City: <span class="required">*</span></label>
+                            <input type="text" id="city" name="city" placeholder="Chennai" required>
+                        </div>
+                        <div class="form-col">
+                            <label for="batchTime">Batch Time: <span class="required">*</span></label>
+                            <input type="time" id="batchTime" name="batchTime" required>
+                        </div>
+                    </div>
+
+                    <label>Technical Skills: <span class="required">*</span></label>
+                    <div class="options">
+                        <label><input type="checkbox" name="skills[]" value="HTML" checked> HTML</label>
+                        <label><input type="checkbox" name="skills[]" value="CSS" checked> CSS</label>
+                        <label><input type="checkbox" name="skills[]" value="JavaScript" checked> JavaScript</label>
+                        <label><input type="checkbox" name="skills[]" value="JSON" checked> JSON</label>
+                        <label><input type="checkbox" name="skills[]" value="PHP"> PHP</label>
+                        <label><input type="checkbox" name="skills[]" value="MySQL"> MySQL</label>
+                        <label><input type="checkbox" name="skills[]" value="Python"> Python</label>
+                    </div>
+
+                    <label for="address" style="margin-top:14px;">Full Address:</label>
+                    <textarea id="address" name="address" placeholder="Enter residential address..."></textarea>
+                </fieldset>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-submit">💾 1. Send & Store to JSON File</button>
+                    <button type="button" class="btn btn-secondary" onclick="handleDownloadSeparateJson()">📥 2. Download as Separate .json File</button>
+                    <button type="button" class="btn btn-reset" style="background:#6366f1;" onclick="fillSampleForm()">⚡ Auto-Fill Sample</button>
+                </div>
+            </form>
+
+            <div id="formResultAlert" style="margin-top:20px; display:none;"></div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TAB 4: Display JSON File Data into HTML Forms & Table -->
+        <!-- ============================================================ -->
+        <div id="tab-display" class="tab-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
+                <div>
+                    <h2>Data from <code>students.json</code> File</h2>
+                    <p class="subtitle">Read live JSON data and populate into HTML Table or prefill back into HTML Form</p>
+                </div>
+                <button class="btn btn-submit" style="width:auto; padding:8px 16px;" onclick="loadAndDisplayJson()">🔄 Fetch & Reload JSON Data</button>
+            </div>
+
+            <!-- JSON Table Display -->
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Roll No</th>
+                            <th>Full Name</th>
+                            <th>Age & Gender</th>
+                            <th>Course</th>
+                            <th>Email & Phone</th>
+                            <th>Skills</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jsonTableBody">
+                        <tr>
+                            <td colspan="8" style="text-align:center; padding:25px; color:var(--text-muted);">
+                                Click "Fetch & Reload JSON Data" or switch to this tab to load records from <code>students.json</code>.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Core Integration -->
+    <script src="json_basics.js"></script>
+    <script>
+        // Tab Switcher
+        function switchTab(tabId, btn) {
+            document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+            document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
+            document.getElementById(tabId).classList.add("active");
+            btn.classList.add("active");
+
+            if (tabId === "tab-display") {
+                loadAndDisplayJson();
+            }
+        }
+
+        // Demo: JSON.parse
+        function runParseDemo() {
+            const raw = document.getElementById("parseInput").value;
+            try {
+                const parsed = JSON.parse(raw);
+                const out = document.getElementById("parseOutput");
+                out.style.display = "block";
+                out.innerHTML = `<strong>✅ JSON.parse() Success!</strong>\n` +
+                    `Parsed Object Type: ${typeof parsed}\n` +
+                    `Accessing parsed.name: "${parsed.name}"\n` +
+                    `Accessing parsed.course: "${parsed.course}"\n` +
+                    `Accessing parsed.skills[0]: "${parsed.skills ? parsed.skills[0] : 'N/A'}"\n\n` +
+                    `Inspected Object:\n` + JSON.stringify(parsed, null, 2);
+            } catch (err) {
+                const out = document.getElementById("parseOutput");
+                out.style.display = "block";
+                out.innerHTML = `<strong>❌ SyntaxError in JSON.parse():</strong> ${err.message}`;
+            }
+        }
+
+        // Demo: JSON.stringify
+        function runStringifyDemo() {
+            const res = demoJsonStringify();
+            const out = document.getElementById("stringifyOutput");
+            out.style.display = "block";
+            out.innerHTML = `<strong>✅ JSON.stringify() Result:</strong>\n\n` +
+                `1. Formatted with 2-space indentation:\n${res.jsonString}\n\n` +
+                `2. Filtered Replacer (name, email, skills only):\n${res.filteredString}`;
+        }
+
+        // Demo: Statements
+        function runStatementsDemo() {
+            const lines = demoAccessStatements();
+            const out = document.getElementById("statementsOutput");
+            out.style.display = "block";
+            out.innerHTML = `<strong>✅ Accessed JSON Values using STATEMENTS:</strong>\n\n` + lines.join("\n");
+        }
+
+        // Demo: Looping
+        function runLoopingDemo() {
+            const logs = demoAccessLooping();
+            const out = document.getElementById("loopingOutput");
+            out.style.display = "block";
+            out.innerHTML = `<strong>✅ Accessed JSON Values using LOOPING:</strong>\n\n` + logs;
+        }
+
+        // Sample form autofill
+        function fillSampleForm() {
+            const form = document.getElementById("masterStudentForm");
+            form.elements["rollNo"].value = "MCA-" + Math.floor(1000 + Math.random() * 9000);
+            form.elements["name"].value = "Rachel Green";
+            form.elements["age"].value = "23";
+            form.elements["dob"].value = "2003-07-20";
+            form.elements["email"].value = "rachel.green@example.com";
+            form.elements["phone"].value = "9876501234";
+            form.elements["course"].value = "MCA";
+            form.elements["city"].value = "Bangalore";
+            form.elements["batchTime"].value = "14:00";
+            form.elements["address"].value = "Flat 20, Central Perk Residency, Bangalore - 560001";
+            
+            const femaleRadio = form.querySelector('input[name="gender"][value="Female"]');
+            if (femaleRadio) femaleRadio.checked = true;
+        }
+
+        // Send Form to JSON backend
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById("masterStudentForm");
+            const alertBox = document.getElementById("formResultAlert");
+            alertBox.style.display = "block";
+            alertBox.innerHTML = "⏳ Processing and saving form to JSON file...";
+
+            const res = await sendFormDataToJson(form, true);
+
+            alertBox.className = "alert-box alert-success";
+            alertBox.innerHTML = `
+                <h3>🎉 Form Data Stored into JSON File!</h3>
+                <p><strong>Master File:</strong> <code>students.json</code></p>
+                <p><strong>Separate File:</strong> <code>records/student_${form.elements["rollNo"].value}.json</code></p>
+                <p><strong>Payload Stored:</strong></p>
+                <pre class="code-box" style="font-size:12px; margin-top:8px;"><code>${res.jsonPayload}</code></pre>
+                <div style="margin-top:10px;">
+                    <a href="students.json" target="_blank" class="btn btn-submit" style="width:auto; padding:6px 14px; font-size:12px;">Open students.json</a>
+                    <button type="button" class="btn btn-secondary" style="width:auto; padding:6px 14px; font-size:12px;" onclick="switchTab('tab-display', document.querySelectorAll('.tab-btn')[3])">View in Table</button>
+                </div>
+            `;
+        }
+
+        // Download as separate JSON file directly in browser
+        function handleDownloadSeparateJson() {
+            const form = document.getElementById("masterStudentForm");
+            const result = downloadFormDataAsJsonFile(form);
+            const alertBox = document.getElementById("formResultAlert");
+            alertBox.style.display = "block";
+            alertBox.className = "alert-box alert-success";
+            alertBox.innerHTML = `
+                <h3>📥 Separate JSON File Downloaded!</h3>
+                <p>Saved to your machine as <strong>${result.filename}</strong></p>
+                <pre class="code-box" style="font-size:12px; margin-top:8px;"><code>${result.jsonString}</code></pre>
+            `;
+        }
+
+        // Load JSON data and display to HTML Table
+        let cachedStudents = [];
+        async function loadAndDisplayJson() {
+            const tbody = document.getElementById("jsonTableBody");
+            tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:20px;">Loading from students.json...</td></tr>`;
+
+            try {
+                const resp = await fetch("students.json?" + new Date().getTime());
+                const data = await resp.json();
+                cachedStudents = data;
+
+                if (!Array.isArray(data) || data.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:20px;">No student records found in students.json</td></tr>`;
+                    return;
+                }
+
+                let html = "";
+                data.forEach((student, idx) => {
+                    const skillsText = Array.isArray(student.skills) ? student.skills.join(", ") : (student.skills || "None");
+                    html += `
+                        <tr>
+                            <td><strong>${student.id || (idx + 1)}</strong></td>
+                            <td><span class="badge-tag">${student.rollNo || 'N/A'}</span></td>
+                            <td><strong>${student.name}</strong></td>
+                            <td>${student.age || '-'} yrs &bull; ${student.gender || '-'}</td>
+                            <td><strong>${student.course || '-'}</strong></td>
+                            <td>
+                                <a href="mailto:${student.email}">${student.email}</a><br>
+                                <small style="color:var(--text-muted);">${student.phone}</small>
+                            </td>
+                            <td><small>${skillsText}</small></td>
+                            <td>
+                                <button class="btn btn-submit" style="padding:4px 8px; font-size:11.5px; width:auto;" onclick="prefillFormWithStudent(${idx})">
+                                    📝 Load into Form
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            } catch (err) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:#dc2626; padding:20px;">Failed to fetch students.json: ${err.message}</td></tr>`;
+            }
+        }
+
+        // Populate JSON record into HTML Form
+        function prefillFormWithStudent(index) {
+            const student = cachedStudents[index];
+            if (!student) return;
+
+            const form = document.getElementById("masterStudentForm");
+            populateJsonToForm(student, form);
+
+            // Switch to Form tab
+            switchTab("tab-form", document.querySelectorAll(".tab-btn")[2]);
+
+            // Flash alert
+            const alertBox = document.getElementById("formResultAlert");
+            alertBox.style.display = "block";
+            alertBox.className = "alert-box alert-success";
+            alertBox.innerHTML = `✅ Successfully loaded data for <strong>${student.name}</strong> (${student.rollNo}) from JSON into HTML Form inputs!`;
+            alertBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Dark theme toggle
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+            if (isDark) {
+                document.documentElement.removeAttribute("data-theme");
+                localStorage.setItem("json_theme", "light");
+                document.getElementById("themeToggle").textContent = "🌙";
+            } else {
+                document.documentElement.setAttribute("data-theme", "dark");
+                localStorage.setItem("json_theme", "dark");
+                document.getElementById("themeToggle").textContent = "☀️";
+            }
+        }
+
+        if (localStorage.getItem("json_theme") === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+            document.getElementById("themeToggle").textContent = "☀️";
+        }
+    </script>
+
+</body>
+
+</html>

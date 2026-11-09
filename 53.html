@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="cascadingApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 53 - Cascading Selection</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="CascadingCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#53</span>
+        <div class="header-title">
+          <h1>Cascading Selection Application</h1>
+          <p>Dependent Dropdowns with ng-options & ng-change</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card mb-4">
+      <div class="card-title"><span>Academic Program Hierarchy</span><span class="badge badge-info">3-Tier Dependent Selection</span></div>
+      <div class="grid-3">
+        <!-- Tier 1: Department -->
+        <div class="form-group">
+          <label class="form-label">1. Department:</label>
+          <select class="form-control" ng-model="selDept" ng-options="d.name for d in departments" ng-change="selProg = selCourse = null">
+            <option value="">-- Choose Department --</option>
+          </select>
+        </div>
+
+        <!-- Tier 2: Program -->
+        <div class="form-group">
+          <label class="form-label">2. Program / Degree:</label>
+          <select class="form-control" ng-model="selProg" ng-disabled="!selDept" ng-options="p.title for p in selDept.programs" ng-change="selCourse = null">
+            <option value="">-- Choose Program --</option>
+          </select>
+        </div>
+
+        <!-- Tier 3: Course -->
+        <div class="form-group">
+          <label class="form-label">3. Core Elective Course:</label>
+          <select class="form-control" ng-model="selCourse" ng-disabled="!selProg" ng-options="c.code + ' - ' + c.name for c in selProg.courses">
+            <option value="">-- Choose Course --</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="card" ng-if="selCourse">
+      <div class="card-title"><span>Enrollment Summary Sheet</span><span class="badge badge-success">Selected</span></div>
+      <div style="background: rgba(15,23,42,0.6); padding: 16px; border-radius: var(--radius-sm);">
+        <h3 style="color: #fff; margin-bottom: 6px;">{{ selCourse.name }}</h3>
+        <p class="text-muted">Code: <strong style="color: #38bdf8;">{{ selCourse.code }}</strong> | Credits: {{ selCourse.credits }}</p>
+        <p class="text-muted">Dept: <strong>{{ selDept.name }}</strong> | Degree: <strong>{{ selProg.title }}</strong></p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('cascadingApp', [])
+      .controller('CascadingCtrl', function($scope) {
+        $scope.departments = [
+          {
+            name: 'Computer Science',
+            programs: [
+              { title: 'B.Sc Computer Science', courses: [{ code: 'CS101', name: 'Web Programming & AngularJS', credits: 4 }, { code: 'CS102', name: 'Database Management Systems', credits: 4 }] },
+              { title: 'M.Sc Information Tech', courses: [{ code: 'IT201', name: 'Cloud Computing & Microservices', credits: 4 }, { code: 'IT202', name: 'Machine Learning', credits: 4 }] }
+            ]
+          },
+          {
+            name: 'Electronics & Comm',
+            programs: [
+              { title: 'B.Tech ECE', courses: [{ code: 'EC101', name: 'Digital Signal Processing', credits: 4 }, { code: 'EC102', name: 'VLSI Circuit Design', credits: 4 }] }
+            ]
+          }
+        ];
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="collegeApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 43 - College Management</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="CollegeCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#43</span>
+        <div class="header-title">
+          <h1>College Management System</h1>
+          <p>Modular Architecture with Sub-Modules</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card mb-4 text-center">
+      <h2 style="color: #fff;">{{ collegeName }}</h2>
+      <p class="text-muted">Master Module: <code>angular.module('collegeApp', ['studentModule', 'facultyModule'])</code></p>
+    </div>
+
+    <div class="grid-2">
+      <!-- Student Sub-Module -->
+      <div class="card" ng-controller="StudentCtrl">
+        <div class="card-title"><span>Student Sub-Module</span><span class="badge badge-info">studentModule</span></div>
+        <form ng-submit="addStudent()" style="display: flex; gap: 8px; margin-bottom: 16px;">
+          <input type="text" class="form-control" ng-model="newName" placeholder="Student name" required>
+          <input type="text" class="form-control" ng-model="newRoll" placeholder="Roll No" style="width: 120px;" required>
+          <button class="btn btn-primary btn-sm">Add</button>
+        </form>
+        <div class="table-container">
+          <table class="custom-table">
+            <thead><tr><th>#</th><th>Roll No</th><th>Student Name</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr ng-repeat="s in students">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ s.roll }}</td>
+                <td>{{ s.name }}</td>
+                <td><button class="btn btn-danger btn-sm" ng-click="students.splice($index, 1)">×</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Faculty Sub-Module -->
+      <div class="card" ng-controller="FacultyCtrl">
+        <div class="card-title"><span>Faculty Sub-Module</span><span class="badge badge-success">facultyModule</span></div>
+        <form ng-submit="addFaculty()" style="display: flex; gap: 8px; margin-bottom: 16px;">
+          <input type="text" class="form-control" ng-model="newName" placeholder="Faculty name" required>
+          <input type="text" class="form-control" ng-model="newDept" placeholder="Department" style="width: 120px;" required>
+          <button class="btn btn-primary btn-sm">Add</button>
+        </form>
+        <div class="table-container">
+          <table class="custom-table">
+            <thead><tr><th>#</th><th>Faculty Name</th><th>Department</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr ng-repeat="f in facultyList">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ f.name }}</td>
+                <td>{{ f.dept }}</td>
+                <td><button class="btn btn-danger btn-sm" ng-click="facultyList.splice($index, 1)">×</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Sub-Module 1: Students
+    angular.module('studentModule', [])
+      .controller('StudentCtrl', function($scope) {
+        $scope.students = [{ roll: '21BCSE01', name: 'Aadhirai A.' }, { roll: '21BCSE02', name: 'Balaji V.' }];
+        $scope.addStudent = function() {
+          $scope.students.push({ name: $scope.newName, roll: $scope.newRoll });
+          $scope.newName = $scope.newRoll = '';
+        };
+      });
+
+    // Sub-Module 2: Faculty
+    angular.module('facultyModule', [])
+      .controller('FacultyCtrl', function($scope) {
+        $scope.facultyList = [{ name: 'Dr. K. Raman', dept: 'CSE' }, { name: 'Dr. S. Meena', dept: 'IT' }];
+        $scope.addFaculty = function() {
+          $scope.facultyList.push({ name: $scope.newName, dept: $scope.newDept });
+          $scope.newName = $scope.newDept = '';
+        };
+      });
+
+    // Master App Module injecting sub-modules
+    angular.module('collegeApp', ['studentModule', 'facultyModule'])
+      .controller('CollegeCtrl', function($scope) {
+        $scope.collegeName = 'Gandhigram Rural Institute - Deemed University';
+      });
+  </script>
+</body>
+</html>

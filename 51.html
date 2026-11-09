@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="employeeApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 51 - Employee Directory</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="EmployeeCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#51</span>
+        <div class="header-title">
+          <h1>Employee Directory</h1>
+          <p>Built-in & Custom Filters (filter, orderBy, currency, date, uppercase)</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Controls -->
+    <div class="card mb-4">
+      <div class="grid-2">
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label">Search Employees (filter:search)</label>
+          <input type="text" class="form-control" ng-model="searchText" placeholder="Search name, dept...">
+        </div>
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label">Sort By (orderBy)</label>
+          <select class="form-control" ng-model="sortCol">
+            <option value="name">Name (A-Z)</option>
+            <option value="-salary">Salary (High to Low)</option>
+            <option value="salary">Salary (Low to High)</option>
+            <option value="-exp">Experience (Senior first)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="card">
+      <div class="card-title"><span>Employee Records</span><span class="badge badge-success">{{ (employees | filter:searchText).length }} Employees</span></div>
+      <div class="table-container">
+        <table class="custom-table">
+          <thead><tr><th>#</th><th>Name (uppercase)</th><th>Department</th><th>Monthly Salary</th><th>Joining Date</th><th>Level (Custom)</th></tr></thead>
+          <tbody>
+            <tr ng-repeat="e in employees | filter:searchText | orderBy:sortCol">
+              <td>{{ $index + 1 }}</td>
+              <td><strong>{{ e.name | uppercase }}</strong></td>
+              <td>{{ e.dept }}</td>
+              <td class="text-info font-heading">{{ e.salary | currency:'₹ ' }}</td>
+              <td>{{ e.joinDate | date:'mediumDate' }}</td>
+              <td>
+                <span class="badge" ng-class="e.exp >= 5 ? 'badge-success' : 'badge-info'">{{ e.exp | experienceLevel }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('employeeApp', [])
+      .filter('experienceLevel', function() {
+        return function(exp) { return (exp >= 5 ? 'Senior (' : 'Junior (') + exp + ' yrs)'; };
+      })
+      .controller('EmployeeCtrl', function($scope) {
+        $scope.sortCol = 'name';
+        $scope.employees = [
+          { name: 'Anand Kumar', dept: 'Software Engg', salary: 75000, joinDate: new Date('2019-06-15'), exp: 6 },
+          { name: 'Deepa Lakshmi', dept: 'DevOps & Cloud', salary: 92000, joinDate: new Date('2018-03-20'), exp: 8 },
+          { name: 'Hariharan S.', dept: 'Frontend Dev', salary: 48000, joinDate: new Date('2023-01-10'), exp: 2 },
+          { name: 'Janani Ramesh', dept: 'Quality Assurance', salary: 52000, joinDate: new Date('2021-08-01'), exp: 3 },
+          { name: 'Manoj Prabhakar', dept: 'System Admin', salary: 84000, joinDate: new Date('2017-11-25'), exp: 7 }
+        ];
+      });
+  </script>
+</body>
+</html>

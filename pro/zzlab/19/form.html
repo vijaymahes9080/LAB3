@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+  Name: <input type="text" id="name">
+  <script>
+    var x = new XMLHttpRequest();
+    x.open("GET", "user.xml", false);
+    x.send();
+
+    // Try responseXML first (works when served from a server)
+    var xml = x.responseXML;
+    if (xml && xml.getElementsByTagName("name")[0]) {
+      document.getElementById("name").value = xml.getElementsByTagName("name")[0].textContent;
+    } else if (x.responseText) {
+      // Fallback: parse responseText with DOMParser (works with local files)
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(x.responseText, "text/xml");
+      var nameNode = doc.getElementsByTagName("name")[0];
+      if (nameNode) {
+        document.getElementById("name").value = nameNode.textContent;
+      }
+    }
+  </script>
+</body>
+</html>
+

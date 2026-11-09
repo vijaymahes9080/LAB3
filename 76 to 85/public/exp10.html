@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="authApp">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiment 10 - Login and Registration</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+</head>
+<body ng-controller="AuthController">
+  <h2>Experiment 10: Login and Registration</h2>
+  <button ng-click="mode='register'; message=''">Register</button>
+  <button ng-click="mode='login'; message=''">Login</button>
+  <form ng-submit="submit()" ng-if="mode==='register'">
+    <h3>Registration</h3>
+    <input ng-model="form.username" placeholder="Username (min 3 characters)" required>
+    <input type="password" ng-model="form.password" placeholder="Password (min 8 characters)" required>
+    <button type="submit">Register</button>
+  </form>
+  <form ng-submit="submit()" ng-if="mode==='login'">
+    <h3>Login</h3>
+    <input ng-model="form.username" placeholder="Username" required>
+    <input type="password" ng-model="form.password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+  <p>{{message}}</p>
+  <script>
+    angular.module("authApp", []).controller("AuthController", function($scope, $http) {
+      $scope.mode = "register"; $scope.form = {}; $scope.message = "";
+      $scope.submit = () => {
+        const endpoint = $scope.mode === "register" ? "/api/register" : "/api/login";
+        $http.post(endpoint, $scope.form).then(r => {
+          $scope.message = r.data.message; $scope.form = {};
+        }).catch(r => $scope.message = r.data.error || "Request failed");
+      };
+    });
+  </script>
+</body>
+</html>

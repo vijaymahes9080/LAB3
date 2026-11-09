@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML & HTML Student Data Processing & MySQL Storage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            📁 <strong>XML-MySQL Hub</strong> &bull; HTML &bull; DTD &bull; XSD &bull; PHP
+        </div>
+        <div class="nav-links">
+            <a href="view_xml.php" class="nav-btn">📄 View XML / DTD / XSD</a>
+            <a href="validate_dtd.php" class="nav-btn">🛡️ Validate DTD</a>
+            <a href="validate_xsd.php" class="nav-btn">🛡️ Validate XSD</a>
+            <a href="xml_to_db.php" class="nav-btn" style="background:#16a34a; color:#fff; border-color:#16a34a;">📥 Import XML to DB</a>
+            <a href="db_to_xml.php" class="nav-btn" style="background:#2563eb; color:#fff; border-color:#2563eb;">📤 Export DB to XML</a>
+            <a href="records.php" class="nav-btn">📋 DB Records</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <header class="form-header">
+            <h1>Student XML Generator & Database Storage</h1>
+            <p class="subtitle">Enter student data &rarr; Generates XML node &rarr; Validates against DTD & XSD &rarr; Stores in MySQL Database</p>
+        </header>
+
+        <!-- Architecture Flow Banner -->
+        <div class="flow-banner">
+            <div class="flow-step"><span>1</span> HTML Form</div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step"><span>2</span> students.xml</div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step"><span>3</span> DTD / XSD Validate</div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step"><span>4</span> PHP Parser</div>
+            <div class="flow-arrow">&rarr;</div>
+            <div class="flow-step"><span>5</span> MySQL (XAMPP)</div>
+        </div>
+
+        <!-- Student Form -->
+        <form id="studentForm" action="process.php" method="POST">
+
+            <!-- Fieldset 1: Identity -->
+            <fieldset>
+                <legend>🆔 Student Identity & Academics</legend>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="rollNo">Roll Number (Pattern: ABC-1234): <span class="required">*</span></label>
+                        <input type="text" id="rollNo" name="rollNo" placeholder="e.g. CSB-2026" required pattern="[A-Z]{3}-[0-9]{4}">
+                        <small class="hint">Must match XSD Regex: 3 uppercase letters, hyphen, 4 digits</small>
+                    </div>
+
+                    <div class="form-col">
+                        <label for="name">Full Name: <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" placeholder="e.g. Alex Johnson" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="age">Age (15 - 70): <span class="required">*</span></label>
+                        <input type="number" id="age" name="age" min="15" max="70" placeholder="e.g. 21" required>
+                    </div>
+
+                    <div class="form-col">
+                        <label for="dob">Date of Birth: <span class="required">*</span></label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label>Gender: <span class="required">*</span></label>
+                        <div class="options">
+                            <label><input type="radio" name="gender" value="Male" required checked> Male</label>
+                            <label><input type="radio" name="gender" value="Female"> Female</label>
+                            <label><input type="radio" name="gender" value="Other"> Other</label>
+                        </div>
+                    </div>
+
+                    <div class="form-col">
+                        <label for="course">Degree / Course: <span class="required">*</span></label>
+                        <select id="course" name="course" required>
+                            <option value="">-- Select Course (XSD Enumeration) --</option>
+                            <option value="BSc CS">B.Sc Computer Science</option>
+                            <option value="BCA">BCA</option>
+                            <option value="BTech IT">B.Tech IT</option>
+                            <option value="MCA">MCA</option>
+                            <option value="MSc CS">M.Sc Computer Science</option>
+                            <option value="MTech CSE">M.Tech CSE</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Fieldset 2: Contact & Technical -->
+            <fieldset>
+                <legend>📬 Contact & Skills</legend>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="email">Email Address: <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="alex@example.com" required>
+                    </div>
+
+                    <div class="form-col">
+                        <label for="phone">Phone Number (10 Digits): <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="9876543210" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="city">Campus / City: <span class="required">*</span></label>
+                        <input type="text" id="city" name="city" placeholder="e.g. Chennai" required>
+                    </div>
+
+                    <div class="form-col">
+                        <label for="batch_time">Batch Time: <span class="required">*</span></label>
+                        <input type="time" id="batch_time" name="batch_time" required>
+                    </div>
+                </div>
+
+                <!-- Checkboxes: Technical Skills -->
+                <label>Technical Skills: <span class="required">*</span></label>
+                <div class="options">
+                    <label><input type="checkbox" name="skills[]" value="HTML" checked> HTML</label>
+                    <label><input type="checkbox" name="skills[]" value="CSS" checked> CSS</label>
+                    <label><input type="checkbox" name="skills[]" value="JavaScript" checked> JavaScript</label>
+                    <label><input type="checkbox" name="skills[]" value="PHP" checked> PHP</label>
+                    <label><input type="checkbox" name="skills[]" value="XML"> XML</label>
+                    <label><input type="checkbox" name="skills[]" value="MySQL"> MySQL</label>
+                    <label><input type="checkbox" name="skills[]" value="Python"> Python</label>
+                </div>
+
+                <!-- Textarea: Address -->
+                <label for="address" style="margin-top: 15px;">Permanent Postal Address: <span class="required">*</span></label>
+                <textarea id="address" name="address" placeholder="Door no, street, area, city, pincode..." required></textarea>
+            </fieldset>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-submit">⚡ Generate XML & Save to MySQL</button>
+                <button type="reset" class="btn btn-reset">🔄 Reset Form</button>
+                <button type="button" class="btn btn-secondary" onclick="fillSampleData()">🧪 Auto-Fill Demo</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Interactive JS Script -->
+    <script>
+        function fillSampleData() {
+            document.getElementById("rollNo").value = "BCA-2026";
+            document.getElementById("name").value = "David Warner";
+            document.getElementById("age").value = "22";
+            document.getElementById("dob").value = "2004-03-18";
+            document.getElementById("course").value = "BCA";
+            document.getElementById("email").value = "david.warner@example.com";
+            document.getElementById("phone").value = "9845123456";
+            document.getElementById("city").value = "Hyderabad";
+            document.getElementById("batch_time").value = "11:30";
+            document.getElementById("address").value = "Plot 55, Cyberabad Hi-Tech City, Hyderabad - 500081";
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="billingApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 45 - Product Billing</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="BillingCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#45</span>
+        <div class="header-title">
+          <h1>Product Billing Application</h1>
+          <p>Real-Time Two-Way Data Binding (ng-model)</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Add Item Form -->
+    <div class="card mb-4">
+      <div class="card-title"><span>Add New Product</span><span class="badge badge-info">Two-Way Bound</span></div>
+      <form ng-submit="addItem()" style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <input type="text" class="form-control" ng-model="newItem.name" placeholder="Item Name" required style="flex: 2; min-width: 160px;">
+        <input type="number" class="form-control" ng-model="newItem.price" placeholder="Price (₹)" min="1" required style="flex: 1; min-width: 100px;">
+        <input type="number" class="form-control" ng-model="newItem.qty" placeholder="Qty" min="1" required style="flex: 1; min-width: 80px;">
+        <button type="submit" class="btn btn-primary">+ Add Item</button>
+      </form>
+    </div>
+
+    <!-- Items Table -->
+    <div class="card mb-4">
+      <div class="card-title"><span>Billed Items</span><span class="badge badge-success">{{ items.length }} Item(s)</span></div>
+      <div class="table-container">
+        <table class="custom-table">
+          <thead><tr><th>#</th><th>Item Description</th><th>Price (₹)</th><th>Quantity</th><th>Total (₹)</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr ng-repeat="item in items">
+              <td>{{ $index + 1 }}</td>
+              <td><strong>{{ item.name }}</strong></td>
+              <td><input type="number" class="form-control" ng-model="item.price" min="1" style="width: 100px; padding: 4px 8px;"></td>
+              <td><input type="number" class="form-control" ng-model="item.qty" min="1" style="width: 80px; padding: 4px 8px;"></td>
+              <td class="text-info font-heading">₹{{ item.price * item.qty }}</td>
+              <td><button class="btn btn-danger btn-sm" ng-click="items.splice($index, 1)">×</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Summary Box -->
+    <div class="card">
+      <div class="grid-3">
+        <div class="stat-box"><div class="stat-val text-info">₹{{ subtotal() }}</div><div class="stat-label">Subtotal</div></div>
+        <div class="stat-box"><div class="stat-val text-warning">₹{{ (subtotal() * 0.05) | number:2 }}</div><div class="stat-label">GST (5%)</div></div>
+        <div class="stat-box"><div class="stat-val text-success">₹{{ (subtotal() * 1.05) | number:2 }}</div><div class="stat-label">Grand Total</div></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('billingApp', [])
+      .controller('BillingCtrl', function($scope) {
+        $scope.items = [
+          { name: 'Wireless Mouse', price: 650, qty: 2 },
+          { name: 'Mechanical Keyboard', price: 2200, qty: 1 },
+          { name: 'USB-C Cable', price: 350, qty: 3 }
+        ];
+        $scope.newItem = { name: '', price: '', qty: 1 };
+
+        $scope.addItem = function() {
+          $scope.items.push({ name: $scope.newItem.name, price: Number($scope.newItem.price), qty: Number($scope.newItem.qty) });
+          $scope.newItem = { name: '', price: '', qty: 1 };
+        };
+
+        $scope.subtotal = function() {
+          return $scope.items.reduce(function(sum, item) { return sum + (item.price * item.qty); }, 0);
+        };
+      });
+  </script>
+</body>
+</html>

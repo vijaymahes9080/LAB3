@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dashboardApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 56 - Digital Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="DashboardCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#56</span>
+        <div class="header-title">
+          <h1>Real-Time Digital Dashboard</h1>
+          <p>AngularJS Built-in Services ($interval, $timeout, $log)</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 850px;">
+    <!-- Service 1: $interval (Clock) -->
+    <div class="card mb-4 text-center">
+      <div class="card-title"><span>Live Clock</span><span class="badge badge-info">$interval</span></div>
+      <div style="font-size: 3.5rem; font-weight: 800; color: #38bdf8; font-family: monospace; margin: 12px 0;">
+        {{ clock | date:'hh:mm:ss a' }}
+      </div>
+      <p class="text-muted">{{ clock | date:'fullDate' }}</p>
+    </div>
+
+    <div class="grid-2">
+      <!-- Service 2: $timeout -->
+      <div class="card">
+        <div class="card-title"><span>Alert Timer</span><span class="badge badge-warning">$timeout</span></div>
+        <p class="text-muted" style="margin-bottom: 14px;">Triggers an alert that auto-dismisses after 3 seconds.</p>
+        <button class="btn btn-primary" ng-click="showAlert()" ng-disabled="alertVisible">
+          {{ alertVisible ? 'Timer Running (3s)...' : 'Trigger Timed Alert' }}
+        </button>
+        <div ng-if="alertVisible" class="card" style="background: rgba(16,185,129,0.2); border-color: #10b981; margin-top: 14px; padding: 10px;">
+          <strong style="color: #6ee7b7;">✔ Success!</strong>
+          <p style="color: #a7f3d0; font-size: 0.85rem; margin: 0;">Disappearing automatically in 3s...</p>
+        </div>
+      </div>
+
+      <!-- Service 3: $log -->
+      <div class="card">
+        <div class="card-title"><span>Logging Service</span><span class="badge badge-success">$log</span></div>
+        <p class="text-muted" style="margin-bottom: 14px;">Logs telemetry events to browser console via <code>$log.info()</code>.</p>
+        <button class="btn btn-secondary" ng-click="sendLog()">Write $log.info()</button>
+        <div style="background: rgba(15,23,42,0.6); padding: 10px; border-radius: var(--radius-sm); margin-top: 14px; font-family: monospace; font-size: 0.8rem;">
+          <div class="text-muted">Last Log Message:</div>
+          <div style="color: #38bdf8; margin-top: 4px;">{{ lastLog || 'No log recorded yet.' }}</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('dashboardApp', [])
+      .controller('DashboardCtrl', function($scope, $interval, $timeout, $log) {
+        $scope.clock = new Date();
+        var timer = $interval(function() { $scope.clock = new Date(); }, 1000);
+        $scope.$on('$destroy', function() { $interval.cancel(timer); });
+
+        $scope.showAlert = function() {
+          $scope.alertVisible = true;
+          $timeout(function() { $scope.alertVisible = false; }, 3000);
+        };
+
+        $scope.count = 0;
+        $scope.sendLog = function() {
+          $scope.lastLog = 'Event #' + (++$scope.count) + ' at ' + new Date().toLocaleTimeString();
+          $log.info($scope.lastLog);
+        };
+      });
+  </script>
+</body>
+</html>

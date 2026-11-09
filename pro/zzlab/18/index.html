@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Send Form Data to XML</title>
+</head>
+<body>
+  <h2>Send HTML Form Data to XML File</h2>
+  <form onsubmit="sendData(); return false;">
+    Name: <input type="text" id="name"><br><br>
+    Email: <input type="text" id="email"><br><br>
+    <button type="submit">Save to XML</button>
+  </form>
+
+  <h3>XML Created:</h3>
+  <pre id="output"></pre>
+
+  <script>
+    function sendData() {
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+
+      // Create XML string
+      let xml =
+        "<user>\n" +
+        " <name>" + name + "</name>\n" +
+        " <email>" + email + "</email>\n" +
+        "</user>";
+
+      document.getElementById("output").textContent = xml;
+
+      // Send XML to PHP for saving
+      let x = new XMLHttpRequest();
+      x.open("POST", "savexml.php", true);
+      x.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      x.send("xmlData=" + encodeURIComponent(xml));
+    }
+  </script>
+</body>
+</html>
+

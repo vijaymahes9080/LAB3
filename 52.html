@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="resultApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 52 - Student Result Analysis</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="ResultCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#52</span>
+        <div class="header-title">
+          <h1>Student Result Analysis</h1>
+          <p>Multi-Criteria Filtering & Performance Analytics</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Controls -->
+    <div class="card mb-4">
+      <div class="grid-2">
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label">Department:</label>
+          <select class="form-control" ng-model="selDept">
+            <option value="">All Departments</option>
+            <option value="CSE">Computer Science (CSE)</option>
+            <option value="IT">Information Technology (IT)</option>
+            <option value="ECE">Electronics (ECE)</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label">Result Status:</label>
+          <select class="form-control" ng-model="selStatus">
+            <option value="">All Statuses</option>
+            <option value="Pass">Pass Only</option>
+            <option value="Fail">Fail Only</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics Cards -->
+    <div class="grid-4 mb-4">
+      <div class="stat-box"><div class="stat-val text-info">{{ filtered.length }}</div><div class="stat-label">Displayed</div></div>
+      <div class="stat-box"><div class="stat-val text-success">{{ getCount('Pass') }}</div><div class="stat-label">Passed</div></div>
+      <div class="stat-box"><div class="stat-val text-danger">{{ getCount('Fail') }}</div><div class="stat-label">Failed</div></div>
+      <div class="stat-box"><div class="stat-val" style="color: #a855f7;">{{ getAvg() | number:1 }}%</div><div class="stat-label">Class Avg</div></div>
+    </div>
+
+    <!-- Table -->
+    <div class="card">
+      <div class="card-title"><span>Academic Results</span><span class="badge badge-info">{{ filtered.length }} Records</span></div>
+      <div class="table-container">
+        <table class="custom-table">
+          <thead><tr><th>#</th><th>Roll No</th><th>Student Name</th><th>Dept</th><th>Score (/100)</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr ng-repeat="s in (filtered = (students | filter:(selDept ? {dept: selDept} : '') | filter:(selStatus ? {status: selStatus} : '')))">
+              <td>{{ $index + 1 }}</td>
+              <td><strong>{{ s.rollNo }}</strong></td>
+              <td>{{ s.name }}</td>
+              <td>{{ s.dept }}</td>
+              <td class="font-heading text-info">{{ s.score }}</td>
+              <td><span class="badge" ng-class="s.status === 'Pass' ? 'badge-success' : 'badge-danger'">{{ s.status }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('resultApp', [])
+      .controller('ResultCtrl', function($scope) {
+        $scope.students = [
+          { rollNo: '21BCSE01', name: 'Aadhirai A.', dept: 'CSE', score: 88, status: 'Pass' },
+          { rollNo: '21BCSE02', name: 'Balaji V.', dept: 'CSE', score: 42, status: 'Fail' },
+          { rollNo: '21BIT01', name: 'Chandran K.', dept: 'IT', score: 76, status: 'Pass' },
+          { rollNo: '21BIT02', name: 'Divya Bharathi', dept: 'IT', score: 91, status: 'Pass' },
+          { rollNo: '21BECE01', name: 'Eswaran M.', dept: 'ECE', score: 38, status: 'Fail' },
+          { rollNo: '21BECE02', name: 'Farhan Ali', dept: 'ECE', score: 81, status: 'Pass' }
+        ];
+
+        $scope.getCount = function(st) { return ($scope.filtered || []).filter(function(s) { return s.status === st; }).length; };
+        $scope.getAvg = function() {
+          var list = $scope.filtered || [];
+          return list.length ? (list.reduce(function(sum, s) { return sum + s.score; }, 0) / list.length) : 0;
+        };
+      });
+  </script>
+</body>
+</html>

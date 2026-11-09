@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Student Registration Portal</title>
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            🎓 <strong>EduPortal</strong> Student Registration
+        </div>
+        <div class="nav-links">
+            <a href="records.php" class="nav-btn">📋 View Registered Students</a>
+            <button type="button" id="themeToggle" class="theme-toggle-btn" title="Toggle Dark/Light Mode">🌙</button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- Form Header -->
+        <header class="form-header">
+            <h1>Student Admission & Registration</h1>
+            <p class="subtitle">Complete all sections below to enroll for academic year 2026-2027</p>
+        </header>
+
+        <!-- Dynamic Form Completion Progress Bar -->
+        <div class="progress-wrapper">
+            <div class="progress-info">
+                <span>Form Completion:</span>
+                <strong id="progressPercent">0%</strong>
+            </div>
+            <progress id="formProgress" value="0" max="100"></progress>
+        </div>
+
+        <!-- Registration Form -->
+        <form id="studentForm" action="process.php" method="POST" enctype="multipart/form-data" novalidate>
+
+            <!-- ============================================== -->
+            <!-- 1. SYSTEM GENERATED DETAILS -->
+            <!-- ============================================== -->
+            <fieldset>
+                <legend>🆔 Application Info</legend>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="app_id">Application ID (Read-only):</label>
+                        <input type="text" id="app_id" name="app_id" value="APP-2026-<?php echo rand(100, 999); ?>" readonly class="readonly-input">
+                    </div>
+                    <div class="form-col">
+                        <label for="interests">Research Interests (Search):</label>
+                        <input type="search" id="interests" name="interests" placeholder="e.g. AI, Cyber Security, Cloud">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- ============================================== -->
+            <!-- 2. PERSONAL INFORMATION -->
+            <!-- ============================================== -->
+            <fieldset>
+                <legend>👤 Personal Information</legend>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <!-- Full Name -->
+                        <label for="name">Full Name: <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" placeholder="e.g. John Doe">
+                        <span id="nameError" class="error"></span>
+                    </div>
+
+                    <div class="form-col">
+                        <!-- Age (Number) -->
+                        <label for="age">Age (15 - 70): <span class="required">*</span></label>
+                        <input type="number" id="age" name="age" min="15" max="70" placeholder="e.g. 20">
+                        <span id="ageError" class="error"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <!-- Date of Birth (Date) -->
+                        <label for="dob">Date of Birth: <span class="required">*</span></label>
+                        <input type="date" id="dob" name="dob">
+                        <span id="dobError" class="error"></span>
+                    </div>
+
+                    <div class="form-col">
+                        <!-- Gender (Radio) -->
+                        <label>Gender: <span class="required">*</span></label>
+                        <div class="options">
+                            <label><input type="radio" name="gender" value="Male"> Male</label>
+                            <label><input type="radio" name="gender" value="Female"> Female</label>
+                            <label><input type="radio" name="gender" value="Other"> Other</label>
+                        </div>
+                        <span id="genderError" class="error"></span>
+                    </div>
+                </div>
+
+                <!-- Photo Upload with Live Avatar Preview -->
+                <label for="photo">Passport Size Photo (File Upload):</label>
+                <div class="file-upload-box">
+                    <div class="avatar-preview">
+                        <img id="imagePreview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' fill='%23ccc' viewBox='0 0 16 16'%3E%3Cpath d='M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z'/%3E%3Cpath fill-rule='evenodd' d='M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z'/%3E%3C/svg%3E" alt="Avatar Preview">
+                    </div>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="photo" name="photo" accept="image/png, image/jpeg, image/webp">
+                        <small class="hint">Accepted formats: JPG, PNG, WEBP (Max 2MB)</small>
+                    </div>
+                </div>
+                <span id="photoError" class="error"></span>
+            </fieldset>
+
+            <!-- ============================================== -->
+            <!-- 3. CONTACT & CREDENTIALS -->
+            <!-- ============================================== -->
+            <fieldset>
+                <legend>🔐 Contact & Login Credentials</legend>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <!-- Email -->
+                        <label for="email">Email Address: <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com">
+                        <span id="emailError" class="error"></span>
+                    </div>
+
+                    <div class="form-col">
+                        <!-- Phone Number -->
+                        <label for="phone">Phone Number (10 Digits): <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="9876543210">
+                        <span id="phoneError" class="error"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <!-- Password with Show/Hide Toggle & Strength Meter -->
+                        <label for="password">Account Password: <span class="required">*</span></label>
+                        <div class="password-field-container">
+                            <input type="password" id="password" name="password" placeholder="Min 6 characters">
+                            <button type="button" id="togglePasswordBtn" class="toggle-password" title="Show/Hide Password">👁️</button>
+                        </div>
+                        <div class="password-strength-container">
+                            <meter id="passwordMeter" min="0" max="4" low="1" high="3" optimum="4" value="0"></meter>
+                            <span id="passwordStrengthText" class="strength-label">Strength: None</span>
+                        </div>
+                        <span id="passwordError" class="error"></span>
+                    </div>
+
+                    <div class="form-col">
+                        <!-- Portfolio / LinkedIn URL -->
+                        <label for="portfolio">Portfolio / LinkedIn Profile (URL):</label>
+                        <input type="url" id="portfolio" name="portfolio" placeholder="https://linkedin.com/in/username">
+                        <span id="portfolioError" class="error"></span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- ============================================== -->
+            <!-- 4. ACADEMIC DETAILS & SCHEDULE -->
+            <!-- ============================================== -->
+            <fieldset>
+                <legend>🎓 Academic Preferences & Schedule</legend>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <!-- Degree Selection with Optgroup -->
+                        <label for="course">Degree / Course: <span class="required">*</span></label>
+                        <select id="course" name="course">
+                            <option value="">-- Choose Degree Program --</option>
+                            <optgroup label="Undergraduate (UG)">
+                                <option value="BSc CS">B.Sc Computer Science</option>
+                                <option value="BCA">BCA (Bachelor of Computer Applications)</option>
+                                <option value="BTech IT">B.Tech Information Technology</option>
+                            </optgroup>
+                            <optgroup label="Postgraduate (PG)">
+                                <option value="MCA">MCA (Master of Computer Applications)</option>
+                                <option value="MSc CS">M.Sc Computer Science</option>
+                                <option value="MTech CSE">M.Tech Computer Science & Eng.</option>
+                            </optgroup>
+                        </select>
+                        <span id="courseError" class="error"></span>
+                    </div>
+
+                    <div class="form-col">
+                        <!-- Datalist: Study Campus -->
+                        <label for="city">Preferred Campus / City (Autocomplete):</label>
+                        <input list="cityList" id="city" name="city" placeholder="Search or select campus">
+                        <datalist id="cityList">
+                            <option value="Chennai Campus">
+                            <option value="Bangalore Campus">
+                            <option value="Hyderabad Campus">
+                            <option value="Mumbai Campus">
+                            <option value="Delhi Campus">
+                            <option value="Coimbatore Campus">
+                            <option value="Pune Campus">
+                        </datalist>
+                    </div>
+                </div>
+
+                <!-- Multi-select: Electives -->
+                <label for="electives">Elective Specializations (Hold Ctrl to select multiple):</label>
+                <select id="electives" name="electives[]" multiple size="3" class="multi-select">
+                    <option value="AI & Machine Learning">Artificial Intelligence & Machine Learning</option>
+                    <option value="Cloud Computing & DevOps">Cloud Computing & DevOps</option>
+                    <option value="Cyber Security & Forensics">Cyber Security & Forensics</option>
+                    <option value="Data Science & Analytics">Data Science & Analytics</option>
+                    <option value="Full Stack Web Dev">Full Stack Web Development</option>
+                </select>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <!-- Time: Batch Time -->
+                        <label for="batch_time">Daily Batch Time: <span class="required">*</span></label>
+                        <input type="time" id="batch_time" name="batch_time">
+                        <span id="batchTimeError" class="error"></span>
+                    </div>
+
+                    <div class="form-col">
+                        <!-- Datetime-local: Counseling Slot -->
+                        <label for="interview_slot">Entrance/Counseling Slot (Date & Time):</label>
+                        <input type="datetime-local" id="interview_slot" name="interview_slot">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <!-- Month: Expected Graduation Month & Year -->
+                        <label for="grad_month">Expected Graduation (Month & Year):</label>
+                        <input type="month" id="grad_month" name="grad_month">
+                    </div>
+
+                    <div class="form-col">
+                        <!-- Week: Preferred Orientation Week -->
+                        <label for="orientation_week">Preferred Orientation Week:</label>
+                        <input type="week" id="orientation_week" name="orientation_week">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- ============================================== -->
+            <!-- 5. TECHNICAL SKILLS & ID CUSTOMIZATION -->
+            <!-- ============================================== -->
+            <fieldset>
+                <legend>⚙️ Skills & Badge Customization</legend>
+
+                <!-- Checkboxes: Technical Skills -->
+                <label>Technical Skills: <span class="required">*</span></label>
+                <div class="options">
+                    <label><input type="checkbox" name="skills[]" value="HTML5"> HTML5</label>
+                    <label><input type="checkbox" name="skills[]" value="CSS3"> CSS3</label>
+                    <label><input type="checkbox" name="skills[]" value="JavaScript"> JavaScript</label>
+                    <label><input type="checkbox" name="skills[]" value="PHP"> PHP</label>
+                    <label><input type="checkbox" name="skills[]" value="MySQL"> MySQL</label>
+                    <label><input type="checkbox" name="skills[]" value="Python"> Python</label>
+                    <label><input type="checkbox" name="skills[]" value="React"> React</label>
+                </div>
+                <span id="skillsError" class="error"></span>
+
+                <!-- Range Slider & Real-time Output -->
+                <label for="experience">Self-Assessed Skill Proficiency (0% - 100%):</label>
+                <div class="range-container">
+                    <input type="range" id="experience" name="experience" min="0" max="100" value="50" oninput="expOutput.value = this.value + '%'">
+                    <output id="expOutput">50%</output>
+                </div>
+
+                <!-- Color Picker: ID Card Theme -->
+                <label for="badge_color">ID Card Theme Badge Color (Color Picker):</label>
+                <div class="color-picker-container">
+                    <input type="color" id="badge_color" name="badge_color" value="#1a73e8">
+                    <span class="color-label">Select accent color for generated Student ID Card</span>
+                </div>
+            </fieldset>
+
+            <!-- ============================================== -->
+            <!-- 6. ADDRESS & TERMS -->
+            <!-- ============================================== -->
+            <fieldset>
+                <legend>📍 Address & Confirmation</legend>
+
+                <!-- Textarea with Live Character Counter -->
+                <div class="textarea-header">
+                    <label for="address">Full Permanent Address:</label>
+                    <span id="charCounter" class="char-count">0 / 300</span>
+                </div>
+                <textarea id="address" name="address" maxlength="300" placeholder="Enter door no, street name, area, city, and pincode..."></textarea>
+                <span id="addressError" class="error"></span>
+
+                <!-- Terms & Conditions Checkbox -->
+                <div class="options" style="margin-top: 15px;">
+                    <label>
+                        <input type="checkbox" id="terms" name="terms" value="Agreed">
+                        I hereby declare that all information provided is true and accurate. <span class="required">*</span>
+                    </label>
+                </div>
+                <span id="termsError" class="error"></span>
+            </fieldset>
+
+            <!-- ============================================== -->
+            <!-- ACTION BUTTONS -->
+            <!-- ============================================== -->
+            <div class="button-group">
+                <button type="submit" id="submitBtn" class="btn btn-submit">🚀 Submit & Register</button>
+                <button type="reset" id="resetBtn" class="btn btn-reset">🔄 Reset Form</button>
+                <button type="button" id="fillDemoBtn" class="btn btn-secondary">⚡ Fill Sample Data</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- JavaScript Validation & Interactivity Script -->
+    <script src="validation.js"></script>
+
+</body>
+
+</html>

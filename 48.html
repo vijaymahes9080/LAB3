@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="catalogApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 48 - Product Catalog</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="CatalogCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#48</span>
+        <div class="header-title">
+          <h1>Dynamic Product Catalog</h1>
+          <p>Built-in & Custom Directives (&lt;stock-badge&gt;)</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Filter Controls -->
+    <div class="card mb-4 flex-between">
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+        <label class="form-label" style="margin: 0;">Category:</label>
+        <button class="btn btn-sm" ng-class="activeCat === '' ? 'btn-primary' : 'btn-secondary'" ng-click="activeCat = ''">All</button>
+        <button class="btn btn-sm" ng-repeat="c in categories" ng-class="activeCat === c ? 'btn-primary' : 'btn-secondary'" ng-click="$parent.activeCat = c">{{ c }}</button>
+      </div>
+      <span class="badge badge-info">Cart: {{ cartCount }} items</span>
+    </div>
+
+    <!-- Table -->
+    <div class="card">
+      <div class="card-title"><span>Product Inventory</span><span class="badge badge-success">{{ (products | filter:(activeCat ? {category: activeCat} : '')).length }} Items</span></div>
+      <div class="table-container">
+        <table class="custom-table">
+          <thead><tr><th>#</th><th>Product Name</th><th>Category</th><th>Price</th><th>Stock Status</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr ng-repeat="p in products | filter:(activeCat ? {category: activeCat} : '')">
+              <td>{{ $index + 1 }}</td>
+              <td><strong>{{ p.name }}</strong></td>
+              <td>{{ p.category }}</td>
+              <td class="text-info font-heading">₹{{ p.price }}</td>
+              <td><stock-badge in-stock="p.available"></stock-badge></td>
+              <td>
+                <button class="btn btn-sm btn-primary" ng-disabled="!p.available" ng-click="cartCount = cartCount + 1">
+                  {{ p.available ? 'Add to Cart' : 'Out of Stock' }}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('catalogApp', [])
+      .directive('stockBadge', function() {
+        return {
+          restrict: 'E',
+          scope: { inStock: '=' },
+          template: '<span class="badge" ng-class="inStock ? \'badge-success\' : \'badge-danger\'">{{ inStock ? "In Stock" : "Out of Stock" }}</span>'
+        };
+      })
+      .controller('CatalogCtrl', function($scope) {
+        $scope.cartCount = 0;
+        $scope.activeCat = '';
+        $scope.categories = ['Electronics', 'Accessories', 'Wearables'];
+        $scope.products = [
+          { name: 'Ultra-Slim Mechanical Keyboard', category: 'Accessories', price: 3499, available: true },
+          { name: 'Wireless Ergonomic Mouse', category: 'Accessories', price: 1299, available: true },
+          { name: 'Noise-Cancelling Headphones', category: 'Electronics', price: 7999, available: false },
+          { name: 'Fitness Smart Watch', category: 'Wearables', price: 4999, available: true },
+          { name: '4K IPS USB-C Monitor', category: 'Electronics', price: 21999, available: false }
+        ];
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "rollNo": "CSB-2026",
+    "name": "Alex Johnson",
+    "age": 21,
+    "dob": "2005-04-12",
+    "gender": "Male",
+    "email": "alex@example.com",
+    "phone": "9876543210",
+    "course": "B.Sc Computer Science",
+    "skills": ["HTML", "CSS", "JavaScript", "PHP"],
+    "city": "Chennai",
+    "batchTime": "09:00",
+    "address": {
+      "doorNo": "124",
+      "street": "Tech Park Road",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "pincode": "600042"
+    },
+    "registeredAt": "2026-09-06 10:30:00"
+  },
+  {
+    "id": 2,
+    "rollNo": "MCA-2026",
+    "name": "Sophia Miller",
+    "age": 23,
+    "dob": "2003-08-25",
+    "gender": "Female",
+    "email": "sophia@example.com",
+    "phone": "9123456780",
+    "course": "MCA",
+    "skills": ["Python", "MySQL", "PHP", "JSON"],
+    "city": "Bangalore",
+    "batchTime": "14:00",
+    "address": {
+      "doorNo": "78",
+      "street": "Silicon Valley Residency",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "pincode": "560038"
+    },
+    "registeredAt": "2026-09-06 11:00:00"
+  },
+  {
+    "id": 3,
+    "rollNo": "BCA-2026",
+    "name": "David Warner",
+    "age": 22,
+    "dob": "2004-03-18",
+    "gender": "Male",
+    "email": "david.warner@example.com",
+    "phone": "9845123456",
+    "course": "BCA",
+    "skills": ["HTML", "JavaScript", "React"],
+    "city": "Hyderabad",
+    "batchTime": "11:30",
+    "address": {
+      "doorNo": "55",
+      "street": "Cyberabad Hi-Tech City",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "pincode": "500081"
+    },
+    "registeredAt": "2026-09-06 11:15:00"
+  }
+]

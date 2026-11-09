@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Application Form</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h2>Job Application Form</h2>
+
+<form>
+
+<label>Full Name</label>
+<input type="text" placeholder="Enter your name" required>
+
+<label>Email</label>
+<input type="email" placeholder="Enter your email" required>
+
+<label>Mobile Number</label>
+<input type="tel" placeholder="Enter mobile number">
+
+<label>Age</label>
+<input type="number" min="18" max="60">
+
+<label>Date of Birth</label>
+<input type="date">
+
+<label>Gender</label>
+<div class="option-group">
+    <input type="radio" name="gender"> Male
+    <input type="radio" name="gender"> Female
+    <input type="radio" name="gender"> Other
+</div>
+
+<label>Job Position</label>
+<select>
+    <option>Select Position</option>
+    <option>Software Developer</option>
+    <option>Web Designer</option>
+    <option>Data Analyst</option>
+    <option>System Administrator</option>
+    <option>Tester</option>
+</select>
+
+<label>Skills</label>
+<div class="option-group">
+    <input type="checkbox"> HTML
+    <input type="checkbox"> CSS
+    <input type="checkbox"> JavaScript
+    <input type="checkbox"> Java
+    <input type="checkbox"> Python
+</div>
+
+<label>Experience</label>
+<select>
+    <option>Fresher</option>
+    <option>1-2 Years</option>
+    <option>3-5 Years</option>
+    <option>5+ Years</option>
+</select>
+
+<label>Upload Resume</label>
+<input type="file">
+
+<label>Address</label>
+<textarea rows="4" placeholder="Enter your address"></textarea>
+<br>
+
+<input type="submit" value="Submit Application">
+<input type="reset" value="Reset">
+</form>
+</div>
+
+<script>
+const checkboxes = document.querySelectorAll('input[name="skills"]');
+
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+        const checked = document.querySelectorAll('input[name="skills"]:checked');
+
+        if (checked.length > 3) {
+            checkbox.checked = false;
+            alert("You can select a maximum of 3 skills.");
+        }
+    });
+});
+</script>
+</body>
+</html>

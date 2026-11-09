@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="studentApiApp">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiment 6 - Student REST API</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+</head>
+<body ng-controller="StudentController">
+  <h2>Experiment 6: Student Data from REST API</h2>
+  <button ng-click="load()">Load Students</button><p>{{message}}</p>
+  <table border="1" cellpadding="8">
+    <tr><th>Roll No</th><th>Name</th><th>Department</th></tr>
+    <tr ng-repeat="s in students"><td>{{s.rollNo}}</td><td>{{s.name}}</td><td>{{s.department}}</td></tr>
+  </table>
+  <script>
+    angular.module("studentApiApp", []).controller("StudentController", function($scope, $http) {
+      $scope.students = [];
+      $scope.load = function() {
+        $http.get("/api/students").then(r => {
+          $scope.students = r.data; $scope.message = "Records loaded successfully";
+        }).catch(() => $scope.message = "Unable to load records. Check MongoDB/server.");
+      };
+      $scope.load();
+    });
+  </script>
+</body>
+</html>

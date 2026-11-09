@@ -1,0 +1,512 @@
+[
+  {
+    "page": 1,
+    "text": "3\nINDEX\nS. No. DATE TITLE Page No.\n1 26.07.2025 CreateaHTMLpagetodisplayyourBio-Data\n2 26.07.2025 Createawebpagetodisplaythedetailsofanytwo\nitems\n3 28.07.2025 Implementalltextandimageformattingtags\n4 28.07.2025 DesignanywebpageusingFrames\n5 29.07.2025 ImplementHTMLtablesandLists\n6 29.07.2025 IllustrateCascadingStyleSheet(inline,internal,\nexternalandmultipleCSS)\n7 30.07.2025 DesignanyuserregistrationformusingallHTML\ninputelementsalongwithCSS\n8 30.07.2025 DisplaytheEmojisymbolsusingHTML\n9 30.07.2025 Createmenusandillustratedrawingborders,\nshadingandshapesinHTML\n10 02.08.2025 ImplementallwebAPIs(draganddrop,\nGeolocation,ThirdParty,JavaScriptValidation,\nWebHistory,Storage,WebWorker)\n11 03.08.2025 DesignaUserRegistrationForminHTMLand\nwriteafunctiontovalidatealltheinputfieldsusing\nJavaScript\n12 03.08.2025 CreateasmallwebpageusingHTML,CSS,\nJavaScript,PHPandMYSQL.\n13 03.08.2025 CreateXMLfileusingyourowndata\n14 03.08.2025 XMLinternalDTD\n15 04.08.2025 XMLexternalDTD\n16 04.08.2025 DisplayXMLtableinHTMLdocument\n17 04.08.2025 ProgramtosendHTMLformdatatoXMLfile(use\nXMLandJavaScript)\n18 04.08.2025 DisplaythedatafromXMLfiletoHTMLforms\n19 04.08.2025 ImplementXMLscheme(XSD)forsimpledatatype\nusingvariousrestrictionsandattributes\n20 04.08.2025 ImplementXMLscheme(XSD)forcomplexdata\ntype\n21 06.08.2025 WriteaprogramtoreadXMLdatausingPHP\nsimplexml_load_string()function\n22 06.08.2025 WriteaprogramtoreaddatastoredinXMLfile\nusingPHP\n23 29.08.2025 WriteaprogramtodisplaytheXMLdatausingPHP\n24 29.08.2025 WriteaprogramtodisplaymanyvaluesfromXML\nfileusingPHPloopingstatement\n25 04.09.2025 JSONobjectliteral,illustratethevariouswaysof\naccessingtheobjectvalues.",
+    "image_count": 0
+  },
+  {
+    "page": 2,
+    "text": "4\n26 04.09.2025 ProgramtocreateaJavaScriptarraybyparsinga\nJSONstringandaccessthearrayvalues\n27 04.09.2025 CreateaJSONfileusingyourowndata(which\nincludeanarrayelement)andaccesstheJSON\nvaluesbyarrayindexingandlooping\n28 05.09.2025 IllustratetheusageofdateandfunctioninJSON\n29 05.09.2025 IllustratetheusageofJSON.stringify()onarray,\ndateandfunction\n30 06.09.2025 ProgramtosendHTMLformdatatoJSONfile\n31 07.09.2025 DisplaythedatafromJSONfiletoHTMLforms\n32 07.09.2025 ProgramtostoreHTMLformdata asaseparate\nJSONfile.\n33 07.09.2025 ImplementthetypesofexpressionsinAngularJS\n34 08.09.2025 Writeacodetoimplementtheclassesofng-model\ndirective\n35 08.09.2025 ImplementthetypesofdatabindinginAngularJS\n36 08.09.2025 ImplementAngularJSmodulesandController\ndirectives\n37 09.09.2025 ImplementanytenAngularJSfilters\n38 09.09.2025 Illustratetheservicesof$httpinAngularJS\n39 09.09.2025 DisplaytableusingAngularJSng-repeatdirective\n(withoutPHPandwithPHP).UsenecessaryCSS.\n40 09.09.2025 IllustrateaboutBindingapplicationdatatothe\nattributesofHTMLDOMelements.\n41 24.09.2025 ImplementtheAngularJSevendirectives\n42 24.09.2025 DesignanyuserregistrationforminAngularJSand\nvalidateallthefieldsintheform.Usenecessary\nCSS.\n43 25.09.2025 ImplementtheusageofcoremoduleinNode.JS\n44 08.10.2025 ImplementLocalmoduleandThird-partyModule\n45 08.10.2025 Implementationof HTTPmodule\n46 08.10.2025 Implementationofmethodsinfilesystemmodule\n47 15.10.2025 IllustrateURLmodule\n48 16.10.2025 IllustrateEventhandlinginNode.JS\n49 22.10.2025 FileuploadinginNode.JS\n50 23.10.2025 SendingEmailinNode.JS",
+    "image_count": 0
+  },
+  {
+    "page": 3,
+    "text": "EX.NO:01\nDATE:\n26.7.2025\nCreate a HTML page to display your Bio-Data\nAIM:\nTo write a program Create a HTML page to display your Bio-Data.\nPROGRAM:\n<!DOCTYPE html>\n<html>\n<head>\n<title>My Bio-Data</title>\n</head>\n<body>\n<h1>John Doe</h1>\n<p><strong>Contact:</strong> john.doe@email.com | (555) 123-4567</p>\n<h2>Summary</h2>\n<p>Highly motivated and results-oriented professional with 5 years of experience in\nSoftware Development. Proven ability to deliver high-quality projects on time.</p>\n<h2>Experience</h2>\n<ul>\n<li><strong>Senior Developer</strong> - Tech Solutions Inc. (2020 - Present)\n<ul>\n<li>Led a team of 3 developers on the new e-commerce platform.</li>\n<li>Reduced server response time by 20% through optimization.</li>\n</ul>\n</li>\n</ul>\n<h2>Education</h2>\n<ul>\n<li><strong>M.S. Computer Science</strong> - State University (2018)</li>\n<li><strong>B.E. Information Technology</strong> - City College (2016)</li>\n</ul>\n<h2>Skills</h2>\n<p>Python, JavaScript, HTML, CSS, SQL, AWS, Git</p>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 4,
+    "text": "OUTPUT :\nRESULT :\nThus the above program was executed successfully.",
+    "image_count": 1
+  },
+  {
+    "page": 5,
+    "text": "EX.NO:02\nDATE:\n26.7.2025\nCreate a web page to display the details of any two items\nAIM:\nTo write a program Create a web page to display the details of any two items.\nPROGRAM:\n<!DOCTYPE html>\n<html>\n<head>\n<title>Item Details</title>\n</head>\n<body>\n<h1>Featured Products</h1>\n<h2>Product A: Wireless Headphones</h2>\n<p><strong>Price:</strong> $79.99</p>\n<p><strong>Description:</strong> Noise-cancelling over-ear headphones with 20 hours\nof battery life. Available in Black and White.</p>\n<h2>Product B: Smart Watch</h2>\n<p><strong>Price:</strong> $199.00</p>\n<p><strong>Description:</strong> Tracks fitness, sleep, and heart rate. Features a durable\naluminum case and waterproof design.</p>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 6,
+    "text": "OUTPUT :\nRESULT :\nThus the above program was executed successfully.",
+    "image_count": 1
+  },
+  {
+    "page": 7,
+    "text": "EX.NO:03\nDATE:\n28.7.2025\nImplement all text and image formatting tags\nAIM:\nTowriteaprogramImplementalltextandimageformattingtags.\nPROGRAM:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>FormattingTagsDemo</title>\n</head>\n<body>\n<h1>TextandImageFormattingTags</h1>\n<p>Thisisaparagraphof**normaltext**.</p>\n<p>Here we show **bold** (using &lt;b&gt; and &lt;strong&gt;), <i>italic</i> (using\n&lt;i&gt;and&lt;em&gt;),<mark>marked/highlighted</mark>,<small>smallprint</small>,\nand<ins>inserted</ins>text.</p>\n<p>Math Example: $x^{2}$ is $\\text{superscript}$ ($\\text{&lt;sup&gt;}$), and\n$\\text{H}_{2}\\text{O}$is$\\text{subscript}$($\\text{&lt;sub&gt;}$).</p>\n<p>The product is <del>discontinued</del> now. This is a <code>short code\nsnippet</code>.</p>\n<hr>\n<h2>ImageTagExample</h2>\n<img src=\"https://via.placeholder.com/300x150\" alt=\"Placeholder Image\" style=\"border:\n2pxsolidblue;padding:5px;width:50%;\">\n<p>The image above is set to have a **blue border**, some internal **padding**, and a\n**widthof50%**ofthepageusingthe`style`attribute(inlineCSS).</p>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 8,
+    "text": "OUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 9,
+    "text": "EX.NO:04\nDATE:\n28.7.2025\nDesign any web page using Frames\nAIM:\nTowriteaprogramDesignanywebpageusingFrames.\nPROGRAM:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>iFrameExample</title>\n</head>\n<body>\n<h1>ModernWebLayoutwithiFrames</h1>\n<iframe src=\"https://www.example.com\" width=\"300\" height=\"400\" title=\"Example\nWebsite1\"></iframe>\n<iframe src=\"https://www.wikipedia.org\" width=\"600\" height=\"400\" title=\"Example\nWebsite2\"></iframe>\n</body>\n</html>\nOUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 10,
+    "text": "EX.NO:05\nDATE:\n29.7.2025\nImplement HTML tables and Lists\nAIM:\nTo write a program Implement HTML tables and Lists.\nPROGRAM:\n<!DOCTYPE html>\n<html>\n<head>\n<title>Tables and Lists Demo</title>\n</head>\n<body>\n<h1>Table and List Examples</h1>\n<h2> Simple Data Table</h2>\n<table>\n<tr>\n<th>Name</th>\n<th>Age</th>\n<th>City</th>\n</tr>\n<tr>\n<td>Alice</td>\n<td>30</td>\n<td>New York</td>\n</tr>\n<tr>\n<td>Bob</td>\n<td>25</td>\n<td>London</td>\n</tr>\n</table>\n<hr>\n<h2> Shopping List</h2>\n<ul>\n<li>Apples</li>\n<li>Bananas</li>\n<li>Milk</li>\n<li>Bread</li>\n</ul>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 11,
+    "text": "OUTPUT :\nRESULT :\nThus the above program was executed successfully.",
+    "image_count": 1
+  },
+  {
+    "page": 12,
+    "text": "EX.NO:06\nDATE:\n29.7.2025\nIllustrate Cascading Style Sheet\n(inline, internal, external and multiple CSS)\nAIM:\nTowriteaprogramIllustrateCascadingStyleSheet(inline,internal,external\nandmultipleCSS)\nPROGRAM:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>CSSImplementationDemo</title>\n<linkrel=\"stylesheet\"href=\"external-styles.css\">\n<linkrel=\"stylesheet\"href=\"multiple-styles.css\">\n<style>\nh1{\ncolor:purple;/*InternalstyleforH1*/\nborder-bottom:2pxsolidpurple;\n}\n.internal-style{\nbackground-color:lightyellow;\npadding:10px;\n}\n</style>\n</head>\n<body>\n<h1>CSSImplementationMethods</h1>\n<pstyle=\"color:blue;font-size:1.1em;background-color:lightblue;\">\nThisparagraphuses**InlineCSS**(highestprecedence).\n</p>\n<pclass=\"internal-style\">\nThisparagraphuses**InternalCSS**(definedinthe&lt;style&gt;tag).\n</p>\n<pid=\"external-style\">\nThisparagraphuses**ExternalCSS**(linkedviaexternal-styles.css).\n</p>\n<pclass=\"multiple-style\">\nThis paragraph demonstrates **Multiple CSS** files. The last loaded file (multiple-\nstyles.css)willtypicallywinifrulesconflict.\n</p>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 13,
+    "text": "OUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 14,
+    "text": "EX.NO:07\nDATE:\n30.7.2025\nDesign any user registration form using all HTML input\nelements along with CSS\nAIM:\nTowriteaprogramDesignanyuserregistrationformusingallHTMLinput\nelementsalongwithCSS\nPROGRAM:\n<!doctypehtml>\n<htmllang=\"en\">\n<head>\n<metacharset=\"utf-8\"/>\n<metaname=\"viewport\"content=\"width=device-width,initial-scale=1\"/>\n<title>SimpleRegistration</title>\n<style>\n/*Container*/\nbody{\nfont-family:system-ui,-apple-system,\"SegoeUI\",Roboto,Arial;\ndisplay:flex;\nalign-items:center;\njustify-content:center;\nmin-height:100vh;\nmargin:0;\nbackground:linear-gradient(135deg,#f7f9fc,#e9f0ff);\n}\n/*Card*/\n.card{\nwidth:320px;\npadding:22px;\nborder-radius:12px;\nbox-shadow:06px22pxrgba(20,40,80,0.08);\nbackground:#fff;\n}\nh2{margin:0012px;font-size:20px;color:#183056;text-align:center;}\n/*Inputs*/\n.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}\nlabel{font-size:13px;color:#415a72;}\ninput{\npadding:10px12px;\nborder:1pxsolid#d6e0ef;\nborder-radius:8px;\nfont-size:14px;\noutline:none;\ntransition:box-shadow.12s,border-color.12s;",
+    "image_count": 0
+  },
+  {
+    "page": 15,
+    "text": "}\ninput:focus{border-color:#6b8cff;box-shadow:04px14pxrgba(107,140,255,0.12);}\n/*Button*/\nbutton{\nwidth:100%;\npadding:10px;\nborder:none;\nborder-radius:10px;\nbackground:linear-gradient(90deg,#556bff,#6b8cff);\ncolor:#fff;\nfont-weight:600;\ncursor:pointer;\nfont-size:15px;\n}\nbutton:active{transform:translateY(1px);}\n/*Smallhelpertext*/\n.muted{font-size:12px;color:#7b8aa0;text-align:center;margin-top:10px;}\n</style>\n</head>\n<body>\n<formclass=\"card\"onsubmit=\"event.preventDefault();alert('Registered:\\\\n'+\n'Name:'+name.value+'\\\\nEmail:'+email.value);\">\n<h2>Createanaccount</h2>\n<divclass=\"field\">\n<labelfor=\"name\">Fullname</label>\n<inputid=\"name\"name=\"name\"type=\"text\"placeholder=\"Yourname\"required/>\n</div>\n<divclass=\"field\">\n<labelfor=\"email\">Emailaddress</label>\n<input id=\"email\" name=\"email\" type=\"email\" placeholder=\"you@example.com\"\nrequired/>\n</div>\n<divclass=\"field\">\n<labelfor=\"password\">Password</label>\n<input id=\"password\" name=\"password\" type=\"password\" placeholder=\"Create a\npassword\"minlength=\"6\"required/>\n</div>\n<buttontype=\"submit\">Signup</button>\n<div class=\"muted\">Already have an account? <a href=\"#\" style=\"color:#556bff;text-\ndecoration:none;\">Login</a></div>\n</form>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 16,
+    "text": "OUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 17,
+    "text": "EX.NO:08\nDATE:\n30.7.2025\nDisplay the Emoji symbols using HTML\nAIM:\nTowriteaprogramDisplaytheEmojisymbolsusingHTML.\nPROGRAM:\n<!doctypehtml>\n<htmllang=\"en\">\n<head>\n<metacharset=\"utf-8\">\n<title>EmojiDemo</title>\n<style>\nbody{font-family:system-ui,SegoeUI,Roboto,Arial;margin:32px;line-height:1.8}\n.row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}\n.emoji{font-size:48px}\n.label{font-size:14px;color:#555}\n</style>\n</head>\n<body>\n<h2>SimpleEmojiDisplay</h2>\n<!--Directemojicharacters-->\n<divclass=\"row\">\n<div><div class=\"emoji\" aria-label=\"grinning face\"> </div><div\nclass=\"label\">Grinning</div></div>\n<div><div class=\"emoji\" aria-label=\"thumbs up\"> </div><div class=\"label\">Thumbs\nup</div></div>\n<div><div class=\"emoji\" aria-label=\"red heart\"> </div><div\nclass=\"label\">Heart</div></div>\n</div>\n<!--Unicodecodepoint(hex)-->\n<h3>UsingHTMLentity(hex)</h3>\n<divclass=\"row\">\n<divclass=\"emoji\"aria-hidden=\"true\">&#x1F601;</div><!-- -->\n<divclass=\"emoji\"aria-hidden=\"true\">&#x1F4A1;</div><!-- -->\n<divclass=\"emoji\"aria-hidden=\"true\">&#x1F680;</div><!-- -->\n</div>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 18,
+    "text": "OUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 19,
+    "text": "EX.NO:09\nDATE:\n30.7.2025\nCreate menus and illustrate drawing\nborders, shading and shapes in HTML\nAIM:\nTowriteaprogramCreatemenusandillustratedrawingborders,shadingand\nshapesinHTML.\nPROGRAM:\n<!doctypehtml>\n<htmllang=\"en\">\n<head>\n<metacharset=\"utf-8\">\n<metaname=\"viewport\"content=\"width=device-width,initial-scale=1\">\n<title>SimpleDemo</title>\n<style>\nbody{font-family:Arial;margin:24px;background:#f7f9fc;color:#122;}\nnav{display:flex;gap:10px;align-items:center;margin-bottom:16px}\na{padding:6px10px;text-decoration:none;color:#345;border-radius:6px}\na:hover{background:#e8f3ff}\n/*accessibledropdownusingdetails*/\ndetails{position:relative}\nsummary{list-style:none;cursor:pointer;padding:6px10px;border-radius:6px}\n/*cardwithborder+shadow*/\n.card{display:inline-block;padding:12px;border-radius:8px;border:1pxsolid#d7e3fb;\nbackground:linear-gradient(180deg,#fff,#f8fbff);box-shadow:0 8px 18px\nrgba(16,40,80,.06);margin-right:12px}\n.row{display:flex;gap:10px;align-items:center;margin-top:10px}\n.box{width:56px;height:56px;display:grid;place-items:center;border-\nradius:8px;background:#fff;border:3pxsolid}\n.solid{border-color:#d9534f}\n.dashed{border-style:dashed;border-color:#f0ad4e}\n.circle{width:70px;height:70px;border-radius:50%;background:linear-\ngradient(135deg,#ff9,#f90)}\n/*triangle*/\n.tri{width:0;height:0;border-left:30pxsolidtransparent;border-right:30pxsolidtransparent;\nborder-bottom:56pxsolid#6c9}\nsmall{display:block;color:#667;margin-top:8px;font-size:13px}\n</style>\n</head>\n<body>\n<nav>\n<strongstyle=\"color:#246;padding-right:6px\">Logo</strong>\n<ahref=\"#\">Home</a>\n<ahref=\"#\">About</a>\n<details>\n<summary>Menu \u25be </summary>",
+    "image_count": 0
+  },
+  {
+    "page": 20,
+    "text": "<div style=\"padding:8px;background:#fff;border-radius:8px;box-shadow:0 8px 18px\nrgba(0,0,0,.06);margin-top:6px\">\n<ahref=\"#\"style=\"display:block;padding:6px8px;color:#234\">Item1</a>\n<ahref=\"#\"style=\"display:block;padding:6px8px;color:#234\">Item2</a>\n</div>\n</details>\n<ahref=\"#\">Contact</a>\n</nav>\n<divclass=\"card\">\n<strong>Borders</strong>\n<divclass=\"row\">\n<divclass=\"boxsolid\">solid</div>\n<divclass=\"boxdashed\">dashed</div>\n</div>\n<small>Use<code>border</code>and<code>border-style</code>.</small>\n</div>\n<divclass=\"card\">\n<strong>Shading</strong>\n<divclass=\"row\"style=\"margin-top:10px\">\n<div style=\"padding:10px;border-radius:8px;box-shadow:0 10px 24px\nrgba(36,70,140,.12);background:linear-gradient(180deg,#fff,#eef6ff)\">\nshadow+gradient\n</div>\n</div>\n</div>\n<divclass=\"card\">\n<strong>Shapes</strong>\n<divclass=\"row\"style=\"margin-top:10px\">\n<divclass=\"circle\"title=\"circle\"></div>\n<divclass=\"tri\"title=\"triangle\"></div>\n</div>\n</div>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 21,
+    "text": "OUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 22,
+    "text": "EX.NO:10\nDATE:\n02.08.2025\nImplement all web APIs (drag and drop, Geolocation,\nThird Party, JavaScript Validation, Web History, Storage,\nWeb Worker)\nAIM:\nTo write a program Implement all web APIs (drag and drop, Geolocation,\nThirdParty,JavaScriptValidation,WebHistory,Storage,WebWorker).\nPROGRAM:\n<!doctypehtml>\n<htmllang=\"en\">\n<head>\n<meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-\nscale=1\">\n<title>MiniWebAPIsDemo</title>\n<style>\nbody{font-family:Arial;margin:18px;background:#f7fbff;color:#123}\n.box{width:80px;height:80px;background:#6bbcff;border-radius:8px;display:grid;place-\nitems:center;color:#fff;cursor:grab}\n.drop{width:200px;height:100px;border:2px dashed #9ab;border-\nradius:8px;display:grid;place-items:center;margin-top:8px}\n.row{display:flex;gap:12px;flex-wrap:wrap}\n.card{background:#fff;padding:10px;border-radius:8px;box-shadow:0 6px 18px\nrgba(0,30,80,.06);min-width:240px}\nsmall{color:#556;font-size:12px}\n</style>\n</head>\n<body>\n<h3>CompactWebAPIsdemo</h3>\n<divclass=\"row\">\n<!--Drag&Drop-->\n<divclass=\"card\">\n<strong>Drag&Drop</strong>\n<divid=\"drag\"class=\"box\"draggable=\"true\">DRAG</div>\n<divid=\"drop\"class=\"drop\">Drophere</div>\n<smallid=\"dmsg\"></small>\n</div>\n<!--Geolocation-->\n<divclass=\"card\">\n<strong>Geolocation</strong>\n<buttonid=\"geoBtn\">GetLocation</button>\n<divid=\"loc\">\u2014</div>\n<small>Usesnavigator.geolocation</small>\n</div>",
+    "image_count": 0
+  },
+  {
+    "page": 23,
+    "text": "<!--Third-party(Lodash)-->\n<divclass=\"card\">\n<strong>Third-party(Lodash)</strong>\n<inputid=\"txt\"placeholder=\"typename\"><buttonid=\"cap\">Cap</button>\n<divid=\"capout\">\u2014</div>\n<small>CDNscript+_.capitalize</small>\n</div>\n<!--Validation+Storage-->\n<divclass=\"card\">\n<strong>Validation&Storage</strong>\n<formid=\"f\">\n<input id=\"name\" placeholder=\"name (letters only)\" required pattern=\"^[A-Za-\nz]+$\"><br><br>\n<input id=\"age\" placeholder=\"age (18-99)\" required pattern=\"^(1[89]|[2-9][0-\n9])$\"><br><br>\n<button>Submit</button>\n</form>\n<div><button id=\"save\">Save name to localStorage</button> <button\nid=\"load\">Load</button></div>\n<divid=\"stored\">\u2014</div>\n</div>\n<!--HistoryAPI-->\n<divclass=\"card\">\n<strong>HistoryAPI</strong>\n<divid=\"page\">PageA</div>\n<buttonid=\"goB\">GotoB</button>\n<small>UsebrowserBacktoreturn</small>\n</div>\n<!--WebWorker-->\n<divclass=\"card\">\n<strong>WebWorker</strong>\n<buttonid=\"startw\">StartWorker(calc)</button>\n<divid=\"wout\">\u2014</div>\n<small>Workersums1..Ninbackground</small>\n</div>\n</div>\n<!--LodashCDN(third-party)-->\n<scriptsrc=\"https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js\"></script>\n<script>\n//---Drag&Drop---\nconst drag = document.getElementById('drag'), drop = document.getElementById('drop'),\ndmsg=document.getElementById('dmsg');\ndrag.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain','dragged'));\ndrop.addEventListener('dragover',e=>e.preventDefault());\ndrop.addEventListener('drop',e=>{e.preventDefault();dmsg.textContent='Dropped!';});",
+    "image_count": 0
+  },
+  {
+    "page": 24,
+    "text": "//---Geolocation---\ndocument.getElementById('geoBtn').onclick=()=>{\nconstout=document.getElementById('loc');\nif(!navigator.geolocation)returnout.textContent='Notsupported';\nnavigator.geolocation.getCurrentPosition(p => out.textContent = `Lat:\n${p.coords.latitude.toFixed(4)},Lon:${p.coords.longitude.toFixed(4)}`,\nerr=>out.textContent='Denied/error');\n};\n//---Lodashusage(third-party)---\ndocument.getElementById('cap').onclick=()=>{\nconstv=document.getElementById('txt').value||'';\ndocument.getElementById('capout').textContent=_.capitalize(v);\n};\n//---Validation+Storage---\nconstform=document.getElementById('f');\nform.addEventListener('submit',e=>{\ne.preventDefault();\nif(!form.checkValidity()){alert('Fixfields');return;}\nalert('FormOK\u2014name:'+document.getElementById('name').value);\n});\ndocument.getElementById('save').onclick=()=>{\nconstn=document.getElementById('name').value;\nif(n)localStorage.setItem('demo_name',n);\ndocument.getElementById('stored').textContent='Saved';\n};\ndocument.getElementById('load').onclick=()=>{\ndocument.getElementById('stored').textContent = localStorage.getItem('demo_name') || 'No\nname';\n};\n//---HistoryAPI---\nconstpage=document.getElementById('page');\ndocument.getElementById('goB').onclick=()=>{\nhistory.pushState({page:'B'},'B','?page=B');\npage.textContent='PageB';\n};\nwindow.addEventListener('popstate',e=>{\npage.textContent=(e.state&&e.state.page==='B')?'PageB':'PageA';\n});\n//---WebWorkerviaBlob---\nconstwout=document.getElementById('wout');\ndocument.getElementById('startw').onclick=()=>{\n//smallworkerthatsumsnumbersuptoN(N=1000000)\nconst code = `self.onmessage=e=>{const n=e.data;let s=0;for(let\ni=1;i<=n;i++)s+=i;self.postMessage(s)}`;\nconst worker = new Worker(URL.createObjectURL(new\nBlob([code],{type:'text/javascript'})));",
+    "image_count": 0
+  },
+  {
+    "page": 25,
+    "text": "worker.onmessage=m=>{wout.textContent='Sum='+m.data;worker.terminate();};\nwout.textContent='Working...';worker.postMessage(1000000);\n};\n</script>\n</body>\n</html>\nOUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 26,
+    "text": "EX.NO:11\nDATE:3.8.25\nUser Registration Form with JavaScript Validation\nAIM:\nTowriteaprogramforUserRegistrationFormwithJavaScriptValidation.\nPROGRAM:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>RegistrationForm</title>\n</head>\n<body>\n<h2>UserRegistration</h2>\n<formonsubmit=\"returncheckForm()\">\nName:<inputtype=\"text\"id=\"name\"><br><br>\nEmail:<inputtype=\"text\"id=\"email\"><br><br>\nPassword:<inputtype=\"password\"id=\"pass\"><br><br>\n<inputtype=\"submit\"value=\"Register\">\n</form>\n<script>\nfunctioncheckForm(){\nletname=document.getElementById(\"name\").value;\nletemail=document.getElementById(\"email\").value;\nletpass=document.getElementById(\"pass\").value;\nif(name==\"\"||email==\"\"||pass==\"\"){\nalert(\"Allfieldsarerequired\");\nreturnfalse;\n}\nif(!email.includes(\"@\")){\nalert(\"Enteravalidemail\");\nreturnfalse;\n}\nreturntrue;\n}\n</script>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 27,
+    "text": "OUTPUT:\nRESULT:\nTheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 28,
+    "text": "EX.NO:12\nDATE:3.8.25\nSimple Webpage using HTML + CSS + JS + PHP + MySQL\nAIM:\nTowriteaprogramtocreateasimplewebpageusingHTML,CSS,PHPandMySQL.\nPROGRAM:\nCreate MySQL Database & Table:\nCREATEDATABASEawpdb;\nUSEawpdb;\nCREATETABLEusers(\nidINTAUTO_INCREMENTPRIMARYKEY,\nnameVARCHAR(50),\nemailVARCHAR(50)\n);\nindex.html:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>UserForm</title>\n<style>\nbody{\nbackground:#f3f3f3;\nfont-family:Arial;\n}\n.container{\nwidth:350px;\nbackground:white;\npadding:20px;\nmargin:50pxauto;\nborder-radius:10px;\nbox-shadow:0010pxgray;\n}\ninput{\nwidth:95%;",
+    "image_count": 0
+  },
+  {
+    "page": 29,
+    "text": "padding:10px;\nmargin-top:10px;\nborder-radius:5px;\nborder:1pxsolidgray;\n}\nbutton{\npadding:10px;\nwidth:100%;\nbackground:blue;\ncolor:white;\nborder:none;\nmargin-top:15px;\nborder-radius:5px;\ncursor:pointer;\n}\nbutton:hover{\nbackground:darkblue;\n}\n</style>\n<script>\nfunctionvalidateForm(){\nletname=document.getElementById(\"name\").value;\nletemail=document.getElementById(\"email\").value;\nif(name==\"\"||email==\"\"){\nalert(\"Bothfieldsarerequired!\");\nreturnfalse;\n}\nif(!email.includes(\"@\")){\nalert(\"EnteravalidemailID!\");\nreturnfalse;\n}\nreturntrue;\n}\n</script>\n</head>\n<body>",
+    "image_count": 0
+  },
+  {
+    "page": 30,
+    "text": "<divclass=\"container\">\n<h2>SaveUser</h2>\n<formaction=\"save.php\"method=\"post\"onsubmit=\"returnvalidateForm()\">\n<inputtype=\"text\"id=\"name\"name=\"name\"placeholder=\"EnterName\">\n<inputtype=\"text\"id=\"email\"name=\"email\"placeholder=\"EnterEmail\">\n<buttontype=\"submit\">Save</button>\n</form>\n</div>\n</body>\n</html>\nsave.php:\n<?php\n$con=mysqli_connect(\"localhost\",\"root\",\"\",\"awpdb\");\n$name=$_POST[\"name\"];\n$email=$_POST[\"email\"];\n$sql=\"INSERTINTOusers(name,email)VALUES('$name','$email')\";\nmysqli_query($con,$sql);\necho\"<h2>UserSavedSuccessfully!</h2>\";\necho\"<ahref='index.html'>GoBack</a>\";\n?>\nOUTPUT:\nRESULT:\nTheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 31,
+    "text": "EX.NO:13\nDATE:3.8.25\nSimple Webpage using HTML + CSS + JS + PHP + MySQL\nAIM:\nTowriteaXMLprogramtocreateaXMLfile.\nPROGRAM:\nStudents.xml:\n<?xmlversion=\"1.0\"encoding=\"UTF-8\"?>\n<student>\n<name>Krishna</name>\n<rollno>1023</rollno>\n<department>MCA</department>\n<year>2</year>\n</student>\nOUTPUT:\nRESULT:\nTheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 32,
+    "text": "EX.NO:14\nDATE:3.8.25\nXML with Internal DTD\nAIM:\nTowriteaprogramtoillustrateXMLwithInternalDTD.\nPROGRAM:\n<!DOCTYPEstudent[\n<!ELEMENTstudent(name,age)>\n<!ELEMENTname(#PCDATA)>\n<!ELEMENTage(#PCDATA)>\n]>\n<student>\n<name>Ravi</name>\n<age>20</age>\n</student>\nOUTPUT:\nRESULT:\nTheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 33,
+    "text": "EX.NO:15\nDATE:4.8.25\nXML with External DTD\nAIM:\nTowriteaprogramtoillustrateXMLwithExternalDTD.\nPROGRAM:\nstudent.dtd:\n<!ELEMENTstudent(name,age)>\n<!ELEMENTname(#PCDATA)>\n<!ELEMENTage(#PCDATA)>\nstudent.xml:\n<!DOCTYPEstudentSYSTEM\"student.dtd\">\n<student>\n<name>Ravi</name>\n<age>20</age>\n</student>\nOUTPUT:\nRESULT:\nTheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 34,
+    "text": "EX.NO:16\nDATE:4.8.25\nDisplay XML Table in HTML Document\nAIM:\nTowriteaprogramtodisplayXMLTableinHTMLDocument.\nPROGRAM:\ndata.xml:\n<items>\n<item>\n<name>Pen</name>\n<price>10</price>\n</item>\n<item>\n<name>Book</name>\n<price>40</price>\n</item>\n</items>\ndisplay.html:\n<!DOCTYPEhtml>\n<html>\n<body>\n<h2>ItemsList</h2>\n<tableborder=\"1\"id=\"tbl\"></table>\n<script>\nvarx=newXMLHttpRequest();\nx.open(\"GET\",\"data.xml\",false);\nx.send();\nvarxml=x.responseXML;\nvaritems=xml.getElementsByTagName(\"item\");\nletout=\"<tr><th>Name</th><th>Price</th></tr>\";\nfor(leti=0;i<items.length;i++){\nletname=items[i].getElementsByTagName(\"name\")[0].textContent;\nletprice=items[i].getElementsByTagName(\"price\")[0].textContent;\nout+=\"<tr><td>\"+name+\"</td><td>\"+price+\"</td></tr>\";\n}\ndocument.getElementById(\"tbl\").innerHTML=out;\n</script>\n</body></html>",
+    "image_count": 0
+  },
+  {
+    "page": 35,
+    "text": "OUTPUT:\nRESULT:\nTheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 36,
+    "text": "EX.NO:17\nDATE:4.8.25\nSend HTML Form Data to XML (Using JavaScript)\nAIM:\nTowriteaprogramtosendHTMLformdatatoXMLusingJavaScript.\nPROGRAM:\nindex.html:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>SendFormDatatoXML</title>\n</head>\n<body>\n<h2>SendHTMLFormDatatoXMLFile</h2>\n<formonsubmit=\"sendData();returnfalse;\">\nName:<inputtype=\"text\"id=\"name\"><br><br>\nEmail:<inputtype=\"text\"id=\"email\"><br><br>\n<buttontype=\"submit\">SavetoXML</button>\n</form>\n<h3>XMLCreated:</h3>\n<preid=\"output\"></pre>\n<script>\nfunctionsendData(){\nletname=document.getElementById(\"name\").value;\nletemail=document.getElementById(\"email\").value;\n//CreateXMLstring\nletxml=\n\"<user>\\n\"+\n\" <name>\"+name+\"</name>\\n\"+\n\" <email>\"+email+\"</email>\\n\"+\n\"</user>\";\ndocument.getElementById(\"output\").textContent=xml;\n//SendXMLtoPHPforsaving\nletx=newXMLHttpRequest();",
+    "image_count": 0
+  },
+  {
+    "page": 37,
+    "text": "x.open(\"POST\",\"savexml.php\",true);\nx.setRequestHeader(\"Content-Type\",\"application/x-www-form-urlencoded\");\nx.send(\"xmlData=\"+encodeURIComponent(xml));\n}\n</script>\n</body>\n</html>\nsavexml.php:\n<?php\n$xml=$_POST[\"xmlData\"];\n//SavetheXMLstringintoafile\nfile_put_contents(\"user.xml\",$xml);\necho\"XMLFileSavedSuccessfully!\";\n?>\nOUTPUT:\nRESULT:\nTheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 38,
+    "text": "EX.NO:18\nDATE:4.8.25\nDisplay XML Data into HTML Form\nAIM:\nTowriteaprogramtodisplayXMLdataintoHTMLform.\nPROGRAM:\nuser.xml:\n<user>\n<name>Raja</name>\n</user>\nform.html:\n<!DOCTYPEhtml>\n<html>\n<body>\nName:<inputtype=\"text\"id=\"name\">\n<script>\nvarx=newXMLHttpRequest();\nx.open(\"GET\",\"user.xml\",false);\nx.send();\nvarxml=x.responseXML;\ndocument.getElementById(\"name\").value=\nxml.getElementsByTagName(\"name\")[0].textContent;\n</script>\n</body>\n</html>\nOUTPUT:\nRESULT:\nTheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 39,
+    "text": "EX.NO:19\nDATE:4.8.25\nXML Schema (XSD) for Simple Data Type\nAIM:\nTowriteaprogramtocreateanXMLschemaforsimpledatatype.\nPROGRAM:\n<xs:schemaxmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n<xs:elementname=\"age\">\n<xs:simpleType>\n<xs:restrictionbase=\"xs:integer\">\n<xs:minInclusivevalue=\"1\"/>\n<xs:maxInclusivevalue=\"120\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\n</xs:schema>\nOUTPUT:\nRESULT:\nTheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 40,
+    "text": "EX.NO:20\nDATE:4.8.25\nXML Schema (XSD) for Complex Data Type\nAIM:\nTowriteaprogramtocreateanXMLschemaforComplexDataType.\nPROGRAM:\n<xs:schemaxmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n<xs:elementname=\"student\">\n<xs:complexType>\n<xs:sequence>\n<xs:elementname=\"name\"type=\"xs:string\"/>\n<xs:elementname=\"department\"type=\"xs:string\"/>\n<xs:elementname=\"year\"type=\"xs:integer\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>\n</xs:schema>\nOUTPUT:\nRESULT:\nTheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 41,
+    "text": "EX.NO:21\nDATE:\n06.8.2025\nWrite a program to read XML data using PHP\nsimplexml_load_string() function\nAIM:\nTowriteaprogramtoreadXMLdatausingPHPsimpleXML_load_string()\nfunction\nPROGRAM:\n<?php\n$xmlString=<<<XML\n<bookstore>\n<bookcategory=\"fiction\">\n<titlelang=\"en\">TheGreatGatsby</title>\n<author>F.ScottFitzgerald</author>\n<year>1925</year>\n<price>12.99</price>\n</book>\n<bookcategory=\"programming\">\n<titlelang=\"en\">LearningPHP</title>\n<author>JaneDoe</author>\n<year>2023</year>\n<price>39.50</price>\n</book>\n</bookstore>\nXML;\n$xml=simplexml_load_string($xmlString);\nif($xml!==false){\necho\"<h1>BookList</h1><pre>\";\nforeach($xml->bookas$book){\necho\"Title:\".(string)$book->title.\"\\n\";\necho\"Category:\".(string)$book['category'].\"\\n\";\necho\"Author:\".(string)$book->author.\"\\n\";\necho\"Price:$\".(string)$book->price.\"\\n\\n\";\n}\necho\"</pre>\";\n}else{\necho\"FailedtoloadXML.\";\n}\n?>",
+    "image_count": 0
+  },
+  {
+    "page": 42,
+    "text": "OUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 43,
+    "text": "EX.NO:22\nDATE:\n06.8.2025\nWrite a program to read data stored in XML file using PHP\nAIM:\nTowriteaprogramtoreaddatastoredinXMLfileusingPHP\nPROGRAM:\n<?php\n$xmlData=<<<XML\n<?xmlversion=\"1.0\"encoding=\"UTF-8\"?>\n<user>\n<name>DevilKumar</name>\n<email>devil.kumar@example.com</email>\n<city>Madurai</city>\n</user>\nXML;\n$xml=simplexml_load_string($xmlData);\necho\"Name:\".$xml->name.\"<br>\";\necho\"Email:\".$xml->email.\"<br>\";\necho\"City:\".$xml->city.\"<br>\";\n?>\nOUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 44,
+    "text": "EX.NO:23\nDATE:\n24.8.2025\nWrite a program to display the XML data using PHP\nAIM:\nTowriteaprogramtodisplaytheXMLdatausingPHP.\nPROGRAM:\n<?php\n$xmlString=<<<XML\n<bookstore>\n<bookcategory=\"fiction\">\n<titlelang=\"en\">TheGreatGatsby</title>\n<author>F.ScottFitzgerald</author>\n<price>12.99</price>\n</book>\n<bookcategory=\"programming\">\n<titlelang=\"en\">LearningPHP</title>\n<author>JaneDoe</author>\n<price>39.50</price>\n</book>\n</bookstore>\nXML;\n$xml=simplexml_load_string($xmlString);\nif($xml!==false){\necho\"<h1>Self-ContainedBookList</h1><pre>\";\nforeach($xml->bookas$book){\necho\"Title:\".(string)$book->title.\"(Category:\n\".(string)$book['category'].\")\\n\";\necho\"Author:\".(string)$book->author.\"\\n\";\necho\"Price:$\".(string)$book->price.\"\\n\\n\";",
+    "image_count": 0
+  },
+  {
+    "page": 45,
+    "text": "}\necho\"</pre>\";\n}else{\necho\"FailedtoloadXMLfromstring.\";\n}\n?>\nOUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 46,
+    "text": "EX.NO:24\nDATE:\n29.8.2025\nWrite a program to display many values from XML file\nusing PHP looping statement\nAIM:\nTowriteaprogramtodisplaymanyvaluesfromtheXMLfileusingPHP\nloopingstatement.\nPROGRAM:\n<?php\n$xmlString=<<<XML\n<bookstore>\n<bookcategory=\"fiction\">\n<titlelang=\"en\">TheGreatGatsby</title>\n<author>F.ScottFitzgerald</author>\n<year>1925</year>\n<pages>180</pages>\n<price>12.99</price>\n</book>\n<bookcategory=\"programming\">\n<titlelang=\"en\">LearningPHP</title>\n<author>JaneDoe</author>\n<year>2023</year>\n<pages>550</pages>\n<price>39.50</price>\n</book>\n</bookstore>\nXML;\n$xml=simplexml_load_string($xmlString);\nif($xml!==false){\necho\"<h1>DetailedBookList(ConciseLoop)</h1><pre>\";\nforeach($xml->bookas$book){\necho\"---\".(string)$book->title.\"(Category:\".(string)$book['category'].\")---\\n\";\nforeach($bookas$key=>$value){\nechoucfirst($key).\":\".(string)$value.\"\\n\";\n}\necho\"\\n\";\n}\necho\"</pre>\";\n}else{\necho\"FailedtoloadXMLfromstring.\";\n}\n?>",
+    "image_count": 0
+  },
+  {
+    "page": 47,
+    "text": "OUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 48,
+    "text": "EX.NO:25\nDATE:\n04.9.2025\nCreate a JavaScript object using JSON object literal, also\nillustrate the various ways of accessing the object values.\nAIM:\nTowriteaprogramtocreateaJavaScriptobjectusingjsonobjectliteral,also\nIllustratethevariouswaysofaccessingtheobjectvalues.\nPROGRAM:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>JavaScriptObjectLiteralDemo</title>\n<style>\nbody{\nfont-family:'SegoeUI',Tahoma,Geneva,Verdana,sans-serif;\nmargin:20px;\nbackground-color:#f4f4f9;\n}\n.container{\nmax-width:600px;\nmargin:0auto;\nbackground-color:#fff;\npadding:20px;\nborder-radius:8px;\nbox-shadow:04px8pxrgba(0,0,0,0.1);\n}\nh2{\ncolor:#333;\nborder-bottom:2pxsolid#007bff;\npadding-bottom:10px;\n}\n.code-box{\nbackground-color:#e9ecef;\npadding:15px;\nborder-radius:4px;\nmargin-bottom:20px;\noverflow-x:auto;\n}\n.output-sectionp{\nfont-size:1.1em;\nmargin:10px0;\n}\n.highlight{\nfont-weight:bold;\ncolor:#28a745;\n}\n</style>\n</head>",
+    "image_count": 0
+  },
+  {
+    "page": 49,
+    "text": "<body>\n<divclass=\"container\">\n<h2>JavaScriptObjectAccessDemonstration</h2>\n<p>TheJavaScriptObject(storedinthevariable<code>book</code>):</p>\n<divclass=\"code-box\">\n<pre><code>\nconstbook={\ntitle:\"TheGreatGatsby\",\nauthor:\"F.ScottFitzgerald\",\nyear:1925,\n\"publisher-city\":\"NewYork\",//Propertywithahyphen\nkeywords:[\"jazz\",\"wealth\",\"tragedy\"]\n};\n</code></pre>\n</div>\n<hr>\n<divclass=\"output-section\">\n<h2>AccessingObjectValues</h2>\n<p>Title(DotNotation):<spanid=\"output-title\"class=\"highlight\"></span></p>\n<p>Author(DotNotation):<spanid=\"output-author\"class=\"highlight\"></span></p>\n<p>Publisher City (Bracket Notation - for hyphens): <span id=\"output-publisher\"\nclass=\"highlight\"></span></p>\n<p>First Keyword (Bracket Notation - accessing array): <span id=\"output-keyword\"\nclass=\"highlight\"></span></p>\n<p>Year (Dot Notation for operation): <span id=\"output-operation\"\nclass=\"highlight\"></span></p>\n</div>\n</div>\n<script>\nconstbook={\ntitle:\"TheGreatGatsby\",\nauthor:\"F.ScottFitzgerald\",\nyear:1925,\n\"publisher-city\":\"NewYork\",\nkeywords:[\"jazz\",\"wealth\",\"tragedy\"]\n};\nconstbookTitle=book.title;\nconstbookAuthor=book.author\nconstpublisherCity=book[\"publisher-city\"];\nconstfirstKeyword=book.keywords[0];",
+    "image_count": 0
+  },
+  {
+    "page": 50,
+    "text": "constage=2024-book.year;\ndocument.getElementById('output-title').textContent=bookTitle+\"(Code:book.title)\";\ndocument.getElementById('output-author').textContent=bookAuthor+\"(Code:book.author)\";\ndocument.getElementById('output-publisher').textContent = publisherCity + \" (Code:\nbook[\\\"publisher-city\\\"])\";\ndocument.getElementById('output-keyword').textContent = firstKeyword + \" (Code:\nbook.keywords[0])\";\ndocument.getElementById('output-operation').textContent = age + \" years old (2024 -\nbook.year)\";\n</script>\n</body>\n</html>\nOUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 51,
+    "text": "EX.NO:26\nDATE:\n04.9.2025\nProgram to create a JavaScript array by parsing a JSON\nstring and access the array values\nAIM:\nTowriteaprogramtocreateaJavaScriptarraybyparsingaJSONstringand\nAccessthearrayvalues.\nPROGRAM:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>JSONtoArrayDemo</title>\n</head>\n<body>\n<h1>ParsingJSONStringtoJavaScriptArray</h1>\n<p>JSONString(input):<codeid=\"json-string\"></code></p>\n<p>ParsedArrayLength:<spanid=\"array-length\"></span></p>\n<p>FirstElement(Index0):<spanid=\"first-element\"></span></p>\n<p>LastElement(Index2):<spanid=\"last-element\"></span></p>\n<script>\nconstjsonString='[\"Apple\",\"Banana\",\"Cherry\",\"Date\"]';\ndocument.getElementById('json-string').textContent=jsonString;\nconstfruitArray=JSON.parse(jsonString);\ndocument.getElementById('array-length').textContent=fruitArray.length;\ndocument.getElementById('first-element').textContent=fruitArray[0];\ndocument.getElementById('last-element').textContent=fruitArray[fruitArray.length-1];\nconsole.log(\"ParsedArray:\",fruitArray);\n</script>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 52,
+    "text": "OUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 53,
+    "text": "EX.NO:27\nDATE:\n04.9.2025\nCreate a JSON file using your own data and access the\nJSON values by array indexing and looping\nAIM:\nTowriteaprogramtocreateaJSONfileusingyourowndataandaccessthe\nJSON valuesbyarrayindexingandlooping\nPROGRAM:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>JSONArrayAccessDemo</title>\n<style>\nbody{font-family:Arial,sans-serif;}\ncode{background-color:#eee;padding:2px4px;border-radius:3px;}\n.output-box{border:1pxsolid#ccc;padding:10px;margin-top:10px;}\n</style>\n</head>\n<body>\n<h1>AccessingJSONArrayElements</h1>\n<p>TheJSONstructurecontainsalistof<code>products</code>.</p>\n<divid=\"indexed-output\">\n<h2>1.AccessbyIndexing</h2>\n</div>\n<divid=\"looped-output\">\n<h2>2.AccessbyLooping</h2>\n<ulid=\"product-list\">\n</ul>\n</div>\n<script>\nconstjsonString=`\n{\n\"storeName\":\"TechHub\",\n\"location\":\"Online\",\n\"products\":[\n{\"id\":101,\"name\":\"Laptop\",\"price\":1200},\n{\"id\":102,\"name\":\"Mouse\",\"price\":25},\n{\"id\":103,\"name\":\"Monitor\",\"price\":300}\n]\n}`;\nconstdata=JSON.parse(jsonString);\nconstproductsArray=data.products;\nconstsecondProductName=productsArray[1].name;\nconstsecondProductPrice=productsArray[1].price;",
+    "image_count": 0
+  },
+  {
+    "page": 54,
+    "text": "document.getElementById('indexed-output').innerHTML+=`\n<p>Secondproduct(Index1)is:<strong>${secondProductName}</strong>.</p>\n<p>Itspriceis:<strong>$${secondProductPrice}</strong>.</p>\n`;\nconstlistContainer=document.getElementById('product-list');\nfor(leti=0;i<productsArray.length;i++){\nconstproduct=productsArray[i];\nconstlistItem=document.createElement('li');\nlistItem.textContent=`ID:${product.id}-${product.name}costs$${product.price}`;\nlistContainer.appendChild(listItem);\n}\n</script>\n</body>\n</html>\nOUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 55,
+    "text": "EX.NO:28\nDATE:\n05.9.2025\nIllustrate the usage of date and function in JSON\nAIM:\nTowriteaprogramtoillustratetheusageofdateandfunctioninJSON\nPROGRAM:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>JSONDate/FunctionUsage</title>\n</head>\n<body>\n<h1>JSONStringificationDemo</h1>\n<p>Checkthebrowserconsole(F12)fortheresults.</p>\n<script>\nconstdata={\nid:1,\ncreationDate:newDate(),\nprocessor:function(x){returnx*2;}\n};\nconstjsonString=JSON.stringify(data,null,2);\nconsole.log(\"---OriginalJavaScriptObject---\");\nconsole.log(data);\nconsole.log(\"\\n---JSON.stringify()Result---\");\nconsole.log(jsonString);\nconstparsedData=JSON.parse(jsonString);\nconstdateFromJSON=newDate(parsedData.creationDate);\nconsole.log(\"\\n---AfterJSON.parse()---\");\nconsole.log(\"DatepropertytypeinparsedJSON:\",typeofparsedData.creationDate);\nconsole.log(\"Re-createdJSDate:\",dateFromJSON.getFullYear());\nconsole.log(\"Functionproperty(processor):\",parsedData.processor);\n</script>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 56,
+    "text": "OUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 2
+  },
+  {
+    "page": 57,
+    "text": "EX.NO:29\nDATE:\n05.9.2025\nIllustrate the usage of JSON.stringify() on array, date and\nfunction\nAIM:\nTowriteaprogramtoillustratetheusageofJSON.stringify()onarray,date\nandfunction\nPROGRAM:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>JSON.stringify()UsageDemo</title>\n<style>\nbody{font-family:Arial,sans-serif;padding:20px;}\npre { background-color: #f4f4f4; padding: 15px; border: 1px solid #ddd; overflow-x:\nauto;}\n.result-box{margin-bottom:20px;padding:10px;border-left:3pxsolid#007bff;}\n.label{font-weight:bold;color:#333;}\n</style>\n</head>\n<body>\n<h1>UsingJSON.stringify()</h1>\n<divid=\"output\">\n</div>\n<script>\nconstmyArray=[10,\"hello\",true,null];\nconststringifiedArray=JSON.stringify(myArray);\nconstmyDate=newDate();\nconststringifiedDate=JSON.stringify(myDate);\nconstmyObjectWithFunction={\nid:1,\nname:\"Test\",\ncalculate:function(a,b){returna+b;}\n};\nconststringifiedObject=JSON.stringify(myObjectWithFunction);\nfunctiondisplayResult(title,original,stringified){\nconstoutputDiv=document.getElementById('output');\nconst originalDisplay = typeof original === 'object' && original !== null &&\noriginal.constructor!==Array?\nJSON.stringify(original,null,2):\noriginal;\noutputDiv.innerHTML+=`\n<divclass=\"result-box\">\n<h3>${title}</h3>\n<pclass=\"label\">OriginalDataType:</p>\n<pre><code>${originalDisplay}</code></pre>\n<pclass=\"label\">StringifiedJSONOutput:</p>\n<pre><code>${stringified}</code></pre>",
+    "image_count": 0
+  },
+  {
+    "page": 58,
+    "text": "<pclass=\"label\">Conclusion:</p>\n<p>\n${\ntitle.includes(\"Function\")\n?\"Thefunctionwas**removed**fromthefinalJSONstring.\"\n: \"The data was successfully converted into a JSON **string\nrepresentation**.\"\n}\n</p>\n</div>\n`;\n}\ndisplayResult(\"1.Array(`[]`)\",myArray,stringifiedArray);\ndisplayResult(\"2.DateObject(`newDate()`)\",myDate,stringifiedDate);\ndisplayResult(\"3.ObjectwithFunction\",myObjectWithFunction,stringifiedObject);\n</script>\n</body>\n</html>\nOUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 59,
+    "text": "EX.NO:30\nDATE:\n06.9.2025\nProgram to send HTML form data to JSON file\nAIM:\nTowriteaprogramtosendHTMLformdatatoJSONfile\nPROGRAM:\n<!DOCTYPEhtml>\n<html>\n<head>\n<title>FormDatatoJSONDownload</title>\n<style>\nbody{font-family:Arial,sans-serif;padding:20px;max-width:600px;margin:auto;}\nlabel{display:block;margin-bottom:5px;font-weight:bold;}\ninput[type=\"text\"], input[type=\"email\"] { width: 100%; padding: 8px; margin-bottom:\n15px;border:1pxsolid#ccc;border-radius:4px;box-sizing:border-box;}\nbutton { padding: 10px 15px; background-color: #007bff; color: white; border: none;\nborder-radius:4px;cursor:pointer;}\nbutton:hover{background-color:#0056b3;}\n.output-box{ margin-top: 20px; padding: 15px; background-color: #f8f9fa; border: 1px\ndashed#ced4da;}\n</style>\n</head>\n<body>\n<h1>CollectDataandCreateJSONFile</h1>\n<formid=\"dataForm\">\n<labelfor=\"userName\">Name:</label>\n<inputtype=\"text\"id=\"userName\"name=\"name\"required>\n<labelfor=\"userEmail\">Email:</label>\n<inputtype=\"email\"id=\"userEmail\"name=\"email\"required>\n<labelfor=\"userRole\">Role:</label>\n<inputtype=\"text\"id=\"userRole\"name=\"role\"required>\n<buttontype=\"submit\">ConverttoJSON&Download</button>\n</form>\n<divclass=\"output-box\">\n<p><strong>JSON Output (Console):</strong> Check your browser console (F12) for\ntherawJSONstring.</p>\n<p><strong>Download Action:</strong> Click the button above to generate and\ndownloadthefile.</p>\n</div>\n<script>\ndocument.getElementById('dataForm').addEventListener('submit',function(event){\nevent.preventDefault();\nconstformData=newFormData(event.target);\nconstdataObject={};\nformData.forEach((value,key)=>{\ndataObject[key]=value;\n});",
+    "image_count": 0
+  },
+  {
+    "page": 60,
+    "text": "dataObject.submissionDate=newDate().toISOString();\nconstjsonString=JSON.stringify(dataObject,null,2);\nconsole.log(\"JSONDatatobeSaved:\",jsonString);\nconstblob=newBlob([jsonString],{type:'application/json'});\nconsturl=URL.createObjectURL(blob);\nconsta=document.createElement('a');\na.href=url;\na.download='form_data_'+Date.now()+'.json';\ndocument.body.appendChild(a);\na.click();\ndocument.body.removeChild(a);\nURL.revokeObjectURL(url);\n});\n</script>\n</body>\n</html>\nOUTPUT :\nRESULT :\nThustheaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 61,
+    "text": "EX. NO: 31\nDATE:\n07.09.2025\nDISPLAY THE DATA FROM JSON FILE TO HTML FORMS\nAIM:\nTodisplayJSONdatainanHTMLform.\nCODE:\n<!DOCTYPEhtml>\n<html>\n<head><title>DisplayJSONtoForm</title></head>\n<body>\n<form>\nName:<inputtype=\"text\"id=\"name\"><br>\nAge:<inputtype=\"text\"id=\"age\"><br>\n</form>\n<script>\nfetch(\"formdata.json\")\n.then(res=>res.json())\n.then(data=>{\ndocument.getElementById(\"name\").value=data.name;\ndocument.getElementById(\"age\").value=data.age;\n});\n</script>\n</body>\n</html>\nOUTPUT:\nRESULT:\nThus,theaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 62,
+    "text": "EX. NO: 32\nDATE:\n07.09.2025\nPROGRAM TO STORE HTML FORM DATA (MORE THAN ONE\nRECORD) AS A SEPARATE JSON FILE.\nAIM:\nTostoremultiplerecordsasindividualJSONfiles.\nCODE:\n//index.html\n<!DOCTYPEhtml>\n<html>\n<head><title>MultipleRecordJSON</title></head>\n<body>\n<formmethod=\"post\"action=\"save_multi.php\">\nName:<inputtype=\"text\"name=\"name\"><br>\nAge:<inputtype=\"text\"name=\"age\"><br>\n<inputtype=\"submit\"value=\"SaveRecord\">\n</form>\n</body>\n</html>\n//save_multi.php\n<?php\n$name=$_POST['name'];\n$age=$_POST['age'];\n$data=array(\"name\"=>$name,\"age\"=>$age);\n$fileName=\"record_\".time().\".json\";\nfile_put_contents($fileName,json_encode($data));\necho\"Recordsavedas$fileName\";\n?>",
+    "image_count": 0
+  },
+  {
+    "page": 63,
+    "text": "OUTPUT:\nRecord saved as record_1764424134.json\nRESULT:\nThus,theaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 64,
+    "text": "EX. NO: 33\nDATE:\n07.09.2025\nIMPLEMENT THE TYPES OF EXPRESSIONS IN ANGULARJS\nAIM:\nToimplementanddemonstratethetypesofexpressionsinAngularJS.\nCODE:\n<!DOCTYPEhtml>\n<htmlng-app>\n<head><title>AngularJSExpressions</title></head>\n<body>\n<h2>AngularJSExpressions</h2>\n<div>\n<p>NumericExpression:{{5+3}}</p>\n<p>StringExpression:{{\"Hello\"+\"World\"}}</p>\n<p>BooleanExpression:{{5>2}}</p>\n<p>ObjectExpression:{{{'name':'Sam','age':20}.name}}</p>\n<p>ArrayExpression:{{[10,20,30][1]}}</p>\n</div>\n<scriptsrc=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js\"></script>\n</body>\n</html>\nOUTPUT:\nAngularJSExpressions\nNumericExpression:8\nStringExpression:HelloWorld\nBooleanExpression:true\nObjectExpression:Sam\nArrayExpression:20\nRESULT:\nThus,theaboveprogramwasexecutedsuccessfully.",
+    "image_count": 0
+  },
+  {
+    "page": 65,
+    "text": "EX. NO: 34\nDATE:\n08.09.2025\nWRITE A CODE TO IMPLEMENT THE FOLLOWING CLASSES\nOF NG-MODEL DIRECTIVE:\n1. ng-empty 2. ng-not-empty 3. ng-touched 4. ng-untouched 5. ng-valid\n6. ng-invalid 7. ng-dirty 8. ng-pending 9. ng-pristine\nAIM:\nTodemonstrateandobservetheworkingofAngularJSformfieldstateclasses:\nng-empty,ng-not-empty,ng-touched,ng-untouched,ng-valid,ng-invalid,ng-dirty,ng-\npending,ng-pristine.\nCODE:\n<!DOCTYPEhtml>\n<htmllang=\"en\"ng-app>\n<head>\n<metacharset=\"UTF-8\">\n<title>ng-modelDirectiveClasses</title>\n<scriptsrc=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js\"></script>\n<style>\nbody{font-family:Arial;margin:30px;}\ninput{\ndisplay:block;\nmargin:10px10px;\npadding:8px;\nwidth:250px;\nborder:2pxsolidgray;\nborder-radius:5px;\n}\n/*Visualcuesforeachclass*/\n.ng-empty{background-color:#f8d7da;}\n.ng-not-empty{background-color:#d4edda;}\n.ng-touched{border-color:blue;}\n.ng-untouched{border-color:orange;}",
+    "image_count": 0
+  },
+  {
+    "page": 66,
+    "text": ".ng-valid{border:2pxsolidgreen;}\n.ng-invalid{border:2pxsolidred;}\n.ng-dirty{background-color:#d4d3d0;}\n.ng-pristine{background-color:#e2e3e5;}\n</style>\n</head>\n<body>\n<h2>AngularJSng-modelDirectiveClasses</h2>\n<formname=\"myForm\">\n<label>Enteryourname(required):</label>\n<inputtype=\"text\"name=\"username\"ng-model=\"user.name\"required>\n<p><b>FormState:</b></p>\n<ul>\n<li>ng-empty:{{myForm.username.$error.required}}</li>\n<li>ng-not-empty:{{!myForm.username.$error.required}}</li>\n<li>ng-touched:{{myForm.username.$touched}}</li>\n<li>ng-untouched:{{myForm.username.$untouched}}</li>\n<li>ng-valid:{{myForm.username.$valid}}</li>\n<li>ng-invalid:{{myForm.username.$invalid}}</li>\n<li>ng-dirty:{{myForm.username.$dirty}}</li>\n<li>ng-pristine:{{myForm.username.$pristine}}</li>\n<li>ng-pending:{{myForm.username.$pending}}</li>\n</ul>\n</form>\n<p>Typesomethingandclickoutsidetheboxtoseetheclasschanges.</p>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 67,
+    "text": "OUTPUT:\nRESULT:\nThus,theaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 68,
+    "text": "EX. NO: 35\nDATE:\n08.09.2025\nIMPLEMENT THE TYPES OF DATA BINDING IN ANGULARJS\nAIM:\nToimplementthedifferenttypesofdatabindinginAngularJS.\nCODE:\n<!DOCTYPEhtml>\n<htmlng-app=\"bindApp\">\n<head>\n<title>TypesofDataBinding</title>\n<scriptsrc=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js\"></script>\n</head>\n<bodyng-controller=\"bindCtrl\">\n<h2>TypesofDataBindinginAngularJS</h2>\n<!--One-waybinding-->\n<h3>1.One-wayBinding({{}})</h3>\n<p>Hello,{{name}}</p>\n<!--Two-waybinding-->\n<h3>2.Two-wayBinding(ng-model)</h3>\n<inputtype=\"text\"ng-model=\"message\">\n<p>Youtyped:{{message}}</p>\n<script>\nvarapp=angular.module(\"bindApp\",[]);\napp.controller(\"bindCtrl\",function($scope){\n$scope.name=\"Sam\";\n$scope.message=\"Typesomething...\";\n})\n</script>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 69,
+    "text": "OUTPUT:\nRESULT:\nThus,theaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 70,
+    "text": "EX. NO: 36\nDATE:\n08.09.2025\nIMPLEMENT ANGULARJS MODULES AND CONTROLLER\nDIRECTIVES WITH NECESSARY EXAMPLES.\nAIM:\nToimplementAngularJSmodulesandcontrollers.\nCODE:\n<!DOCTYPEhtml>\n<htmlng-app=\"studentApp\">\n<head><title>ModulesandControllers</title></head>\n<bodyng-controller=\"studentCtrl\">\n<h2>AngularJSModuleandController</h2>\n<p>Name:{{student.name}}</p>\n<p>Course:{{student.course}}</p>\n<scriptsrc=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js\"></script>\n<script>\nangular.module(\"studentApp\",[])\n.controller(\"studentCtrl\",function($scope){\n$scope.student={name:\"Sam\",course:\"ComputerScience\"};\n});\n</script>\n</body>\n</html>\nOUTPUT:\nRESULT:\nThus,theaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 71,
+    "text": "EX. NO: 37\nDATE:\n09.09.2025\nIMPLEMENT ANY TEN ANGULARJS FILTERS\nAIM:\nToimplementtenfiltersinAngularJS.\nCODE:\n<!DOCTYPEhtml>\n<htmlng-app=\"filterApp\"ng-controller=\"filterCtrl\">\n<head><title>AngularJSFilters</title></head>\n<body>\n<h2>AngularJSFiltersExample</h2>\n<p>1.Uppercase:{{name|uppercase}}</p>\n<p>2.Lowercase:{{name|lowercase}}</p>\n<p>3.Currency:{{price|currency:\"\u20b9\"}}</p>\n<p>4.Number:{{num|number:2}}</p>\n<p>5.LimitTo:{{names|limitTo:3}}</p>\n<p>6.OrderBy:{{students|orderBy:'marks'}}</p>\n<p>7.Filter:{{students|filter:'A'}}</p>\n<p>8.JSON:{{students|json}}</p>\n<p>9.Date:{{today|date:'medium'}}</p>\n<p>10.CustomFilter:{{text|reverse}}</p>\n<scriptsrc=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js\"></script>\n<script>\nangular.module(\"filterApp\",[])\n.controller(\"filterCtrl\",function($scope){\n$scope.name=\"Sam\";\n$scope.price=99.99;\n$scope.num=1234.567;\n$scope.names=[\"Asha\",\"Ravi\",\"Sam\",\"Kiran\"];\n$scope.students=[{name:\"A\",marks:70},{name:\"B\",marks:90}];",
+    "image_count": 0
+  },
+  {
+    "page": 72,
+    "text": "$scope.today=newDate();\n$scope.text=\"Hello\";\n})\n.filter('reverse',function(){\nreturnfunction(input){\nreturninput.split(\"\").reverse().join(\"\");\n};\n});\n</script>\n</body>\n</html>\nOUTPUT:\nRESULT:\nThus,theaboveprogramwasexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 73,
+    "text": "EX. NO: 38\nDATE:\n09.09.2025\nILLUSTRATE THE FOLLOWING SERVICES OF $HTTP IN\nANGULARJS\n1. $http.get() 2. $http.head() 3. $http.post() 4. $http.put()\n5. $http.delete() 6. $http.jsonp() 7. $http.patch()\nAIM:\nToillustratetheuseof$httpserviceslikeGET,HEAD,POST,PUT,DELETE,\nJSONP,andPATCHinAngularJS.\nCODE:\n<!DOCTYPEhtml>\n<htmllang=\"en\"ng-app=\"httpApp\">\n<head>\n<metacharset=\"UTF-8\">\n<title>$httpServicesExample</title>\n<scriptsrc=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js\"></script>\n<style>\nbody{font-family:Arial;margin:30px;}\nbutton{margin:5px;padding:8px12px;cursor:pointer;}\npre{background:#f4f4f4;padding:10px;border-radius:5px;}\n</style>\n</head>\n<bodyng-controller=\"httpCtrl\">\n<h2>$httpServicesinAngularJS</h2>\n<p>Clickthebuttonsbelowtosimulatedifferent$httpmethods.</p>\n<buttonng-click=\"getData()\">$http.get()</button>\n<buttonng-click=\"headData()\">$http.head()</button>\n<buttonng-click=\"postData()\">$http.post()</button>\n<buttonng-click=\"putData()\">$http.put()</button>\n<buttonng-click=\"deleteData()\">$http.delete()</button>\n<buttonng-click=\"jsonpData()\">$http.jsonp()</button>",
+    "image_count": 0
+  },
+  {
+    "page": 74,
+    "text": "<buttonng-click=\"patchData()\">$http.patch()</button>\n<h3>Response:</h3>\n<pre>{{response|json}}</pre>\n<script>\n//AngularJSAppandController\nangular.module(\"httpApp\",[])\n.controller(\"httpCtrl\",function($scope,$http){\nconsturl=\"https://jsonplaceholder.typicode.com/posts/1\";//freetestAPI\n//GETMethod\n$scope.getData=function(){\n$http.get(url).then(function(res){\n$scope.response=res.data;\n});\n};\n//HEADMethod\n$scope.headData=function(){\n$http.head(url).then(function(res){\n$scope.response=res.headers();\n});\n};\n//POSTMethod\n$scope.postData=function(){\n$http.post(\"https://jsonplaceholder.typicode.com/posts\",{\ntitle:\"NewPost\",body:\"Samplecontent\",userId:1",
+    "image_count": 0
+  },
+  {
+    "page": 75,
+    "text": "}).then(function(res){\n$scope.response=res.data;\n});\n};\n//PUTMethod\n$scope.putData=function(){\n$http.put(url,{title:\"UpdatedPost\",body:\"Editedcontent\",userId:1})\n.then(function(res){\n$scope.response=res.data;\n});\n};\n//DELETEMethod\n$scope.deleteData=function(){\n$http.delete(url).then(function(res){\n$scope.response={message:\"Datadeletedsuccessfully!\"};\n});\n};\n//JSONPMethod\n$scope.jsonpData=function(){\n$http.jsonp(\"https://api.github.com/users/angular?callback=JSON_CALLBACK\")\n.then(function(res){\n$scope.response=res.data;\n});\n};\n//PATCHMethod\n$scope.patchData=function(){",
+    "image_count": 0
+  },
+  {
+    "page": 76,
+    "text": "$http.patch(url,{title:\"PatchedTitle\"}).then(function(res){\n$scope.response=res.data;\n});\n};\n});\n</script>\n</body>\n</html>\nOUTPUT:\nRESULT:\nThus,theaboveprogramwasexecutedsuccessfully",
+    "image_count": 1
+  },
+  {
+    "page": 77,
+    "text": "EX. NO: 39\nDATE:\n09.09.2025\nDISPLAY TABLE USING ANGULARJS NG-REPEAT DIRECTIVE\n(WITHOUT PHP AND WITH PHP). USE NECESSARY CSS.\nAIM:\nTowriteaprogramforDISPLAYTABLEUSINGANGULARJSNG-REPEAT\nDIRECTIVE(WITHOUTPHPANDWITHPHP).USENECESSARYCSS.\nCODE:\nA. Without PHP (static data)\n<!--table_static.html-->\n<!DOCTYPEhtml>\n<htmlng-app=\"tableApp\">\n<head>\n<metacharset=\"utf-8\"/>\n<title>ng-repeat\u2014StaticTable</title>\n<scriptsrc=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js\"></script>\n<style>\nbody{font-family:Arial,sans-serif;margin:30px;}\ntable{border-collapse:collapse;width:80%;max-width:800px;}\nth,td{padding:10px12px;border:1pxsolid#ccc;text-align:left;}\nthead{background:#2c7be5;color:white;}\ntbodytr:nth-child(even){background:#f6f8fb;}\ncaption{font-size:1.2em;margin-bottom:8px;font-weight:bold;}\n</style>\n</head>\n<bodyng-controller=\"TableCtrl\">\n<table>\n<caption>StudentList(Static)</caption>\n<thead>\n<tr><th>#</th><th>Name</th><th>Age</th><th>Course</th></tr>\n</thead>",
+    "image_count": 0
+  },
+  {
+    "page": 78,
+    "text": "<tbody>\n<trng-repeat=\"sinstudentstrackby$index\">\n<td>{{$index+1}}</td>\n<td>{{s.name}}</td>\n<td>{{s.age}}</td>\n<td>{{s.course}}</td>\n</tr>\n</tbody>\n</table>\n<script>\nangular.module('tableApp',[])\n.controller('TableCtrl',function($scope){\n$scope.students=[\n{name:'Sam',age:20,course:'CSE'},\n{name:'Asha',age:21,course:'ECE'},\n{name:'Ravi',age:22,course:'ME'},\n{name:'Kiran',age:19,course:'IT'}\n];\n});\n</script>\n</body>\n</html>\nB. With PHP (data served from server)\n// students.php\n<?php\nheader('Content-Type: application/json');\n// Example data array\n$students = [\n[\"name\" => \"Sam\", \"age\" => 20, \"course\" => \"CSE\"],",
+    "image_count": 0
+  },
+  {
+    "page": 79,
+    "text": "[\"name\" => \"Asha\", \"age\" => 21, \"course\" => \"ECE\"],\n[\"name\" => \"Ravi\", \"age\" => 22, \"course\" => \"ME\"],\n[\"name\" => \"Kiran\", \"age\" => 19, \"course\" => \"IT\"]\n];\n// Output JSON (pretty print optional)\necho json_encode($students, JSON_PRETTY_PRINT);\n<!-- table_php.html -->\n<!DOCTYPE html>\n<html ng-app=\"tableAppServer\">\n<head>\n<meta charset=\"utf-8\" />\n<title>ng-repeat \u2014 Table from PHP (JSON)</title>\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js\"></script>\n<style>\nbody { font-family: Arial, sans-serif; margin: 30px; }\ntable { border-collapse: collapse; width: 90%; max-width: 900px; }\nth, td { padding: 10px 12px; border: 1px solid #ddd; text-align: left; }\nthead { background: #28a745; color: #fff; }\ntbody tr:hover { background: #eef9f0; }\ncaption { font-weight: bold; margin-bottom: 8px; }\n.loading { color: #666; margin-top: 12px; }\n.error { color: red; margin-top: 12px; }\n</style>\n</head>\n<body ng-controller=\"ServerTableCtrl\">\n<table ng-if=\"students.length\">\n<caption>Student List (From PHP)</caption>\n<thead>",
+    "image_count": 0
+  },
+  {
+    "page": 80,
+    "text": "<tr><th>#</th><th>Name</th><th>Age</th><th>Course</th></tr>\n</thead>\n<tbody>\n<tr ng-repeat=\"s in students track by $index\">\n<td>{{ $index + 1 }}</td>\n<td>{{ s.name }}</td>\n<td>{{ s.age }}</td>\n<td>{{ s.course }}</td>\n</tr>\n</tbody>\n</table>\n<div class=\"loading\" ng-if=\"loading\">Loading data from server...</div>\n<div class=\"error\" ng-if=\"error\">{{ error }}</div>\n<script>\nangular.module('tableAppServer', [])\n.controller('ServerTableCtrl', function($scope, $http) {\n$scope.students = [];\n$scope.loading = true;\n$scope.error = null;\n// Adjust path if PHP file is in a different folder\n$http.get('students.php')\n.then(function(response){\n$scope.students = response.data;\n$scope.loading = false;\n})\n.catch(function(err){\n$scope.error = 'Failed to load data. Check students.php and server.';\n$scope.loading = false;",
+    "image_count": 0
+  },
+  {
+    "page": 81,
+    "text": "console.error(err);\n});\n});\n</script>\n</body>\n</html>\nOUTPUT:\nA.\nB.\nRESULT:\nThus,theaboveprogramwasexecutedsuccessfully.",
+    "image_count": 2
+  },
+  {
+    "page": 82,
+    "text": "EX. NO: 40\nDATE:\n09.09.2025\nILLUSTRATE ABOUT BINDING APPLICATION DATA TO THE\nATTRIBUTES OF HTML DOM ELEMENTS.\nAIM:\nTobindapplicationdatatoHTMLelementattributes.\nCODE:\n<!DOCTYPEhtml>\n<htmlng-app=\"bindApp\"ng-controller=\"bindCtrl\">\n<head><title>AttributeBinding</title></head>\n<body>\n<h2>BindingDatatoAttributes</h2>\n<imgng-src=\"{{image}}\"width=\"150\">\n<br>\n<ang-href=\"{{link}}\">GotoGoogle</a>\n<scriptsrc=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js\"></script>\n<script>\nangular.module(\"bindApp\",[])\n.controller(\"bindCtrl\",function($scope){\n$scope.image=\n\"https://th.bing.com/th/id/R.fa21749d39d8ff8622c2c237ceb5f748?rik=f3h%2b%2fFY2Mm6\nWVg&riu=http%3a%2f%2fwww.themarysue.com%2fwp-\ncontent%2fuploads%2f2015%2f04%2fspider-\nman.jpg&ehk=rp3sX0qoTecfB0bn3ODwXhKXeCl6JKb%2brMxg59H6n4E%3d&risl=&pid\n=ImgRaw&r=0\";\n$scope.link=\"https://www.google.com\";\n});\n</script>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 83,
+    "text": "OUTPUT:\nRESULT:\nThus,theaboveprogramwasexecutedsuccessfully",
+    "image_count": 1
+  },
+  {
+    "page": 84,
+    "text": "AIM:\nToImplementthefollowingAngularJSevendirectivesng-blurng-changeng-clickng-\ndblclickng-focusng-keydownng-keyupng-keypressng-mousedownng-mouseenterng-mouseleave\nng-mousemoveng-mouseoverng-mouseup\nSOURCE CODE:\n<!DOCTYPEhtml>\n<htmlng-app=\"eventApp\">\n<head>\n<scriptsrc=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js\"></script>\n<style>\nbody{font-family:Arial;margin:25px;background:#fafafa;}\n.grid{display:grid;grid-template-columns:1fr1fr;gap:20px;}\n.box{border:1pxsolid#ccc;padding:15px;border-radius:6px;background:white;}\n.event-text{color:#1a73e8;font-weight:bold;margin-top:6px;min-height:20px;}\n.mouse-area{height:120px;border:2pxdashed#666;margin-top:8px;display:flex;justify-\ncontent:center;align-items:center;}\nbutton{color:#fafafa;background-color:black;}\nh2{margin-bottom:20px;}\n@media(max-width:800px){.grid{grid-template-columns:1fr;}}\n</style>\n</head>\n<bodyng-controller=\"evCtrl\">\n<center><h2>AngularJSEvent</h2></center>\n<divclass=\"grid\">\n<!--FOCUS/BLUR-->\n<divclass=\"box\">\n<h3>Focus/Blur</h3>\n<inputtype=\"text\"\nplaceholder=\"Focus/Blur\"\nng-focus=\"focusText='Focused'\"\nEX.NO:41\nDATE:\n24/09/2025\nANGULARJS EVENT DIRECTIVES",
+    "image_count": 0
+  },
+  {
+    "page": 85,
+    "text": "ng-blur=\"focusText='Blurred'\">\n<divclass=\"event-text\">{{focusText}}</div>\n</div>\n<!--ng-change-->\n<divclass=\"box\">\n<h3>ng-change</h3>\n<inputtype=\"text\"ng-model=\"t\"\nng-change=\"changeText='Changed:'+t\"\nplaceholder=\"Typesomething\">\n<divclass=\"event-text\">{{changeText}}</div>\n</div>\n<!--CLICK+DOUBLECLICK-->\n<divclass=\"box\">\n<h3>Click/DoubleClick</h3>\n<buttonng-click=\"detectClick()\">ClickMe</button>\n<divclass=\"event-text\">{{clickText}}</div>\n</div>\n<!--Keyboard-->\n<divclass=\"box\">\n<h3>KeyboardEvents</h3>\n<inputtype=\"text\"\nplaceholder=\"Presskeys\"\nng-keydown=\"keyText='KeyDown'\"\nng-keyup=\"keyText='KeyUp'\"\nng-keypress=\"keyText='KeyPress'\">\n<divclass=\"event-text\">{{keyText}}</div>\n</div>\n<!--Mouse-->\n<divclass=\"box\">\n<h3>MouseEvents</h3>\n<divclass=\"mouse-area\"\nng-mousedown=\"mouseText='MouseDown'\"",
+    "image_count": 0
+  },
+  {
+    "page": 86,
+    "text": "ng-mouseup=\"mouseText='MouseUp'\"\nng-mouseenter=\"mouseText='MouseEnter'\"\nng-mouseleave=\"mouseText='MouseLeave'\"\nng-mouseover=\"mouseText='MouseOver'\"\nng-mousemove=\"mouseMove()\">\nMove/ClickHere\n</div>\n<divclass=\"event-text\">{{mouseText}}</div>\n</div>\n</div>\n<script>\nangular.module(\"eventApp\",[])\n.controller(\"evCtrl\",function($scope,$timeout){\n/*--------Single/DoubleClickLogic--------*/\nletclickCount=0;\n$scope.detectClick=function(){\nclickCount++;\n$timeout(function(){\nif(clickCount===1){\n$scope.clickText=\"SingleClick\";\n}elseif(clickCount===2){\n$scope.clickText=\"DoubleClick\";\n}\nclickCount=0;\n},250);\n};\n/*--------MouseMoveThrottle--------*/\nletlast=0;\n$scope.mouseText=\"\u2014\";\n$scope.mouseMove=function(){\nconstnow=Date.now();",
+    "image_count": 0
+  },
+  {
+    "page": 87,
+    "text": "if(now-last>200){\n$scope.mouseText=\"MouseMove\";\nlast=now;\n}\n};\n});\n</script>\n</body>\n</html>\nOUTPUT:\nRESULT:\nThustheprogramhasbeenexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 88,
+    "text": "AIM:\nToDesignanyuserregistrationform(shouldincludeallinputtypes)inAngularJSand\nvalidateallthefieldsintheform.\nSOURCE CODE:\n<!DOCTYPEhtml>\n<htmlng-app=\"regApp\">\n<head>\n<scriptsrc=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js\"></script>\n<style>\nbody{font-family:Arial;margin:30px;}\n.box{width:350px;margin:auto;padding:20px;border:1pxsolid#ccc;border-radius:8px;}\nlabel{font-weight:bold;margin-top:12px;display:block;}\ninput,select{width:100%;padding:8px;margin-top:6px;border:1pxsolid#bbb;border-\nradius:5px;}\n.error{color:#e63946;font-size:13px;margin-top:4px;}\nbutton{\nmargin-top:20px;width:100%;padding:10px;\nbackground:#1a73e8;color:white;border:none;border-radius:6px;\nfont-size:16px;cursor:pointer;\n}\nbutton:disabled{opacity:0.5;cursor:not-allowed;}\n</style>\n</head>\n<bodyng-controller=\"formCtrl\">\n<divclass=\"box\">\n<h2>RegistrationForm</h2>\n<formname=\"regForm\"ng-submit=\"submit(regForm)\"novalidate>\nEX.NO:42\nDATE:\n24/09/2025\nFORM VALIDATION USING ANGULARJS",
+    "image_count": 0
+  },
+  {
+    "page": 89,
+    "text": "<!--NAME-->\n<label>Name*</label>\n<inputtype=\"text\"name=\"name\"ng-model=\"user.name\"requiredng-pattern=\"/^[A-Za-z]+$/\">\n<divclass=\"error\"ng-if=\"regForm.name.$touched&&regForm.name.$invalid\">\nEnteravalidname.\n</div>\n<!--PHONE-->\n<label>PhoneNumber*</label>\n<inputtype=\"tel\"name=\"phone\"ng-model=\"user.phone\"requiredng-pattern=\"/^[0-9]{10}$/\">\n<divclass=\"error\"ng-if=\"regForm.phone.$touched&&regForm.phone.$invalid\">\nEnter10-digitphonenumber.\n</div>\n<!--EMAIL-->\n<label>Email*</label>\n<inputtype=\"email\"name=\"email\"ng-model=\"user.email\"required>\n<divclass=\"error\"ng-if=\"regForm.email.$touched&&regForm.email.$invalid\">\nEnteravalidemail.\n</div>\n<!--GENDER-->\n<label>Gender*</label>\n<selectname=\"gender\"ng-model=\"user.gender\"required>\n<optionvalue=\"\">--SelectGender--</option>\n<optionvalue=\"Male\">Male</option>\n<optionvalue=\"Female\">Female</option>\n<optionvalue=\"Other\">Other</option>\n</select>\n<divclass=\"error\"ng-if=\"regForm.gender.$touched&&regForm.gender.$error.required\">\nSelectgender.\n</div>\n<!--DOB-->\n<label>DateofBirth*</label>\n<inputtype=\"date\"name=\"dob\"ng-model=\"user.dob\"required>",
+    "image_count": 0
+  },
+  {
+    "page": 90,
+    "text": "<divclass=\"error\"ng-if=\"regForm.dob.$touched&&regForm.dob.$error.required\">\nSelectdateofbirth.\n</div>\n<!--SUBMIT-->\n<buttontype=\"submit\"ng-disabled=\"regForm.$invalid\">Register</button>\n</form>\n</div>\n<script>\nangular.module(\"regApp\",[])\n.controller(\"formCtrl\",function($scope,$window){\n$scope.user={};\n$scope.submit=function(form){\nif(form.$valid){\n$window.alert(\"RegistrationSuccessful!\\n\\n\"+\n\"Name:\"+$scope.user.name+\"\\n\"+\n\"Phone:\"+$scope.user.phone+\"\\n\"+\n\"Email:\"+$scope.user.email+\"\\n\"+\n\"Gender:\"+$scope.user.gender+\"\\n\"+\n\"DOB:\"+$scope.user.dob);\n}else{\n$window.alert(\"Pleasefillallrequiredfieldscorrectly.\");\n}\n};\n});\n</script>\n</body>\n</html>",
+    "image_count": 0
+  },
+  {
+    "page": 91,
+    "text": "OUTPUT:\nRESULT:\nThustheprogramhasbeenexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 92,
+    "text": "AIM:\nToImplementtheusageofcoremoduleinNode.JS\nSOURCE CODE:\nconstfs=require('fs'); //FileSystem\nconstpath=require('path'); //PathOperations\nconstos=require('os'); //OSInformation\nconsthttp=require('http'); //HTTPServer\n//1.FILESYSTEM(fs)\nfs.writeFileSync('sample.txt','Hello,thisisNode.jscoremoduleFS!');\nconsole.log('\u2714Filecreatedusingfsmodule.');\nconstcontent=fs.readFileSync('sample.txt','utf-8');\nconsole.log('\u2714Filecontent:',content);\n//2.PATHMODULE\nconstfullPath=path.join(__dirname,'sample.txt');\nconsole.log('\u2714Fullfilepath:',fullPath);\n//3.OSMODULE\nconsole.log('\u2714OperatingSystem:',os.type());\nconsole.log('\u2714FreeMemory:',os.freemem());\nconsole.log('\u2714UserInfo:',os.userInfo());\n//4.HTTPMODULE\u2013simpleserver\nconstserver=http.createServer((req,res)=>{\nres.writeHead(200,{'Content-Type':'text/plain'});\nres.end('Hello,Node.jsCoreModulesworking!');\n});\nserver.listen(3000,()=>{\nEX.NO:43\nDATE:\n25/09/2025\nIMPLEMENT THE CORE MODULE",
+    "image_count": 0
+  },
+  {
+    "page": 93,
+    "text": "console.log('\u2714HTTPServerrunningathttp://localhost:3000');\n});\nOUTPUT:\nRESULT:\nThustheprogramhasbeenexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 94,
+    "text": "AIM:\nToImplementLocalmoduleinNode.JSandThird-partyModuleinNode.JS.\nSOURCE CODE:\nmath.js\n//Addtwonumbers\nexports.add=function(a,b){\nreturna+b;\n};\n//Subtracttwonumbers\nexports.subtract=function(a,b){\nreturna-b;\n};\napp.js\n//Localmodule\nconstmath=require('./math');\n//Third-partymodule\nconst_=require('lodash');\nconsole.log(\"LocalModuleAdd:\",math.add(3,7));\nconsole.log(\"LocalModuleSub:\",math.subtract(10,2));\nconstarr=[3,6,9,12];\nconsole.log(\"Third-partyModuleSum:\",_.sum(arr));\nconsole.log(\"Third-partyShuffle:\",_.shuffle(arr));\nEX.NO:44\nDATE:\n08/10/2025\nIMPLEMENT LOCAL AND THIRD-PARTY MODULE",
+    "image_count": 0
+  },
+  {
+    "page": 95,
+    "text": "OUTPUT:\nRESULT:\nThustheprogramhasbeenexecutedsuccessfully.",
+    "image_count": 1
+  },
+  {
+    "page": 96,
+    "text": "AIM:\nToImplementanyfivemethodsofHTTPmodule.\nSOURCE CODE:\nconsthttp=require(\"http\");\nconstserver=http.createServer((req,res)=>{\nres.writeHead(200,{\"Content-Type\":\"text/plain\"});\nres.write(\"WelcometoNode.jsHTTPModuleDemo!\\n\");\nres.write(\"Thisisaprintedmessagefromyourserver.\\n\");\nres.write(\"Path:\"+req.url+\"\\n\");\nres.write(\"Method:\"+req.method+\"\\n\");\nres.end(\"Serverresponsecomplete!\");\n});\nserver.listen(3000,()=>{\nconsole.log(\"Serverrunningathttp://localhost:3000\");\n});\nOUTPUT:\nRESULT:\nThustheprogramhasbeenexecutedsuccessfully.\nEX.NO:45\nDATE:\n08/10/2025\nMETHODS OF HTTP MODULE",
+    "image_count": 1
+  },
+  {
+    "page": 97,
+    "text": "AIM:\nToImplementthemethodsinfilesystemmodule.\nSOURCE CODE:\nconstfs=require(\"fs\");\n//1.Writefile\nfs.writeFileSync(\"test.txt\",\"HelloNodeFS!\");\nconsole.log(\"1.Filecreated.\");\n//2.Readfile\nletdata=fs.readFileSync(\"test.txt\",\"utf-8\");\nconsole.log(\"2.Filecontent:\",data);\n//3.Appendfile\nfs.appendFileSync(\"test.txt\",\"\\nMorecontentadded.\");\nconsole.log(\"3.Contentappended.\");\n//4.Renamefile\nfs.renameSync(\"test.txt\",\"newTest.txt\");\nconsole.log(\"4.Filerenamed.\");\n//5.Deletefile\nfs.unlinkSync(\"newTest.txt\");\nconsole.log(\"5.Filedeleted.\");\nOUTPUT:\nRESULT:\nThustheprogramhasbeenexecutedsuccessfully.\nEX.NO:46\nDATE:\n08/10/2025\nMETHODS IN FILE SYSTEM MODULE",
+    "image_count": 1
+  },
+  {
+    "page": 98,
+    "text": "AIM:\nToimplementaprogramtoIllustrateURLmoduleusingNodeJs\nSOURCE CODE:\nconsturl=require(\"url\");\nconstaddress=\"https://www.example.com/products?item=phone&price=20000\";\nconstparsed=url.parse(address,true);\nconsole.log(\"Protocol:\",parsed.protocol);\nconsole.log(\"Host:\",parsed.host);\nconsole.log(\"Pathname:\",parsed.pathname);\nconsole.log(\"QueryParams:\",parsed.query);\nconsole.log(\"Item:\",parsed.query.item);\nconsole.log(\"Price:\",parsed.query.price);\nOUTPUT:\nRESULT:\nThustheprogramhasbeenexecutedsuccessfully.\nEX.NO:47\nDATE:\n15/10/2025\nURL MODULE",
+    "image_count": 1
+  },
+  {
+    "page": 99,
+    "text": "AIM:\nToIllustrateEventhandlinginNode.JS.\nSOURCE CODE:\nconstEventEmitter=require(\"events\");\nconstmyEvent=newEventEmitter();\n//Eventlistener\nmyEvent.on(\"greet\",()=>{\nconsole.log(\"Hello!Eventtriggered.\");\n});\n//Eventwithargument\nmyEvent.on(\"welcome\",(name)=>{\nconsole.log(\"Welcome,\"+name);\n});\n//Triggerevents\nmyEvent.emit(\"greet\");\nmyEvent.emit(\"welcome\",\"Booma\");\nOUTPUT:\nRESULT:\nThustheprogramhasbeenexecutedsuccessfully.\nEX.NO:48\nDATE:\n16/10/2025\nEVENT HANDLING IN NODEJS",
+    "image_count": 1
+  },
+  {
+    "page": 100,
+    "text": "AIM:\nToimplementaprogramforFileuploadinginNode.JS\nSOURCE CODE:\nconsthttp=require(\"http\");\nconstfs=require(\"fs\");\nif(!fs.existsSync(\"uploads\")){\nfs.mkdirSync(\"uploads\");\n}\nconstserver=http.createServer((req,res)=>{\nif(req.method===\"GET\"){\n//SimpleHTMLform\nres.writeHead(200,{\"Content-Type\":\"text/html\"});\nres.end(`\n<h2>FileUpload</h2>\n<formmethod=\"POST\"enctype=\"multipart/form-data\">\n<inputtype=\"file\"name=\"file\"/>\n<buttontype=\"submit\">Upload</button>\n</form>\n`);\n}\nelseif(req.method===\"POST\"){\nletdata=Buffer.alloc(0);\nreq.on(\"data\",chunk=>{\ndata=Buffer.concat([data,chunk]);\n});\nreq.on(\"end\",()=>{\nconstboundary=req.headers['content-type'].split(\"boundary=\")[1];\n//Convertbuffertostringtofindboundaries\nconstparts=data.toString().split(\"--\"+boundary);\nEX.NO:49\nDATE:\n22/10/2025\nFILE UPLOADING",
+    "image_count": 0
+  },
+  {
+    "page": 101,
+    "text": "//Thefilecontentisinthesecondpart\nconstfilePart=parts[1];\n//Extractfilename\nconstfileNameMatch=filePart.match(/filename=\"(.+?)\"/);\nconstfileName=fileNameMatch?fileNameMatch[1]:\"uploaded.bin\";\n//Extractfiledata\nconstfileData=filePart.split(\"\\r\\n\\r\\n\")[1];\nconstfileContent=fileData.slice(0,fileData.length-2);//removelast\\r\\n\n//Savefile\nfs.writeFileSync(\"uploads/\"+fileName,fileContent,\"binary\");\nres.writeHead(200,{\"Content-Type\":\"text/plain\"});\nres.end(\"Fileuploadedsuccessfully:\"+fileName);\n});\n}\n});\nserver.listen(3000,()=>{\nconsole.log(\"Serverrunningathttp://localhost:3000\");\n});\nOUTPUT:\nRESULT:\nThustheprogramhasbeenexecutedsuccessfully.",
+    "image_count": 2
+  },
+  {
+    "page": 102,
+    "text": "AIM:\nToimplementaprogramforSendingEmailinNode.JS\nSOURCE CODE:\nconstnodemailer=require(\"nodemailer\");\n//1.Createemailtransporter\nlettransporter=nodemailer.createTransport({service:\"gmail\",\nauth:{\nuser:\"boomastyles17@gmail.com\",\npass:\"wkwcvwsexkmjojsw\"\n}\n});\n//2.Emailcontent\nletmailOptions={\nfrom:\"boomastyles17@gmail.com\",\nto:\"boomakannan17@gmail.com\",\nsubject:\"TestEmailfromNode.js\",\ntext:\"Hello!ThisisatestemailsentusingNode.js.\"\n};\n//3.Sendemail\ntransporter.sendMail(mailOptions,(err,info)=>{\nif(err){console.log(\"Error:\",err); }\nelse{console.log(\"Emailsent:\",info.response);}\n});\nOUTPUT:\nRESULT:\nThustheprogramhasbeenexecutedsuccessfully.\nEX.NO:50\nDATE:\n23/10/2025\nSENDING EMAIL",
+    "image_count": 1
+  }
+]

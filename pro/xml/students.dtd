@@ -1,0 +1,21 @@
+<!-- =======================================================
+     students.dtd - Document Type Definition for Student Data
+     ======================================================= -->
+
+<!ELEMENT students (student*)>
+<!ELEMENT student (id, rollNo, name, age, dob, gender, email, phone, course, skills, city, batch_time, address)>
+<!ATTLIST student status (active | pending | enrolled) "enrolled">
+
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT rollNo (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT age (#PCDATA)>
+<!ELEMENT dob (#PCDATA)>
+<!ELEMENT gender (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT course (#PCDATA)>
+<!ELEMENT skills (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+<!ELEMENT batch_time (#PCDATA)>
+<!ELEMENT address (#PCDATA)>

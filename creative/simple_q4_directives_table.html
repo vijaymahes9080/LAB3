@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="simpleQ4App">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Exam Q4: Directives, ng-repeat & Conditional Views</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"><\/script>')</script>
+</head>
+<body ng-controller="DirectivesCtrl">
+
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">SIMPLE Q4</span>
+        <div class="header-title">
+          <h1>Directives: ng-repeat, ng-if, ng-show/hide & ng-switch</h1>
+          <p>Lab Exam Fundamental Question • Covers Programs 401, 41 & 44</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Creative Hub</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card mb-4" style="background: rgba(15, 23, 42, 0.7);">
+      <strong class="text-info">Lab Exam Question:</strong>
+      <p style="margin-top: 4px; color: #cbd5e1;">
+        "Write an AngularJS program to display records in a table using the ng-repeat directive (demonstrating $index, $even, $odd) and illustrate conditional display using ng-if, ng-show, ng-hide, and ng-switch directives."
+      </p>
+    </div>
+
+    <div class="card mb-4">
+      <div class="flex-between mb-3">
+        <div class="card-title" style="margin-bottom: 0;">
+          <span>Student Directory Table (ng-repeat)</span>
+          <span class="badge badge-info">{{ students.length }} Items</span>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <label style="font-size: 0.85rem; color: #cbd5e1;">
+            <input type="checkbox" ng-model="showDetails"> Toggle Extra Details (ng-show/hide)
+          </label>
+        </div>
+      </div>
+
+      <table class="table" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border-color); text-align: left;">
+            <th style="padding: 8px;">Index ($index)</th>
+            <th style="padding: 8px;">Parity ($even/$odd)</th>
+            <th style="padding: 8px;">Name</th>
+            <th style="padding: 8px;">Department</th>
+            <th style="padding: 8px;">GPA</th>
+            <th style="padding: 8px;">Status Badge (ng-switch)</th>
+            <th style="padding: 8px;" ng-show="showDetails">Scholarship (ng-show)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="s in students track by $index"
+              style="border-bottom: 1px solid var(--border-color);"
+              ng-style="{'background': $even ? 'rgba(255,255,255,0.02)' : 'rgba(255,255,255,0.06)'}">
+            <td style="padding: 8px; font-family: monospace;">{{ $index + 1 }}</td>
+            <td style="padding: 8px; font-size: 0.8rem; color: var(--text-muted);">
+              {{ $even ? 'Even Row' : 'Odd Row' }}
+            </td>
+            <td style="padding: 8px; font-weight: 600;">{{ s.name }}</td>
+            <td style="padding: 8px;">{{ s.dept }}</td>
+            <td style="padding: 8px; font-weight: 700; color: #34d399;">{{ s.gpa }}</td>
+            
+            <!-- ng-switch demonstration -->
+            <td style="padding: 8px;" ng-switch="s.status">
+              <span class="badge badge-success" ng-switch-when="Active">Active</span>
+              <span class="badge badge-warning" ng-switch-when="Probation">Probation</span>
+              <span class="badge badge-info" ng-switch-default>Alumni</span>
+            </td>
+
+            <!-- ng-show demonstration -->
+            <td style="padding: 8px;" ng-show="showDetails">
+              <span ng-if="s.gpa >= 9.0" style="color: #fbbf24;">★ Merit Eligible</span>
+              <span ng-if="s.gpa < 9.0" style="color: var(--text-muted);">-</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ng-if vs ng-show demonstration box -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">
+          <span>ng-if Directive</span>
+          <span class="badge badge-primary">DOM Insertion/Removal</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">
+          Physically adds or tears down elements from the DOM tree.
+        </p>
+        <button class="btn btn-secondary btn-sm mb-2" ng-click="showIfBox = !showIfBox">
+          Toggle ng-if (Currently: {{ showIfBox }})
+        </button>
+        <div ng-if="showIfBox" style="background: rgba(16,185,129,0.2); border: 1px solid #10b981; padding: 12px; border-radius: 6px; color: #34d399;">
+          ✅ This element is inserted in the DOM only when <code>showIfBox == true</code>.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span>ng-show & ng-hide Directives</span>
+          <span class="badge badge-primary">CSS Display Toggle</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">
+          Keeps element in the DOM but toggles <code>display: none</code>.
+        </p>
+        <button class="btn btn-secondary btn-sm mb-2" ng-click="showHideBox = !showHideBox">
+          Toggle ng-show (Currently: {{ showHideBox }})
+        </button>
+        <div ng-show="showHideBox" style="background: rgba(6,182,212,0.2); border: 1px solid #06b6d4; padding: 12px; border-radius: 6px; color: #38bdf8;">
+          👁️ This element remains in the DOM and toggles CSS visibility.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    var app = angular.module('simpleQ4App', []);
+    app.controller('DirectivesCtrl', function($scope) {
+      $scope.showDetails = true;
+      $scope.showIfBox = true;
+      $scope.showHideBox = true;
+
+      $scope.students = [
+        { name: 'Vijay Kumar', dept: 'MCA', gpa: 9.4, status: 'Active' },
+        { name: 'Asha Sundaram', dept: 'CS', gpa: 8.9, status: 'Active' },
+        { name: 'Ravi Teja', dept: 'IT', gpa: 6.8, status: 'Probation' },
+        { name: 'Priya Raman', dept: 'DS', gpa: 9.6, status: 'Alumni' }
+      ];
+    });
+  </script>
+</body>
+</html>
+

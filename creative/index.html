@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="creativeExamHub">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical Examination Suite - Complete Lab Exam Questions & Programs</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"><\/script>')</script>
+  <style>
+    .exam-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .exam-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+      border-color: rgba(99, 102, 241, 0.45);
+    }
+    .tag-chip {
+      background: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+    .code-pill {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      background: rgba(15, 23, 42, 0.8);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      color: #38bdf8;
+      display: inline-block;
+      margin-right: 4px;
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+    .modal-box {
+      background: #1e293b;
+      border: 1px solid #4f46e5;
+      border-radius: var(--radius-lg);
+      max-width: 750px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 30px;
+      color: #f8fafc;
+    }
+    .part-tab-btn {
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .part-active {
+      background: #4f46e5;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+    }
+    .part-inactive {
+      background: rgba(15, 23, 42, 0.6);
+      color: #94a3b8;
+      border-color: var(--border-color);
+    }
+    .part-inactive:hover {
+      background: rgba(30, 41, 59, 0.8);
+      color: #fff;
+    }
+  </style>
+</head>
+<body ng-controller="HubController">
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">EXAM SUITE</span>
+        <div class="header-title">
+          <h1>Web Technology Practical Examination Suite</h1>
+          <p>Complete Lab Examination Suite • Simple & Advanced Questions (Programs 34 to 85)</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <a href="creative_lab_manual_printable.html" target="_blank" class="nav-btn" style="background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #34d399;">
+          🖨️ Printable Manual (PDF)
+        </a>
+        <a href="../index.html" class="nav-btn">← Original Lab Index</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- Hero Banner -->
+    <div class="hero-banner" style="background: linear-gradient(135deg, rgba(79, 70, 229, 0.3), rgba(6, 182, 212, 0.25)); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: var(--radius-lg); padding: 30px 26px; margin-bottom: 25px;">
+      <h2 style="font-size: 1.85rem; color: #fff; margin-bottom: 8px;">
+        Practical Examination Questions & Full Program Implementations
+      </h2>
+      <p style="color: #cbd5e1; font-size: 0.95rem; max-width: 850px; line-height: 1.6; margin-bottom: 20px;">
+        Organized according to academic examination standards into <strong>Part A: Simple & Fundamental Questions</strong> (testing core direct concepts) and <strong>Part B: Comprehensive & Integrated Projects</strong> (multi-concept systems). Every single program is 100% self-contained, error-free, and directly runnable.
+      </p>
+
+      <div class="grid-4">
+        <div class="stat-box" style="background: rgba(15, 23, 42, 0.6);">
+          <div class="stat-val text-info">14 Total</div>
+          <div class="stat-label">8 Simple + 6 Advanced</div>
+        </div>
+        <div class="stat-box" style="background: rgba(15, 23, 42, 0.6);">
+          <div class="stat-val text-success">34 — 85</div>
+          <div class="stat-label">Complete Syllabus</div>
+        </div>
+        <div class="stat-box" style="background: rgba(15, 23, 42, 0.6);">
+          <div class="stat-val text-warning">100%</div>
+          <div class="stat-label">Full Working Code</div>
+        </div>
+        <div class="stat-box" style="background: rgba(15, 23, 42, 0.6);">
+          <div class="stat-val" style="color: #a855f7;">Zero Config</div>
+          <div class="stat-label">Offline & Online Ready</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Switcher Ribbon (Part A vs Part B) -->
+    <div class="card mb-4" style="background: rgba(30, 41, 59, 0.7); padding: 12px 20px;">
+      <div class="flex-between" style="flex-wrap: wrap; gap: 15px;">
+        
+        <div style="display: flex; gap: 10px;">
+          <button class="part-tab-btn" ng-class="activeSection === 'simple' ? 'part-active' : 'part-inactive'" ng-click="activeSection = 'simple'">
+            📘 Part A: Simple / Fundamental Questions (8)
+          </button>
+          <button class="part-tab-btn" ng-class="activeSection === 'advanced' ? 'part-active' : 'part-inactive'" ng-click="activeSection = 'advanced'">
+            🚀 Part B: Comprehensive / Advanced Projects (6)
+          </button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <input type="text" class="form-control" placeholder="Search questions..." ng-model="searchQuery" style="width: 250px;">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: PART A - SIMPLE QUESTIONS (8)       -->
+    <!-- ========================================== -->
+    <div ng-show="activeSection === 'simple'">
+      <div class="flex-between mb-3">
+        <h3 style="color: #38bdf8; font-size: 1.2rem;">Part A: Simple Fundamental Examination Questions</h3>
+        <span class="badge badge-info">{{ filteredSimple.length }} of {{ simpleQuestions.length }} Questions</span>
+      </div>
+
+      <div class="grid-2" style="gap: 20px;">
+        <div class="exam-card" ng-repeat="s in (filteredSimple = (simpleQuestions | filter:searchQuery)) track by s.id">
+          <div>
+            <div class="flex-between mb-2">
+              <span class="badge-id" style="font-size: 0.8rem; padding: 3px 8px;">{{ s.badge }}</span>
+              <span class="badge badge-success">{{ s.topic }}</span>
+            </div>
+
+            <h3 style="color: #fff; font-size: 1.15rem; margin-bottom: 6px; line-height: 1.4;">
+              {{ s.title }}
+            </h3>
+
+            <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 12px; line-height: 1.5;">
+              {{ s.question }}
+            </p>
+
+            <div style="margin-bottom: 10px;">
+              <span class="code-pill">{{ s.syllabusMapping }}</span>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+              <span class="tag-chip" ng-repeat="t in s.tags">{{ t }}</span>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--border-color); padding-top: 12px;">
+            <div class="flex-between">
+              <a ng-href="{{ s.runUrl }}" class="btn btn-primary btn-sm" target="_blank" style="flex: 1; text-align: center; text-decoration: none;" ng-if="!s.isNodeScript">
+                🚀 Run Simple Program
+              </a>
+              <button class="btn btn-primary btn-sm" style="flex: 1;" ng-click="openQuestionDetails(s)" ng-if="s.isNodeScript">
+                ⚡ View Run Command
+              </button>
+              <button class="nav-btn btn-sm" style="margin-left: 8px;" ng-click="openQuestionDetails(s)">
+                📋 Question Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: PART B - ADVANCED QUESTIONS (6)     -->
+    <!-- ========================================== -->
+    <div ng-show="activeSection === 'advanced'">
+      <div class="flex-between mb-3">
+        <h3 style="color: #818cf8; font-size: 1.2rem;">Part B: Comprehensive & Integrated Lab Exam Projects</h3>
+        <span class="badge badge-primary">{{ filteredAdvanced.length }} of {{ advancedExams.length }} Projects</span>
+      </div>
+
+      <div class="grid-2" style="gap: 24px;">
+        <div class="exam-card" ng-repeat="e in (filteredAdvanced = (advancedExams | filter:searchQuery)) track by e.id">
+          <div>
+            <div class="flex-between mb-2">
+              <span class="badge-id" style="font-size: 0.85rem; padding: 4px 10px;">{{ e.badge }}</span>
+              <span class="badge badge-info">{{ e.category }}</span>
+            </div>
+
+            <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 8px; line-height: 1.4;">
+              {{ e.title }}
+            </h3>
+
+            <p class="text-muted" style="font-size: 0.88rem; margin-bottom: 14px; line-height: 1.5;">
+              {{ e.shortSummary }}
+            </p>
+
+            <div style="margin-bottom: 12px;">
+              <div style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 4px; font-weight: 600;">SYLLABUS FUSION:</div>
+              <span class="code-pill" ng-repeat="f in e.fusion">{{ f }}</span>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+              <span class="tag-chip" ng-repeat="t in e.tags">{{ t }}</span>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--border-color); padding-top: 14px;">
+            <div class="flex-between">
+              <a ng-href="{{ e.runUrl }}" class="btn btn-primary btn-sm" target="_blank" style="flex: 1; text-align: center; text-decoration: none;" ng-if="!e.isNodeScript">
+                🚀 Run Advanced Application
+              </a>
+              <button class="btn btn-primary btn-sm" style="flex: 1;" ng-click="openQuestionDetails(e)" ng-if="e.isNodeScript">
+                ⚡ View Run Command
+              </button>
+              <button class="nav-btn btn-sm" style="margin-left: 8px;" ng-click="openQuestionDetails(e)">
+                📋 Exam Specs
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Documentation Banner -->
+    <div class="card mt-4" style="background: rgba(15, 23, 42, 0.7); text-align: center; padding: 25px;">
+      <h3 style="color: #fff; margin-bottom: 6px;">📖 Complete Practical Examination Record Ready</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">
+        For complete University Exam Aims, Algorithms, Source Codes, and 25+ Viva-Voce Questions with Answers:
+      </p>
+      <div style="display: flex; justify-content: center; gap: 15px;">
+        <a href="creative_lab_manual_printable.html" target="_blank" class="btn btn-primary">
+          🖨️ Open Printable Examination Manual (PDF)
+        </a>
+        <a href="LAB_EXAM_MANUAL.md" target="_blank" class="btn btn-secondary">
+          📄 View LAB_EXAM_MANUAL.md
+        </a>
+      </div>
+    </div>
+
+    <!-- Question Details Modal -->
+    <div class="modal-overlay" ng-if="activeModalQuestion" ng-click="closeModal()">
+      <div class="modal-box" ng-click="$event.stopPropagation()">
+        <div class="flex-between mb-3">
+          <span class="badge-id">{{ activeModalQuestion.badge }}</span>
+          <button class="btn btn-secondary btn-sm" ng-click="closeModal()">✕ Close</button>
+        </div>
+
+        <h2 style="color: #fff; font-size: 1.4rem; margin-bottom: 10px;">{{ activeModalQuestion.title }}</h2>
+        
+        <div style="margin-bottom: 15px; padding: 12px; background: rgba(15,23,42,0.6); border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+          <strong class="text-info">Lab Exam Question / Problem Statement:</strong>
+          <p style="margin-top: 6px; font-size: 0.9rem; line-height: 1.6; color: #cbd5e1;">
+            {{ activeModalQuestion.problemStatement || activeModalQuestion.question }}
+          </p>
+        </div>
+
+        <div style="margin-bottom: 15px;" ng-if="activeModalQuestion.requirements">
+          <h4 style="color: #fbbf24; margin-bottom: 6px;">Key Technical Requirements:</h4>
+          <ul style="padding-left: 20px; font-size: 0.88rem; color: #cbd5e1; line-height: 1.7;">
+            <li ng-repeat="req in activeModalQuestion.requirements">{{ req }}</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 15px;" ng-if="activeModalQuestion.runCommand">
+          <h4 style="color: #34d399; margin-bottom: 6px;">How to Execute:</h4>
+          <pre style="background: #090d16; padding: 10px; border-radius: 6px; font-family: monospace; color: #38bdf8; font-size: 0.85rem;">{{ activeModalQuestion.runCommand }}</pre>
+        </div>
+
+        <div class="flex-between mt-4">
+          <a ng-href="{{ activeModalQuestion.runUrl }}" class="btn btn-primary" target="_blank" ng-if="!activeModalQuestion.isNodeScript">
+            Launch Program
+          </a>
+          <button class="btn btn-secondary" ng-click="closeModal()">Close Window</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    var app = angular.module('creativeExamHub', []);
+
+    app.controller('HubController', function($scope) {
+      $scope.activeSection = 'simple'; // Default to simple questions per user request!
+      $scope.searchQuery = '';
+      $scope.activeModalQuestion = null;
+
+      $scope.openQuestionDetails = function(q) {
+        $scope.activeModalQuestion = q;
+      };
+
+      $scope.closeModal = function() {
+        $scope.activeModalQuestion = null;
+      };
+
+      // PART A: 8 SIMPLE QUESTIONS
+      $scope.simpleQuestions = [
+        {
+          id: 'S1',
+          badge: 'SIMPLE Q1',
+          topic: 'Expressions & Data Binding',
+          title: 'All Types of Expressions & One-Way vs Two-Way Binding',
+          question: 'Write an AngularJS program to demonstrate all types of expressions (Numeric, String, Boolean, Object, Array indexing) and compare One-Way ({{ }}) vs Two-Way (ng-model) data binding.',
+          syllabusMapping: 'Programs 34 & 36',
+          tags: ['Expressions', 'Numeric', 'String', 'Boolean', 'One-Way', 'Two-Way'],
+          runUrl: 'simple_q1_expressions_binding.html',
+          isNodeScript: false,
+          requirements: [
+            'Demonstrate numeric math, string concatenation, boolean evaluation, and object property access inside {{ }}.',
+            'Demonstrate one-way data binding from $scope model to DOM view.',
+            'Demonstrate two-way data binding via ng-model with live input synchronization.'
+          ]
+        },
+        {
+          id: 'S2',
+          badge: 'SIMPLE Q2',
+          topic: 'Directives & Validation',
+          title: 'ng-model Directive Classes & State Flags',
+          question: 'Write an AngularJS code to implement and observe all CSS classes and validation states that the ng-model directive adds to an input element ($valid, $invalid, $dirty, $pristine, $touched, $untouched).',
+          syllabusMapping: 'Program 35',
+          tags: ['ng-model classes', 'Form Validation', '$valid', '$dirty', '$touched'],
+          runUrl: 'simple_q2_ng_model_classes.html',
+          isNodeScript: false,
+          requirements: [
+            'Input with type="email" and required attribute.',
+            'Observe CSS styling modifications on pristine vs dirty and valid vs invalid.',
+            'Live boolean state indicator dashboard for all 6 ng-model properties.'
+          ]
+        },
+        {
+          id: 'S3',
+          badge: 'SIMPLE Q3',
+          topic: 'Filters',
+          title: 'Ten Built-in Filters & Custom Filter Creation',
+          question: 'Write an AngularJS program to implement any ten built-in filters (uppercase, lowercase, currency, number, limitTo, orderBy, filter, json, date) and demonstrate the creation of a custom filter.',
+          syllabusMapping: 'Program 38',
+          tags: ['Built-in Filters', 'currency', 'orderBy', 'date', 'Custom Filter'],
+          runUrl: 'simple_q3_filters.html',
+          isNodeScript: false,
+          requirements: [
+            'Format text, currency values, numbers with decimal limits, dates, and arrays.',
+            'Construct custom filter "reverse" to invert string characters using JavaScript pipe syntax.'
+          ]
+        },
+        {
+          id: 'S4',
+          badge: 'SIMPLE Q4',
+          topic: 'Directives & DOM',
+          title: 'ng-repeat Table & Conditional Directives (ng-if, ng-show/hide, ng-switch)',
+          question: 'Write an AngularJS program to display records in a table using ng-repeat (with $index, $even, $odd) and illustrate conditional display using ng-if, ng-show, ng-hide, and ng-switch directives.',
+          syllabusMapping: 'Programs 401, 41 & 44',
+          tags: ['ng-repeat', '$index', '$even / $odd', 'ng-if', 'ng-show', 'ng-switch'],
+          runUrl: 'simple_q4_directives_table.html',
+          isNodeScript: false,
+          requirements: [
+            'Tabular iteration using ng-repeat with alternating row striping via $even / $odd.',
+            'Badge status rendering using ng-switch for Active, Probation, and Alumni.',
+            'Interactive comparison between DOM-removing ng-if and CSS-hiding ng-show.'
+          ]
+        },
+        {
+          id: 'S5',
+          badge: 'SIMPLE Q5',
+          topic: 'Services & AJAX',
+          title: 'AngularJS $http Services & Asynchronous Requests',
+          question: 'Write an AngularJS program to illustrate the usage of the $http service methods ($http.get, $http.post, $http.put, $http.delete) and render the returned server response dynamically.',
+          syllabusMapping: 'Programs 39 & 402',
+          tags: ['$http.get', '$http.post', '$http.put', '$http.delete', 'JSON Response'],
+          runUrl: 'simple_q5_http_service.html',
+          isNodeScript: false,
+          requirements: [
+            'Buttons to dispatch GET, POST, PUT, and DELETE HTTP requests.',
+            'Capture promise resolution (.then / .catch) and format JSON response onto the screen.'
+          ]
+        },
+        {
+          id: 'S6',
+          badge: 'SIMPLE Q6',
+          topic: 'Node.js Core',
+          title: 'Command Line Arguments, Local Math Module & Core Modules',
+          question: 'Write a Node.js program to display command line arguments using process.argv, import and execute a custom local math module, and inspect host system telemetry using os, path, and util core modules.',
+          syllabusMapping: 'Programs 59, 60, 61 & 62',
+          tags: ['process.argv', 'Local Module', 'os', 'path', 'util'],
+          runUrl: 'simple_q6_nodejs_basics.js',
+          runCommand: 'node simple_q6_nodejs_basics.js arg1 arg2 --mode=test',
+          isNodeScript: true,
+          requirements: [
+            'Iterate through process.argv array.',
+            'Export and require functions (add, multiply, calculateGrade) from utils_math.js.',
+            'Print platform, arch, hostname, and normalized file paths.'
+          ]
+        },
+        {
+          id: 'S7',
+          badge: 'SIMPLE Q7',
+          topic: 'Node.js Server & FS',
+          title: 'HTTP Web Server Routing & File System (fs) CRUD',
+          question: 'Write a Node.js program to create an HTTP web server with URL routing and demonstrate asynchronous and synchronous file operations using the fs module (write, read, append, rename, delete).',
+          syllabusMapping: 'Programs 63, 64, 65 & 66',
+          tags: ['http.createServer', 'URL routing', 'fs.readFile', 'fs.writeFileSync'],
+          runUrl: 'http://localhost:3002',
+          runCommand: 'node simple_q7_nodejs_fs_server.js',
+          isNodeScript: true,
+          requirements: [
+            'File operations: fs.writeFileSync, appendFileSync, readFile, renameSync, and unlinkSync.',
+            'HTTP server routing requests for /, /about, /contact, and 404.'
+          ]
+        },
+        {
+          id: 'S8',
+          badge: 'SIMPLE Q8',
+          topic: 'Node.js Events & URL',
+          title: 'URL Module Query Parsing & Event Handling (EventEmitter)',
+          question: 'Write a Node.js program to illustrate URL parsing to extract query string parameters and implement custom event handling using the EventEmitter class.',
+          syllabusMapping: 'Programs 67, 68, 70 & 73',
+          tags: ['url.parse', 'query params', 'EventEmitter', 'emit / on'],
+          runUrl: 'http://localhost:3003',
+          runCommand: 'node simple_q8_nodejs_events_url.js',
+          isNodeScript: true,
+          requirements: [
+            'Parse address with url.parse(address, true) and read individual query attributes.',
+            'Instantiate EventEmitter, register listeners with .on(), and fire events with .emit().'
+          ]
+        }
+      ];
+
+      // PART B: 6 ADVANCED PROJECTS
+      $scope.advancedExams = [
+        {
+          id: 1,
+          badge: 'EXAM PROJECT #1',
+          track: 'AngularJS',
+          category: 'Frontend & Reactive Scopes',
+          title: 'Integrated Student Academic & Performance Analytics Portal',
+          shortSummary: 'Comprehensive student admission, dynamic GPA computation, deep scope watch auditing, attendance directives, and score range analytics.',
+          fusion: ['Prog 34', 'Prog 35', 'Prog 36', 'Prog 42', 'Prog 44', 'Prog 47', 'Prog 49', 'Prog 52', 'Prog 57'],
+          tags: ['Two-Way Binding', '$scope.$watch', 'ng-switch', 'GPA Engine', 'Validation Regex'],
+          runUrl: 'exam1_academic_analytics.html',
+          isNodeScript: false,
+          problemStatement: 'Develop an integrated AngularJS Web Application for university student academic evaluation with validation, two-way bound GPA calculation, live $scope.$watch deep audit trail, attendance tiers, and cohort filtering.',
+          requirements: [
+            'Student registration form with regex validation on roll number.',
+            'Instant dynamic calculation of aggregate marks, percentage, and GPA out of 10.0.',
+            'Deep watch using $scope.$watch to log every mark change with timestamps.',
+            'Attendance directive evaluation using ng-switch for exam hall ticket eligibility.'
+          ]
+        },
+        {
+          id: 2,
+          badge: 'EXAM PROJECT #2',
+          track: 'AngularJS',
+          category: 'Custom Directives & Business Logic',
+          title: 'Smart E-Commerce Catalog, POS Billing & Order Dispatch ERP',
+          shortSummary: 'Multi-category product catalog with custom directives <product-stock-tag> and <star-rating>, live GST tax invoice, and interactive inline order dispatch.',
+          fusion: ['Prog 38', 'Prog 41', 'Prog 45', 'Prog 48', 'Prog 54'],
+          tags: ['Custom Directives', 'Currency Filter', 'GST Calculation', 'ng-dblclick', 'Print Invoice'],
+          runUrl: 'exam2_ecommerce_billing.html',
+          isNodeScript: false,
+          problemStatement: 'Design and implement an enterprise E-Commerce and Point of Sale (POS) application using AngularJS with custom directives, POS billing, GST tax slabs, and printable tax invoice.',
+          requirements: [
+            'Implement custom directives <product-stock-tag> and <star-rating>.',
+            'POS cart management: dynamic quantity updates and stock cap enforcement.',
+            'Automated financial calculations: Gross Total, Promotional Discounts, GST slabs, and Grand Total.',
+            'Print-ready stylesheet (@media print) for client tax invoices.'
+          ]
+        },
+        {
+          id: 3,
+          badge: 'EXAM PROJECT #3',
+          track: 'AngularJS',
+          category: 'Modular Multi-Controller Architecture',
+          title: 'Institutional Library Multi-Controller & Cascading Catalog System',
+          shortSummary: 'Multi-controller architecture with shared singleton service, hierarchical scope inheritance ($parent), 4-tier cascading dropdowns, and circulation fines.',
+          fusion: ['Prog 37', 'Prog 43', 'Prog 46', 'Prog 50', 'Prog 53'],
+          tags: ['Multi-Controllers', 'Shared Service', 'Prototypal Inheritance', '4-Tier Cascading', 'Circulation'],
+          runUrl: 'exam3_library_circulation.html',
+          isNodeScript: false,
+          problemStatement: 'Construct a modular institutional Library ERP in AngularJS with prototypal scope inheritance, 4-tier cascading selection, and multi-controllers synchronized via a shared singleton service.',
+          requirements: [
+            'Prototypal scope inheritance: Dean controller budget cascading to department sub-scope.',
+            '4-Tier cascading selection engine with dynamic subject textbook lookup.',
+            'Central LibrarySharedService singleton coordinating state across all isolated controllers.'
+          ]
+        },
+        {
+          id: 4,
+          badge: 'EXAM PROJECT #4',
+          track: 'AngularJS',
+          category: 'Enterprise Services & Security',
+          title: 'Enterprise Operations Dashboard & Secure Employee Portal',
+          shortSummary: 'Role-based authentication with password entropy validator, live telemetry with $interval/$timeout, custom experienceLevel filter, and modal lightbox.',
+          fusion: ['Prog 51', 'Prog 55', 'Prog 56', 'Prog 58'],
+          tags: ['$interval', '$timeout', 'Custom Filter', 'Password Entropy', 'Modal Lightbox'],
+          runUrl: 'exam4_enterprise_operations.html',
+          isNodeScript: false,
+          problemStatement: 'Develop a secure Enterprise Operations and HR Management Portal using AngularJS with password entropy scoring, $interval telemetry, $timeout alerts, and custom experienceLevel filter.',
+          requirements: [
+            'Client authentication tabs (Login & Registration) with entropy scoring.',
+            'Live server telemetry gauges updating every second using $interval.',
+            'Auto-dismissing alert toasts managed via $timeout.',
+            'Employee directory with custom filter experienceLevel and header column sorting.'
+          ]
+        },
+        {
+          id: 5,
+          badge: 'EXAM PROJECT #5',
+          track: 'NodeJS',
+          category: 'Backend Core Architecture',
+          title: 'Enterprise Modular Node.js Server & Asynchronous Audit Engine',
+          shortSummary: 'Multi-route HTTP server combining core modules (os, path, util, url, fs), custom math/security modules, CLI arguments, and EventEmitter auditing.',
+          fusion: ['Prog 59', 'Prog 60', 'Prog 61', 'Prog 62', 'Prog 63', 'Prog 64', 'Prog 65', 'Prog 66', 'Prog 67', 'Prog 68', 'Prog 69', 'Prog 70', 'Prog 73'],
+          tags: ['HTTP Server', 'EventEmitter', 'fs Streams', 'URL Query Parser', 'Local Module'],
+          runUrl: 'http://localhost:3000',
+          runCommand: 'node exam5_nodejs_server.js --mode=exam --user=vijay',
+          isNodeScript: true,
+          problemStatement: 'Build a production-grade, modular Node.js Server application combining core modules (http, url, fs, path, os, util, events), CLI args, local math module, and file audits.',
+          requirements: [
+            'Inspect process.argv and display startup arguments.',
+            'Gather system hardware telemetry using os and path modules.',
+            'Local module utils_math.js exporting calculation and classification methods.',
+            'EventEmitter auditing all HTTP requests and file modifications to server_audit.log.'
+          ]
+        },
+        {
+          id: 6,
+          badge: 'EXAM PROJECT #6',
+          track: 'FullStack',
+          category: 'End-to-End RESTful Architecture',
+          title: 'Full-Stack Integrated REST API Client & Server Management Suite',
+          shortSummary: 'End-to-end full-stack application with Node.js REST API server (CRUD), file persistence, and AngularJS $http client with live terminal inspection.',
+          fusion: ['Exps 1 to 10 (Syllabus 76-85)', 'Prog 39 ($http)', 'Prog 402 (Server Table)'],
+          tags: ['$http.get/post/put/delete', 'RESTful API', 'JSON Persistence', 'CRUD Operations', 'Terminal Stream'],
+          runUrl: 'exam6_fullstack_crud.html',
+          runCommand: 'node fullstack_server.js (then launch exam6_fullstack_crud.html)',
+          isNodeScript: false,
+          problemStatement: 'Design and implement an end-to-end Full-Stack Student Management System comprising a Node.js REST API backend and an AngularJS single-page client with JSON persistence.',
+          requirements: [
+            'Node.js HTTP REST API handling JSON payloads for full CRUD operations.',
+            'JSON database persistence storing student records on disk.',
+            'AngularJS client using $http.get(), $http.post(), $http.put(), and $http.delete().',
+            'Live network activity terminal tracking HTTP response status codes.'
+          ]
+        }
+      ];
+    });
+  </script>
+</body>
+</html>

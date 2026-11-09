@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="performanceApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 49 - Student Performance</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="PerformanceCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#49</span>
+        <div class="header-title">
+          <h1>Student Performance System</h1>
+          <p>AngularJS Scope Watchers ($scope.$watch)</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid-2">
+      <!-- Input Card -->
+      <div class="card">
+        <div class="card-title"><span>Performance Monitor</span><span class="badge badge-info">$watch Active</span></div>
+        <div class="form-group">
+          <label class="form-label">Student Name</label>
+          <input type="text" class="form-control" ng-model="student.name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Internal Marks (/100)</label>
+          <input type="number" class="form-control" ng-model="student.marks" min="0" max="100">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Attendance (%)</label>
+          <input type="number" class="form-control" ng-model="student.attendance" min="0" max="100">
+        </div>
+        <div ng-if="warning" class="card" style="background: rgba(239,68,68,0.2); border-color: #ef4444; padding: 10px; margin-top: 10px;">
+          <strong style="color: #fca5a5;">⚠️ Warning:</strong>
+          <span style="color: #fecaca; font-size: 0.85rem;">{{ warning }}</span>
+        </div>
+      </div>
+
+      <!-- Scope Evaluation Card -->
+      <div class="card">
+        <div class="card-title"><span>Real-Time Evaluation</span><span class="badge badge-success">Watch Count: {{ watchCount }}</span></div>
+        <div class="grid-2 mb-3">
+          <div class="stat-box"><div class="stat-val text-info">{{ student.marks }}</div><div class="stat-label">Marks</div></div>
+          <div class="stat-box"><div class="stat-val" ng-class="student.attendance >= 75 ? 'text-success' : 'text-danger'">{{ student.attendance }}%</div><div class="stat-label">Attendance</div></div>
+        </div>
+
+        <div class="card" style="background: rgba(15,23,42,0.6); padding: 14px; margin: 0;">
+          <p><strong>Assigned Grade:</strong> <span class="badge badge-info">{{ grade }}</span></p>
+          <p class="text-muted" style="font-size: 0.85rem; margin-top: 8px;">
+            <code>$scope.$watch</code> detects model modifications automatically and recalculates compliance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('performanceApp', [])
+      .controller('PerformanceCtrl', function($scope) {
+        $scope.watchCount = 0;
+        $scope.student = { name: 'Gokulnath Mohan', marks: 82, attendance: 88 };
+
+        $scope.$watch('student', function(val) {
+          $scope.watchCount++;
+          $scope.grade = val.marks >= 80 ? 'Distinction (A+)' : val.marks >= 60 ? 'First Class (A)' : val.marks >= 50 ? 'Second Class (B)' : 'Fail (F)';
+          $scope.warning = (val.attendance < 75 && val.marks < 50) ? 'Low attendance (<75%) AND low score (<50%)!'
+                         : val.attendance < 75 ? 'Attendance below mandatory 75% threshold.'
+                         : val.marks < 50 ? 'Marks are below passing mark (50).' : '';
+        }, true);
+      });
+  </script>
+</body>
+</html>

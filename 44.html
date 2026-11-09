@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="attendanceApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 44 - Student Attendance</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="AttendanceCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#44</span>
+        <div class="header-title">
+          <h1>Student Attendance Application</h1>
+          <p>Conditional & Repetition Directives (ng-repeat, ng-switch, ng-if, ng-show)</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ng-if Alert Directive -->
+    <div ng-if="count('Absent') > 0" class="card mb-4" style="background: rgba(239, 68, 68, 0.15); border-color: #ef4444;">
+      <strong style="color: #fca5a5;">⚠️ ng-if Alert:</strong> {{ count('Absent') }} student(s) marked Absent!
+    </div>
+
+    <!-- Controls & ng-show Summary -->
+    <div class="card mb-4 flex-between">
+      <button class="btn btn-secondary btn-sm" ng-click="showSummary = !showSummary">
+        {{ showSummary ? 'Hide Summary (ng-show)' : 'Show Summary (ng-show)' }}
+      </button>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-success btn-sm" ng-click="setAll('Present')">All Present</button>
+        <button class="btn btn-danger btn-sm" ng-click="setAll('Absent')">All Absent</button>
+      </div>
+    </div>
+
+    <!-- ng-show Summary Box -->
+    <div ng-show="showSummary" class="grid-3 mb-4">
+      <div class="stat-box"><div class="stat-val text-info">{{ students.length }}</div><div class="stat-label">Total Students</div></div>
+      <div class="stat-box"><div class="stat-val text-success">{{ count('Present') }}</div><div class="stat-label">Present</div></div>
+      <div class="stat-box"><div class="stat-val text-danger">{{ count('Absent') }}</div><div class="stat-label">Absent</div></div>
+    </div>
+
+    <!-- Table with ng-repeat & ng-switch -->
+    <div class="card">
+      <div class="card-title"><span>Attendance Register</span><span class="badge badge-info">CSE Dept</span></div>
+      <div class="table-container">
+        <table class="custom-table">
+          <thead><tr><th>#</th><th>Roll No</th><th>Student Name</th><th>Status (ng-switch)</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr ng-repeat="s in students" ng-class="{'row-even': $even, 'row-odd': $odd}">
+              <td>{{ $index + 1 }}</td>
+              <td><strong>{{ s.rollNo }}</strong></td>
+              <td>{{ s.name }}</td>
+              <td>
+                <div ng-switch="s.status">
+                  <span ng-switch-when="Present" class="badge badge-success">✓ Present</span>
+                  <span ng-switch-when="Absent" class="badge badge-danger">✗ Absent</span>
+                  <span ng-switch-when="On Duty" class="badge badge-info">★ On Duty</span>
+                </div>
+              </td>
+              <td><button class="btn btn-secondary btn-sm" ng-click="cycle(s)">Toggle</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('attendanceApp', [])
+      .controller('AttendanceCtrl', function($scope) {
+        $scope.showSummary = true;
+        var states = ['Present', 'Absent', 'On Duty'];
+        $scope.students = [
+          { rollNo: '21BCSE01', name: 'Aadhirai A.', status: 'Present' },
+          { rollNo: '21BCSE02', name: 'Balaji V.', status: 'Present' },
+          { rollNo: '21BCSE03', name: 'Charumathi R.', status: 'Absent' },
+          { rollNo: '21BCSE04', name: 'Dinesh K.', status: 'Present' },
+          { rollNo: '21BCSE05', name: 'Elango S.', status: 'On Duty' }
+        ];
+
+        $scope.cycle = function(s) { s.status = states[(states.indexOf(s.status) + 1) % states.length]; };
+        $scope.setAll = function(val) { $scope.students.forEach(function(s) { s.status = val; }); };
+        $scope.count = function(val) { return $scope.students.filter(function(s) { return s.status === val; }).length; };
+      });
+  </script>
+</body>
+</html>

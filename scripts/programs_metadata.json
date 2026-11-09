@@ -1,0 +1,226 @@
+[
+  {
+    "id": 42,
+    "title": "Dynamic Student Profile Application",
+    "category": "Core & Scopes",
+    "description": "Uses AngularJS Expressions, Modules, and Controllers to dynamically bind and preview student profiles, calculating GPA and academic standing in real-time.",
+    "tags": [
+      "angular.module",
+      "ng-controller",
+      "Expressions {{ }}",
+      "Two-Way Binding",
+      "Math in Expressions"
+    ]
+  },
+  {
+    "id": 43,
+    "title": "College Management Modular Architecture",
+    "category": "Core & Scopes",
+    "description": "A modular architecture assembling studentModule, facultyModule, and courseModule into a master collegeApp with isolated controller domains.",
+    "tags": [
+      "Modular Architecture",
+      "Sub-Modules",
+      "Dependency Injection",
+      "$rootScope Shared State"
+    ]
+  },
+  {
+    "id": 44,
+    "title": "Student Attendance Application",
+    "category": "Directives",
+    "description": "Comprehensive demonstration of conditional and repetition directives: ng-repeat, ng-if, ng-show/ng-hide, and ng-switch for multi-case status badges.",
+    "tags": [
+      "ng-repeat",
+      "ng-if",
+      "ng-show",
+      "ng-hide",
+      "ng-switch",
+      "$even / $odd"
+    ]
+  },
+  {
+    "id": 45,
+    "title": "Dynamic Product Billing Application",
+    "category": "Data Binding",
+    "description": "Two-way bound line item management with automatic calculation of subtotals, item-level discounts, GST slabs, and a printable customer invoice.",
+    "tags": [
+      "ng-model",
+      "Two-Way Binding",
+      "Live Invoice",
+      "Print Invoice",
+      "Calculated Totals"
+    ]
+  },
+  {
+    "id": 46,
+    "title": "Library Multi-Controller Management",
+    "category": "Core & Scopes",
+    "description": "Coordinates BookInventoryCtrl, MemberRegistryCtrl, CirculationCtrl, and LibraryStatsCtrl via a central shared LibraryService singleton.",
+    "tags": [
+      "Multi-Controllers",
+      "Shared Service",
+      "Book Issues",
+      "Fine Calculations",
+      "Cross-Controller Sync"
+    ]
+  },
+  {
+    "id": 47,
+    "title": "Interactive Student Mark Analysis System",
+    "category": "Data Binding",
+    "description": "Two-way binding evaluating theory, internal, and practical mark components, generating visual progress bars with ng-style and semester GPA.",
+    "tags": [
+      "Two-Way Data Binding",
+      "ng-style Bars",
+      "GPA Evaluation",
+      "University Grade Rules",
+      "Arrear Tracking"
+    ]
+  },
+  {
+    "id": 48,
+    "title": "Dynamic Product Catalog Application",
+    "category": "Directives",
+    "description": "Built-in directives (ng-repeat, ng-src, ng-class, ng-disabled, ng-cloak) combined with custom directives <product-stock-tag> and <star-rating>.",
+    "tags": [
+      "Custom Directives",
+      "ng-cloak",
+      "ng-disabled",
+      "Category Filter",
+      "Cart Counter"
+    ]
+  },
+  {
+    "id": 49,
+    "title": "Student Performance Management System",
+    "category": "Core & Scopes",
+    "description": "Deep dive into $scope lifecycle and $scope.$watch listener methods, automatically auditing mark variations and issuing academic risk notifications.",
+    "tags": [
+      "$scope.$watch",
+      "Deep Watch",
+      "Audit Trail",
+      "Cohort Ranks",
+      "Academic Alerts"
+    ]
+  },
+  {
+    "id": 50,
+    "title": "College Department Nested Scopes Application",
+    "category": "Core & Scopes",
+    "description": "Demonstrates hierarchical scopes from DeanCtrl down to DepartmentCtrl and LabCtrl, illustrating prototypal inheritance and $parent access.",
+    "tags": [
+      "Nested Scopes",
+      "Prototypal Inheritance",
+      "$parent Access",
+      "Budget Cascading",
+      "Scope Chains"
+    ]
+  },
+  {
+    "id": 51,
+    "title": "Searchable & Sortable Employee Directory",
+    "category": "Filters & Sorting",
+    "description": "Uses built-in filters (filter, orderBy, currency, uppercase, date) and a custom experienceLevel filter with interactive sortable table headers.",
+    "tags": [
+      "filter:search",
+      "orderBy",
+      "currency",
+      "date",
+      "Custom Filter",
+      "Header Sorting"
+    ]
+  },
+  {
+    "id": 52,
+    "title": "Student Result Analysis Application",
+    "category": "Filters & Sorting",
+    "description": "Multi-criteria filtering by department, status, and dynamic score range slider, computing class statistics, highest mark, and distinction rates.",
+    "tags": [
+      "Multi-Filtering",
+      "Score Range Slider",
+      "Class Analytics",
+      "Pass Rate",
+      "Column Sorting"
+    ]
+  },
+  {
+    "id": 53,
+    "title": "Cascading Department & Course Selection",
+    "category": "Directives",
+    "description": "Four-tier dependent cascading dropdowns: Degree Level \u2794 Department \u2794 Semester \u2794 Course Selection with ng-options and ng-change.",
+    "tags": [
+      "ng-options",
+      "ng-change",
+      "Cascading Dropdowns",
+      "Dynamic Syllabus",
+      "Course Enrollment"
+    ]
+  },
+  {
+    "id": 54,
+    "title": "Interactive To-Do Management Application",
+    "category": "DOM & Events",
+    "description": "Event directives (ng-click, ng-dblclick, ng-keydown, ng-blur) with dynamic DOM classes, inline task editing, and status filtering.",
+    "tags": [
+      "ng-click",
+      "ng-dblclick",
+      "ng-keydown (Enter/Esc)",
+      "ng-blur",
+      "ng-class",
+      "Inline Edit"
+    ]
+  },
+  {
+    "id": 55,
+    "title": "Interactive Image Gallery Application",
+    "category": "DOM & Events",
+    "description": "Mouse events (hover preview, zoom, likes) and keyboard listeners (Left/Right arrow navigation, Escape modal close, Spacebar slideshow).",
+    "tags": [
+      "ng-mouseover",
+      "Keyboard Events",
+      "Arrow Navigation",
+      "Modal Lightbox",
+      "Auto Slideshow"
+    ]
+  },
+  {
+    "id": 56,
+    "title": "Real-Time Digital Operations Dashboard",
+    "category": "Services & Forms",
+    "description": "Built-in services ($interval digital clock and telemetry sync, $timeout auto-dismissing toast alerts, $log) and custom ServerMetricsService factory.",
+    "tags": [
+      "$interval",
+      "$timeout",
+      "$log",
+      "Custom Service",
+      "Live Gauges",
+      "Telemetry"
+    ]
+  },
+  {
+    "id": 57,
+    "title": "Online Course Enrolment Form",
+    "category": "Services & Forms",
+    "description": "Form validation states ($valid, $invalid, $dirty, $pristine), regex patterns, elective module checkboxes, and dynamic fee computation.",
+    "tags": [
+      "Form Validation",
+      "$valid / $invalid",
+      "$error.required",
+      "$error.pattern",
+      "Fee Engine"
+    ]
+  },
+  {
+    "id": 58,
+    "title": "User Login & Registration System",
+    "category": "Services & Forms",
+    "description": "Client-side authentication with tab switching, password strength entropy scoring, password match validator, and simulated active sessions.",
+    "tags": [
+      "Login & Register",
+      "Password Strength",
+      "Confirm Password Match",
+      "Session Token",
+      "Auth Tabs"
+    ]
+  }
+]

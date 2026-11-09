@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Implementation Demo</title>
+
+    <!-- External CSS Files -->
+    <link rel="stylesheet" href="external-styles.css">
+    <link rel="stylesheet" href="multiple-styles.css">
+
+    <!-- Internal CSS -->
+    <style>
+        h1 {
+            color: purple;
+            border-bottom: 2px solid purple;
+        }
+
+        .internal-style {
+            background-color: lightyellow;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Implementation Methods</h1>
+
+    <!-- Inline CSS -->
+    <p style="color: blue; font-size: 18px; background-color: lightblue; padding:10px;">
+        This paragraph uses <b>Inline CSS</b> (highest precedence).
+    </p>
+
+    <!-- Internal CSS -->
+    <p class="internal-style">
+        This paragraph uses <b>Internal CSS</b> (defined in the &lt;style&gt; tag).
+    </p>
+
+    <!-- External CSS -->
+    <p id="external-style">
+        This paragraph uses <b>External CSS</b> (linked via external-styles.css).
+    </p>
+
+    <!-- Multiple CSS -->
+    <p class="multiple-style">
+        This paragraph demonstrates <b>Multiple CSS</b> files. The last loaded file
+        (multiple-styles.css) will typically override earlier rules if they conflict.
+    </p>
+
+</body>
+</html>

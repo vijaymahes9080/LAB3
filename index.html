@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="hubApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AngularJS Practical Laboratory Suite (Programs 42 - 58)</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.25), rgba(6, 182, 212, 0.2));
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 36px 30px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-banner::after {
+      content: '</>';
+      position: absolute;
+      right: 30px;
+      bottom: -15px;
+      font-size: 8rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.03);
+      pointer-events: none;
+    }
+    .program-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .program-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+      border-color: rgba(99, 102, 241, 0.45);
+    }
+    .tag-chip {
+      background: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+  </style>
+  <script src="js/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"><\/script>')</script>
+</head>
+<body ng-controller="HubCtrl">
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="header-left">
+          <span class="badge-id">LAB HUB</span>
+          <div class="header-title">
+            <h1>AngularJS Comprehensive Laboratory Suite</h1>
+            <p>17 Interactive Web Applications • Curated Syllabus 42 through 58</p>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <a href="creative/index.html" class="nav-btn" style="background: rgba(99, 102, 241, 0.25); border-color: #6366f1; color: #fff;">🎓 Creative Exam Suite</a>
+          <span class="badge badge-success">AngularJS v1.8.2 Ready</span>
+          <span class="badge badge-info">Offline Capable</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <h2 style="font-size: 2rem; color: #fff; margin-bottom: 8px;">
+        Practical Laboratory Applications (Programs 42 — 58)
+      </h2>
+      <p style="color: #cbd5e1; font-size: 1rem; max-width: 800px; margin-bottom: 20px;">
+        A complete, state-of-the-art implementation of all 17 syllabus exercises featuring rich glassmorphic visuals,
+        live two-way binding, custom directives, nested scopes, real-time services, event manipulation, and comprehensive client-side form validation.
+      </p>
+
+      <div class="grid-4" style="margin-top: 10px;">
+        <div class="stat-box" style="background: rgba(15, 23, 42, 0.6);">
+          <div class="stat-val text-info">17</div>
+          <div class="stat-label">Full Programs</div>
+        </div>
+        <div class="stat-box" style="background: rgba(15, 23, 42, 0.6);">
+          <div class="stat-val text-success">42 to 58</div>
+          <div class="stat-label">Numbered Sequence</div>
+        </div>
+        <div class="stat-box" style="background: rgba(15, 23, 42, 0.6);">
+          <div class="stat-val text-warning">Dual Names</div>
+          <div class="stat-label">42.html & 42_*.html</div>
+        </div>
+        <div class="stat-box" style="background: rgba(15, 23, 42, 0.6);">
+          <div class="stat-val" style="color: #a855f7;">100%</div>
+          <div class="stat-label">Zero Dependencies</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search & Topic Filter Bar -->
+    <div class="card mb-4">
+      <div class="flex-between" style="flex-wrap: wrap; gap: 16px;">
+        <!-- Category Filter Tabs -->
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn btn-sm" ng-class="{'btn-primary': activeCategory === '', 'btn-secondary': activeCategory !== ''}" ng-click="setCategory('')">
+            All Programs ({{ programs.length }})
+          </button>
+          <button class="btn btn-sm" ng-repeat="cat in categories" ng-class="{'btn-primary': activeCategory === cat, 'btn-secondary': activeCategory !== cat}" ng-click="setCategory(cat)">
+            {{ cat }}
+          </button>
+        </div>
+
+        <!-- Live Instant Search Input -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <input type="text" class="form-control" placeholder="Search by topic, number, concept..." ng-model="searchQuery" style="width: 260px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Programs Grid -->
+    <div class="grid-2" style="gap: 24px;">
+      <div class="program-card" ng-repeat="p in programs | filter:searchQuery | filter:(activeCategory ? {category: activeCategory} : '')">
+        <div>
+          <div class="flex-between mb-2">
+            <span class="badge-id" style="font-size: 0.85rem; padding: 4px 10px;">#{{ p.id }}</span>
+            <span class="badge badge-info">{{ p.category }}</span>
+          </div>
+
+          <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 6px; line-height: 1.4;">
+            {{ p.title }}
+          </h3>
+
+          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 14px; line-height: 1.5;">
+            {{ p.description }}
+          </p>
+
+          <div style="margin-bottom: 16px;">
+            <span class="tag-chip" ng-repeat="t in p.tags">{{ t }}</span>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-color); padding-top: 14px;">
+          <div class="flex-between">
+            <a ng-href="{{ p.canonicalFile }}" class="btn btn-primary btn-sm" target="_blank" style="flex: 1; text-align: center; text-decoration: none;">
+              🚀 Launch Program #{{ p.id }}
+            </a>
+            <a ng-href="{{ p.descriptiveFile }}" class="nav-btn btn-sm" target="_blank" style="margin-left: 8px;" title="Launch via descriptive filename">
+              📄 {{ p.descriptiveFile }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    var app = angular.module('hubApp', []);
+
+    app.controller('HubCtrl', function($scope) {
+      $scope.searchQuery = '';
+      $scope.activeCategory = '';
+
+      $scope.categories = ['Core & Scopes', 'Data Binding', 'Directives', 'Filters & Sorting', 'DOM & Events', 'Services & Forms'];
+
+      $scope.setCategory = function(cat) {
+        $scope.activeCategory = cat;
+      };
+
+      $scope.programs = [
+        {
+          id: 42,
+          sylId: 1,
+          canonicalFile: '42.html',
+          descriptiveFile: '42_student_profile.html',
+          title: 'Dynamic Student Profile Application',
+          category: 'Core & Scopes',
+          description: 'Uses AngularJS Expressions, Modules, and Controllers to dynamically bind and preview student profiles, calculating GPA and academic standing in real-time.',
+          tags: ['angular.module', 'ng-controller', 'Expressions {{ }}', 'Two-Way Binding', 'Math in Expressions']
+        },
+        {
+          id: 43,
+          sylId: 2,
+          canonicalFile: '43.html',
+          descriptiveFile: '43_college_management.html',
+          title: 'College Management Modular Architecture',
+          category: 'Core & Scopes',
+          description: 'A modular architecture assembling studentModule, facultyModule, and courseModule into a master collegeApp with isolated controller domains.',
+          tags: ['Modular Architecture', 'Sub-Modules', 'Dependency Injection', '$rootScope Shared State']
+        },
+        {
+          id: 44,
+          sylId: 3,
+          canonicalFile: '44.html',
+          descriptiveFile: '44_student_attendance.html',
+          title: 'Student Attendance Application',
+          category: 'Directives',
+          description: 'Comprehensive demonstration of conditional and repetition directives: ng-repeat, ng-if, ng-show/ng-hide, and ng-switch for multi-case status badges.',
+          tags: ['ng-repeat', 'ng-if', 'ng-show', 'ng-hide', 'ng-switch', '$even / $odd']
+        },
+        {
+          id: 45,
+          sylId: 4,
+          canonicalFile: '45.html',
+          descriptiveFile: '45_product_billing.html',
+          title: 'Dynamic Product Billing Application',
+          category: 'Data Binding',
+          description: 'Two-way bound line item management with automatic calculation of subtotals, item-level discounts, GST slabs, and a printable customer invoice.',
+          tags: ['ng-model', 'Two-Way Binding', 'Live Invoice', 'Print Invoice', 'Calculated Totals']
+        },
+        {
+          id: 46,
+          sylId: 5,
+          canonicalFile: '46.html',
+          descriptiveFile: '46_library_management.html',
+          title: 'Library Multi-Controller Management',
+          category: 'Core & Scopes',
+          description: 'Coordinates BookInventoryCtrl, MemberRegistryCtrl, CirculationCtrl, and LibraryStatsCtrl via a central shared LibraryService singleton.',
+          tags: ['Multi-Controllers', 'Shared Service', 'Book Issues', 'Fine Calculations', 'Cross-Controller Sync']
+        },
+        {
+          id: 47,
+          sylId: 6,
+          canonicalFile: '47.html',
+          descriptiveFile: '47_student_marks_analysis.html',
+          title: 'Interactive Student Mark Analysis System',
+          category: 'Data Binding',
+          description: 'Two-way binding evaluating theory, internal, and practical mark components, generating visual progress bars with ng-style and semester GPA.',
+          tags: ['Two-Way Data Binding', 'ng-style Bars', 'GPA Evaluation', 'University Grade Rules', 'Arrear Tracking']
+        },
+        {
+          id: 48,
+          sylId: 7,
+          canonicalFile: '48.html',
+          descriptiveFile: '48_product_catalog.html',
+          title: 'Dynamic Product Catalog Application',
+          category: 'Directives',
+          description: 'Built-in directives (ng-repeat, ng-src, ng-class, ng-disabled, ng-cloak) combined with custom directives <product-stock-tag> and <star-rating>.',
+          tags: ['Custom Directives', 'ng-cloak', 'ng-disabled', 'Category Filter', 'Cart Counter']
+        },
+        {
+          id: 49,
+          sylId: 8,
+          canonicalFile: '49.html',
+          descriptiveFile: '49_student_performance.html',
+          title: 'Student Performance Management System',
+          category: 'Core & Scopes',
+          description: 'Deep dive into $scope lifecycle and $scope.$watch listener methods, automatically auditing mark variations and issuing academic risk notifications.',
+          tags: ['$scope.$watch', 'Deep Watch', 'Audit Trail', 'Cohort Ranks', 'Academic Alerts']
+        },
+        {
+          id: 50,
+          sylId: 9,
+          canonicalFile: '50.html',
+          descriptiveFile: '50_department_management.html',
+          title: 'College Department Nested Scopes Application',
+          category: 'Core & Scopes',
+          description: 'Demonstrates hierarchical scopes from DeanCtrl down to DepartmentCtrl and LabCtrl, illustrating prototypal inheritance and $parent access.',
+          tags: ['Nested Scopes', 'Prototypal Inheritance', '$parent Access', 'Budget Cascading', 'Scope Chains']
+        },
+        {
+          id: 51,
+          sylId: 10,
+          canonicalFile: '51.html',
+          descriptiveFile: '51_employee_directory.html',
+          title: 'Searchable & Sortable Employee Directory',
+          category: 'Filters & Sorting',
+          description: 'Uses built-in filters (filter, orderBy, currency, uppercase, date) and a custom experienceLevel filter with interactive sortable table headers.',
+          tags: ['filter:search', 'orderBy', 'currency', 'date', 'Custom Filter', 'Header Sorting']
+        },
+        {
+          id: 52,
+          sylId: 11,
+          canonicalFile: '52.html',
+          descriptiveFile: '52_result_analysis.html',
+          title: 'Student Result Analysis Application',
+          category: 'Filters & Sorting',
+          description: 'Multi-criteria filtering by department, status, and dynamic score range slider, computing class statistics, highest mark, and distinction rates.',
+          tags: ['Multi-Filtering', 'Score Range Slider', 'Class Analytics', 'Pass Rate', 'Column Sorting']
+        },
+        {
+          id: 53,
+          sylId: 12,
+          canonicalFile: '53.html',
+          descriptiveFile: '53_cascading_selection.html',
+          title: 'Cascading Department & Course Selection',
+          category: 'Directives',
+          description: 'Four-tier dependent cascading dropdowns: Degree Level ➔ Department ➔ Semester ➔ Course Selection with ng-options and ng-change.',
+          tags: ['ng-options', 'ng-change', 'Cascading Dropdowns', 'Dynamic Syllabus', 'Course Enrollment']
+        },
+        {
+          id: 54,
+          sylId: 13,
+          canonicalFile: '54.html',
+          descriptiveFile: '54_todo_management.html',
+          title: 'Interactive To-Do Management Application',
+          category: 'DOM & Events',
+          description: 'Event directives (ng-click, ng-dblclick, ng-keydown, ng-blur) with dynamic DOM classes, inline task editing, and status filtering.',
+          tags: ['ng-click', 'ng-dblclick', 'ng-keydown (Enter/Esc)', 'ng-blur', 'ng-class', 'Inline Edit']
+        },
+        {
+          id: 55,
+          sylId: 14,
+          canonicalFile: '55.html',
+          descriptiveFile: '55_image_gallery.html',
+          title: 'Interactive Image Gallery Application',
+          category: 'DOM & Events',
+          description: 'Mouse events (hover preview, zoom, likes) and keyboard listeners (Left/Right arrow navigation, Escape modal close, Spacebar slideshow).',
+          tags: ['ng-mouseover', 'Keyboard Events', 'Arrow Navigation', 'Modal Lightbox', 'Auto Slideshow']
+        },
+        {
+          id: 56,
+          sylId: 15,
+          canonicalFile: '56.html',
+          descriptiveFile: '56_digital_dashboard.html',
+          title: 'Real-Time Digital Operations Dashboard',
+          category: 'Services & Forms',
+          description: 'Built-in services ($interval digital clock and telemetry sync, $timeout auto-dismissing toast alerts, $log) and custom ServerMetricsService factory.',
+          tags: ['$interval', '$timeout', '$log', 'Custom Service', 'Live Gauges', 'Telemetry']
+        },
+        {
+          id: 57,
+          sylId: 16,
+          canonicalFile: '57.html',
+          descriptiveFile: '57_course_enrolment.html',
+          title: 'Online Course Enrolment Form',
+          category: 'Services & Forms',
+          description: 'Form validation states ($valid, $invalid, $dirty, $pristine), regex patterns, elective module checkboxes, and dynamic fee computation.',
+          tags: ['Form Validation', '$valid / $invalid', '$error.required', '$error.pattern', 'Fee Engine']
+        },
+        {
+          id: 58,
+          sylId: 17,
+          canonicalFile: '58.html',
+          descriptiveFile: '58_user_auth.html',
+          title: 'User Login & Registration System',
+          category: 'Services & Forms',
+          description: 'Client-side authentication with tab switching, password strength entropy scoring, password match validator, and simulated active sessions.',
+          tags: ['Login & Register', 'Password Strength', 'Confirm Password Match', 'Session Token', 'Auth Tabs']
+        }
+      ];
+    });
+  </script>
+</body>
+</html>

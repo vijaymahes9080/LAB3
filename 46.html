@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="libraryApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 46 - Library Management</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#46</span>
+        <div class="header-title">
+          <h1>Library Management Application</h1>
+          <p>Multi-Controller Architecture with Shared Service</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid-2">
+      <!-- Controller 1: AddBookCtrl -->
+      <div class="card" ng-controller="AddBookCtrl">
+        <div class="card-title"><span>Add New Book</span><span class="badge badge-info">AddBookCtrl</span></div>
+        <form ng-submit="add()">
+          <div class="form-group">
+            <label class="form-label">Book Title</label>
+            <input type="text" class="form-control" ng-model="title" placeholder="Title" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Author Name</label>
+            <input type="text" class="form-control" ng-model="author" placeholder="Author" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">+ Add to Library</button>
+        </form>
+      </div>
+
+      <!-- Controller 2: BookListCtrl -->
+      <div class="card" ng-controller="BookListCtrl">
+        <div class="card-title"><span>Book Inventory</span><span class="badge badge-success">BookListCtrl</span></div>
+        <div class="grid-2 mb-3">
+          <div class="stat-box"><div class="stat-val text-info">{{ books.length }}</div><div class="stat-label">Total Titles</div></div>
+          <div class="stat-box"><div class="stat-val text-success">{{ getAvailable() }}</div><div class="stat-label">Available Copies</div></div>
+        </div>
+        <div class="table-container">
+          <table class="custom-table">
+            <thead><tr><th>Title</th><th>Author</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr ng-repeat="b in books">
+                <td><strong>{{ b.title }}</strong></td>
+                <td>{{ b.author }}</td>
+                <td><span class="badge" ng-class="b.available ? 'badge-success' : 'badge-warning'">{{ b.available ? 'Available' : 'Issued' }}</span></td>
+                <td><button class="btn btn-sm" ng-class="b.available ? 'btn-secondary' : 'btn-primary'" ng-click="b.available = !b.available">{{ b.available ? 'Borrow' : 'Return' }}</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('libraryApp', [])
+      .factory('LibraryService', function() {
+        var books = [
+          { title: 'Clean Architecture', author: 'Robert C. Martin', available: true },
+          { title: 'The Pragmatic Programmer', author: 'Andrew Hunt', available: false },
+          { title: 'AngularJS Essentials', author: 'Rodrigo Branas', available: true }
+        ];
+        return {
+          books: books,
+          add: function(title, author) { books.push({ title: title, author: author, available: true }); }
+        };
+      })
+      .controller('AddBookCtrl', function($scope, LibraryService) {
+        $scope.add = function() {
+          LibraryService.add($scope.title, $scope.author);
+          $scope.title = $scope.author = '';
+        };
+      })
+      .controller('BookListCtrl', function($scope, LibraryService) {
+        $scope.books = LibraryService.books;
+        $scope.getAvailable = function() { return $scope.books.filter(function(b) { return b.available; }).length; };
+      });
+  </script>
+</body>
+</html>

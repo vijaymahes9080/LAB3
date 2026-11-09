@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Items List</h2>
+<table border="1" id="tbl"></table>
+<script>
+var x = new XMLHttpRequest();
+x.open("GET", "data.xml", false);
+x.send();
+var xml = x.responseXML;
+var items = xml.getElementsByTagName("item");
+let out = "<tr><th>Name</th><th>Price</th></tr>";
+for (let i = 0; i < items.length; i++) {
+  let name = items[i].getElementsByTagName("name")[0].textContent;
+  let price = items[i].getElementsByTagName("price")[0].textContent;
+  out += "<tr><td>" + name + "</td><td>" + price + "</td></tr>";
+}
+document.getElementById("tbl").innerHTML = out;
+</script>
+</body>
+</html>
+

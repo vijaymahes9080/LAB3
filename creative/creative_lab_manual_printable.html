@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Practical Examination Record - Complete Suite (Programs 34 to 85)</title>
+<style>
+@page {
+  size: A4 portrait;
+  margin: 12mm 12mm 14mm 12mm;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #0b0f19;
+  color: #f1f5f9;
+  line-height: 1.45;
+  font-size: 11px;
+}
+
+@media screen {
+  body {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .print-bar {
+    position: sticky;
+    top: 10px;
+    background: #1e293b;
+    border: 1px solid #4f46e5;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .print-bar {
+    display: none;
+  }
+  .page-break {
+    page-break-after: always;
+  }
+  .card, .code-box {
+    border-color: #ccc !important;
+    background: #f8fafc !important;
+    color: #000 !important;
+  }
+  h1, h2, h3, h4, strong {
+    color: #000 !important;
+  }
+  pre, code {
+    background: #f1f5f9 !important;
+    color: #000 !important;
+    border-color: #cbd5e1 !important;
+  }
+}
+
+.card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+h1 { font-size: 1.5rem; color: #818cf8; margin-bottom: 6px; }
+h2 { font-size: 1.2rem; color: #38bdf8; margin-top: 14px; margin-bottom: 8px; border-bottom: 1px solid #334155; padding-bottom: 4px; }
+h3 { font-size: 1rem; color: #fbbf24; margin-top: 10px; margin-bottom: 4px; }
+h4 { font-size: 0.9rem; color: #34d399; margin-top: 8px; margin-bottom: 4px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 10.5px;
+}
+th, td {
+  border: 1px solid #334155;
+  padding: 6px 8px;
+  text-align: left;
+}
+th {
+  background: #0f172a;
+  color: #93c5fd;
+  font-weight: 600;
+}
+
+.code-box {
+  background: #090d16;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  line-height: 1.35;
+  overflow-x: auto;
+  margin: 8px 0;
+  color: #e2e8f0;
+}
+
+.btn {
+  background: #4f46e5;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+}
+</style>
+</head>
+<body>
+
+  <div class="print-bar">
+    <div>
+      <strong>Complete Practical Examination Manual (Part A: Simple & Part B: Advanced)</strong>
+      <div style="font-size: 0.8rem; color: #94a3b8;">Click the button or press Ctrl+P to export as official PDF.</div>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+      <a href="index.html" class="btn" style="background: #334155;">← Back to Hub</a>
+    </div>
+  </div>
+
+  <!-- TITLE & COVER PAGE -->
+  <div class="card" style="text-align: center; padding: 30px 20px;">
+    <div style="font-size: 2rem; margin-bottom: 6px;">🏛️</div>
+    <div style="font-size: 1.05rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8;">
+      Department of Computer Science & Applications
+    </div>
+    <h1>Advanced Web Technologies & Full-Stack Development</h1>
+    <p style="font-size: 1rem; color: #38bdf8; margin-top: 4px;">
+      COMPLETE PRACTICAL LABORATORY EXAMINATION MANUAL
+    </p>
+    <div style="margin: 15px auto; max-width: 500px; font-size: 0.88rem; color: #cbd5e1; border-top: 1px solid #334155; border-bottom: 1px solid #334155; padding: 8px 0;">
+      Comprising <strong>Part A (8 Fundamental Questions)</strong> and <strong>Part B (6 Comprehensive Projects)</strong> synthesizing Programs 34 to 85.
+    </div>
+    <div style="font-size: 0.85rem; color: #94a3b8;">
+      Candidate Name: <strong>Vijay Kumar</strong> &nbsp;|&nbsp; Register No: <strong>24MCA101</strong>
+    </div>
+  </div>
+
+  <!-- EVALUATION SCHEME & INDEX -->
+  <div class="card">
+    <h2>Examination Evaluation Rubric (Total: 100 Marks)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Assessment Component</th>
+          <th>Description & Scope</th>
+          <th style="width: 100px; text-align: center;">Marks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Part A: Simple Question Execution</strong></td>
+          <td>Direct concept implementation, syntax correctness, and verification</td>
+          <td style="text-align: center;">30</td>
+        </tr>
+        <tr>
+          <td><strong>Part B: Advanced System Implementation</strong></td>
+          <td>Architecture design, directives, filters, services, and dynamic UI</td>
+          <td style="text-align: center;">40</td>
+        </tr>
+        <tr>
+          <td><strong>Execution & Output Verification</strong></td>
+          <td>Error-free execution, edge-case resilience, and live DOM rendering</td>
+          <td style="text-align: center;">15</td>
+        </tr>
+        <tr>
+          <td><strong>Viva-Voce</strong></td>
+          <td>Conceptual mastery across AngularJS, Scopes, Node.js, and REST APIs</td>
+          <td style="text-align: center;">15</td>
+        </tr>
+        <tr style="font-weight: 700; background: rgba(99, 102, 241, 0.1);">
+          <td colspan="2">TOTAL SCORE</td>
+          <td style="text-align: center; color: #34d399;">100</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 20px;">Master Index of Examination Questions</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 50px;">Section</th>
+          <th style="width: 40px;">Q#</th>
+          <th>Problem Statement Title</th>
+          <th>Syllabus Mapping</th>
+          <th style="width: 170px;">Program File</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="8" style="font-weight: 700; color: #38bdf8; vertical-align: middle;">Part A<br>(Simple)</td>
+          <td><strong>S1</strong></td>
+          <td>Expressions & One-Way vs Two-Way Data Binding</td>
+          <td>Programs 34 & 36</td>
+          <td><code>simple_q1_expressions_binding.html</code></td>
+        </tr>
+        <tr>
+          <td><strong>S2</strong></td>
+          <td>ng-model Directive Classes & Validation States</td>
+          <td>Program 35</td>
+          <td><code>simple_q2_ng_model_classes.html</code></td>
+        </tr>
+        <tr>
+          <td><strong>S3</strong></td>
+          <td>Ten Built-in Filters & Custom Filter Creation</td>
+          <td>Program 38</td>
+          <td><code>simple_q3_filters.html</code></td>
+        </tr>
+        <tr>
+          <td><strong>S4</strong></td>
+          <td>Directives: ng-repeat, ng-if, ng-show/hide & ng-switch</td>
+          <td>Programs 401, 41, 44</td>
+          <td><code>simple_q4_directives_table.html</code></td>
+        </tr>
+        <tr>
+          <td><strong>S5</strong></td>
+          <td>AngularJS $http Asynchronous Services</td>
+          <td>Programs 39 & 402</td>
+          <td><code>simple_q5_http_service.html</code></td>
+        </tr>
+        <tr>
+          <td><strong>S6</strong></td>
+          <td>Node.js CLI Arguments, Local Math Module & Core Modules</td>
+          <td>Programs 59, 60, 61, 62</td>
+          <td><code>simple_q6_nodejs_basics.js</code></td>
+        </tr>
+        <tr>
+          <td><strong>S7</strong></td>
+          <td>Node.js HTTP Server Routing & File System (fs) CRUD</td>
+          <td>Programs 63, 64, 65, 66</td>
+          <td><code>simple_q7_nodejs_fs_server.js</code></td>
+        </tr>
+        <tr>
+          <td><strong>S8</strong></td>
+          <td>Node.js URL Parsing & Event Handling (EventEmitter)</td>
+          <td>Programs 67, 68, 70, 73</td>
+          <td><code>simple_q8_nodejs_events_url.js</code></td>
+        </tr>
+
+        <tr>
+          <td rowspan="6" style="font-weight: 700; color: #818cf8; vertical-align: middle;">Part B<br>(Advanced)</td>
+          <td><strong>B1</strong></td>
+          <td>Integrated Student Academic & Performance Analytics Portal</td>
+          <td>Programs 34-57</td>
+          <td><code>exam1_academic_analytics.html</code></td>
+        </tr>
+        <tr>
+          <td><strong>B2</strong></td>
+          <td>Smart E-Commerce Catalog, POS Billing & Order Dispatch ERP</td>
+          <td>Programs 38, 41, 45, 48, 54</td>
+          <td><code>exam2_ecommerce_billing.html</code></td>
+        </tr>
+        <tr>
+          <td><strong>B3</strong></td>
+          <td>Institutional Library Multi-Controller & Cascading System</td>
+          <td>Programs 37, 43, 46, 50, 53</td>
+          <td><code>exam3_library_circulation.html</code></td>
+        </tr>
+        <tr>
+          <td><strong>B4</strong></td>
+          <td>Enterprise Operations Dashboard & Secure Employee Portal</td>
+          <td>Programs 51, 55, 56, 58</td>
+          <td><code>exam4_enterprise_operations.html</code></td>
+        </tr>
+        <tr>
+          <td><strong>B5</strong></td>
+          <td>Modular Enterprise Node.js Server & Audit Engine</td>
+          <td>Programs 59-70, 73</td>
+          <td><code>exam5_nodejs_server.js</code></td>
+        </tr>
+        <tr>
+          <td><strong>B6</strong></td>
+          <td>Full-Stack Integrated REST API Client & Server Suite</td>
+          <td>Exps 1-10 (76-85)</td>
+          <td><code>exam6_fullstack_crud.html</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- PART A: SIMPLE QUESTIONS DETAILED -->
+  <h2 style="color: #38bdf8; font-size: 1.3rem;">PART A: SIMPLE FUNDAMENTAL EXAMINATION QUESTIONS</h2>
+
+  <!-- S1 -->
+  <div class="card">
+    <div style="display: flex; justify-content: space-between;">
+      <h3>QUESTION S1: Expressions & Data Binding in AngularJS</h3>
+      <span class="badge">Programs 34 & 36</span>
+    </div>
+    <p><strong>Aim:</strong> To demonstrate numeric, string, boolean, object, and array expressions in AngularJS and compare one-way vs two-way data binding.</p>
+    <p><strong>Algorithm:</strong> 1) Create module and controller; 2) Define variables in <code>$scope</code>; 3) Interpolate expressions via <code>{{ }}</code>; 4) Bind input with <code>ng-model</code> for bidirectional updates.</p>
+    <div class="code-box">
+&lt;p&gt;Numeric: {{ 15 * 4 + 10 }} | String: {{ 'Hello ' + 'AngularJS' }} | Boolean: {{ 25 &gt; 10 }}&lt;/p&gt;
+&lt;input type="text" ng-model="liveText"&gt;
+&lt;p&gt;Two-Way Live Value: {{ liveText }}&lt;/p&gt;
+    </div>
+    <p><strong>Output:</strong> Expressions compute and render directly; modifying the input updates the bound paragraph simultaneously.</p>
+  </div>
+
+  <!-- S2 -->
+  <div class="card">
+    <div style="display: flex; justify-content: space-between;">
+      <h3>QUESTION S2: ng-model Directive Classes & Validation States</h3>
+      <span class="badge">Program 35</span>
+    </div>
+    <p><strong>Aim:</strong> To illustrate form validation states and CSS classes added by ng-model ($valid, $invalid, $pristine, $dirty, $touched, $untouched).</p>
+    <p><strong>Algorithm:</strong> 1) Construct HTML form with required email field; 2) Add CSS classes for .ng-valid (green) and .ng-invalid.ng-touched (red); 3) Display live property flags.</p>
+    <div class="code-box">
+&lt;form name="userForm"&gt;
+  &lt;input type="email" name="userEmail" ng-model="email" required&gt;
+  &lt;span&gt;Valid: {{ userForm.userEmail.$valid }} | Dirty: {{ userForm.userEmail.$dirty }}&lt;/span&gt;
+&lt;/form&gt;
+    </div>
+    <p><strong>Output:</strong> Border color transitions between green and red dynamically as valid email characters are typed or cleared.</p>
+  </div>
+
+  <!-- S3 -->
+  <div class="card">
+    <div style="display: flex; justify-content: space-between;">
+      <h3>QUESTION S3: Built-in & Custom Filters in AngularJS</h3>
+      <span class="badge">Program 38</span>
+    </div>
+    <p><strong>Aim:</strong> To demonstrate 10 built-in filters (uppercase, lowercase, currency, number, limitTo, orderBy, filter, json, date) and define a custom filter.</p>
+    <div class="code-box">
+app.filter('reverse', function() {
+  return function(input) { return input ? input.split('').reverse().join('') : ''; };
+});
+// View usage: {{ amount | currency:"₹ " }} | {{ name | uppercase }} | {{ text | reverse }}
+    </div>
+    <p><strong>Output:</strong> All data items are transformed and displayed according to their respective filter pipes.</p>
+  </div>
+
+  <!-- S4 -->
+  <div class="card">
+    <div style="display: flex; justify-content: space-between;">
+      <h3>QUESTION S4: Directives: ng-repeat Table & Conditional Views</h3>
+      <span class="badge">Programs 401, 41, 44</span>
+    </div>
+    <p><strong>Aim:</strong> To render collections in tables using ng-repeat ($index, $even, $odd) and compare ng-if, ng-show/hide, and ng-switch.</p>
+    <div class="code-box">
+&lt;tr ng-repeat="s in students track by $index" ng-class="{'row-even': $even, 'row-odd': $odd}"&gt;
+  &lt;td&gt;{{ $index + 1 }}&lt;/td&gt;&lt;td&gt;{{ s.name }}&lt;/td&gt;
+  &lt;td ng-switch="s.status"&gt;&lt;span ng-switch-when="Active" class="badge"&gt;Active&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+    </div>
+    <p><strong>Output:</strong> Student records render in alternating table rows with badges controlled via ng-switch.</p>
+  </div>
+
+  <!-- S5 -->
+  <div class="card">
+    <div style="display: flex; justify-content: space-between;">
+      <h3>QUESTION S5: AngularJS $http Asynchronous Services</h3>
+      <span class="badge">Programs 39 & 402</span>
+    </div>
+    <p><strong>Aim:</strong> To execute AJAX requests using $http.get(), $http.post(), $http.put(), and $http.delete() and display the JSON responses.</p>
+    <div class="code-box">
+$http.get('https://jsonplaceholder.typicode.com/posts/1').then(function(res) {
+  $scope.responseData = res.data;
+});
+    </div>
+    <p><strong>Output:</strong> Button clicks trigger network requests and display parsed JSON formatted on screen.</p>
+  </div>
+
+  <!-- S6 -->
+  <div class="card">
+    <div style="display: flex; justify-content: space-between;">
+      <h3>QUESTION S6: Node.js CLI Arguments, Local Modules & Core Modules</h3>
+      <span class="badge">Programs 59 to 62</span>
+    </div>
+    <p><strong>Aim:</strong> To parse command-line arguments (process.argv), require a local math module, and query host system specs using os, path, and util.</p>
+    <div class="code-box">
+const os = require('os');
+const math = require('./utils_math');
+console.log('CLI Args:', process.argv);
+console.log('Math Add:', math.add(10, 20));
+console.log('OS Platform:', os.platform(), 'CPUs:', os.cpus().length);
+    </div>
+    <p><strong>Output:</strong> Console prints argument indices, math calculations, and OS hardware telemetry.</p>
+  </div>
+
+  <!-- S7 -->
+  <div class="card">
+    <div style="display: flex; justify-content: space-between;">
+      <h3>QUESTION S7: Node.js HTTP Server Routing & File System (fs) CRUD</h3>
+      <span class="badge">Programs 63 to 66</span>
+    </div>
+    <p><strong>Aim:</strong> To create an HTTP server with clean routing and execute synchronous/asynchronous file CRUD operations.</p>
+    <div class="code-box">
+fs.writeFileSync('test.txt', 'Hello');
+fs.appendFileSync('test.txt', ' Node.js');
+fs.readFile('test.txt', 'utf8', (err, data) => console.log(data));
+http.createServer((req, res) => {
+  if (req.url === '/') res.end('Home'); else res.end('404');
+}).listen(3002);
+    </div>
+    <p><strong>Output:</strong> File lifecycle completes in terminal; HTTP server listens on port 3002.</p>
+  </div>
+
+  <!-- S8 -->
+  <div class="card">
+    <div style="display: flex; justify-content: space-between;">
+      <h3>QUESTION S8: Node.js URL Parsing & Event Handling (EventEmitter)</h3>
+      <span class="badge">Programs 67, 68, 70, 73</span>
+    </div>
+    <p><strong>Aim:</strong> To parse URL parameters using the url module and implement an event observer via EventEmitter.</p>
+    <div class="code-box">
+const url = require('url');
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
+emitter.on('visit', (path) => console.log('Visited:', path));
+http.createServer((req, res) => {
+  emitter.emit('visit', url.parse(req.url, true).pathname);
+  res.end('Logged');
+}).listen(3003);
+    </div>
+    <p><strong>Output:</strong> Page requests fire custom events and log visitor hits in real time.</p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- PART B: COMPREHENSIVE PROJECTS SUMMARY -->
+  <h2 style="color: #818cf8; font-size: 1.3rem;">PART B: COMPREHENSIVE INTEGRATED PROJECTS</h2>
+
+  <div class="card">
+    <h3>Project B1: Integrated Student Academic Performance & Analytics Portal</h3>
+    <p><strong>Combined Programs:</strong> 34, 35, 36, 42, 44, 47, 49, 52, 57 | <strong>File:</strong> <code>exam1_academic_analytics.html</code></p>
+    <p>Integrated admission form with regex validation, two-way bound GPA calculation, live $scope.$watch deep watcher logging mark alterations, attendance percentage badges via ng-switch, and cohort table sorting.</p>
+  </div>
+
+  <div class="card">
+    <h3>Project B2: Smart E-Commerce Catalog, POS Billing & Order Dispatch ERP</h3>
+    <p><strong>Combined Programs:</strong> 38, 41, 45, 48, 54 | <strong>File:</strong> <code>exam2_ecommerce_billing.html</code></p>
+    <p>Product catalog using custom element directives &lt;product-stock-tag&gt; and &lt;star-rating&gt;, line-item POS billing with GST slabs, print invoice layout (@media print), and inline order editing via ng-dblclick and ng-keydown.</p>
+  </div>
+
+  <div class="card">
+    <h3>Project B3: Institutional Library Multi-Controller & Cascading System</h3>
+    <p><strong>Combined Programs:</strong> 37, 43, 46, 50, 53 | <strong>File:</strong> <code>exam3_library_circulation.html</code></p>
+    <p>Modular architecture with prototypal scope inheritance ($parent), 4-tier cascading dropdowns (Level ➔ Dept ➔ Semester ➔ Textbook) via ng-options, and multi-controllers coordinated by a singleton LibrarySharedService factory.</p>
+  </div>
+
+  <div class="card">
+    <h3>Project B4: Enterprise Operations Dashboard & Secure Employee Portal</h3>
+    <p><strong>Combined Programs:</strong> 51, 55, 56, 58 | <strong>File:</strong> <code>exam4_enterprise_operations.html</code></p>
+    <p>Client authentication with password entropy validator, live telemetry via $interval, $timeout auto-dismissing alerts, custom experienceLevel filter, and keyboard-accessible modal lightbox dialog.</p>
+  </div>
+
+  <div class="card">
+    <h3>Project B5: Modular Enterprise Node.js Server & Asynchronous Audit Engine</h3>
+    <p><strong>Combined Programs:</strong> 59 to 73 | <strong>File:</strong> <code>exam5_nodejs_server.js</code></p>
+    <p>Multi-route HTTP server combining core modules (http, url, fs, path, os, util, events), CLI args, local math module, and EventEmitter asynchronous file audit logging.</p>
+  </div>
+
+  <div class="card">
+    <h3>Project B6: Full-Stack Integrated REST API Client & Server Management Suite</h3>
+    <p><strong>Combined Programs:</strong> Exps 1-10 (76-85), 39, 402 | <strong>File:</strong> <code>exam6_fullstack_crud.html</code></p>
+    <p>Node.js REST API server with full CRUD and JSON persistence paired with an AngularJS client using $http.get/post/put/delete and live network terminal monitoring.</p>
+  </div>
+
+  <div class="card" style="text-align: center; color: #94a3b8; font-size: 0.85rem; margin-top: 20px;">
+    Practical Examination Manual Complete • All 14 Programs (8 Simple + 6 Advanced) Verified
+  </div>
+
+</body>
+</html>

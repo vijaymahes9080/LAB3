@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiment 2 - Student CRUD</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+</head>
+<body ng-controller="StudentController">
+  <h2>Experiment 2: Student CRUD</h2>
+  <form ng-submit="saveStudent()">
+    <input ng-model="form.name" placeholder="Name" required>
+    <input ng-model="form.department" placeholder="Department" required>
+    <input type="number" ng-model="form.marks" placeholder="Marks" min="0" max="100" required>
+    <button type="submit">{{editing ? "Update" : "Add"}}</button>
+    <button type="button" ng-click="cancel()" ng-if="editing">Cancel</button>
+  </form>
+  <table border="1" cellpadding="8">
+    <tr><th>ID</th><th>Name</th><th>Department</th><th>Marks</th><th>Actions</th></tr>
+    <tr ng-repeat="s in students track by s.id">
+      <td>{{s.id}}</td><td>{{s.name}}</td><td>{{s.department}}</td><td>{{s.marks}}</td>
+      <td><button ng-click="editStudent(s)">Edit</button>
+          <button ng-click="deleteStudent(s.id)">Delete</button></td>
+    </tr>
+  </table>
+  <script>
+    angular.module("studentApp", []).controller("StudentController", function($scope) {
+      $scope.students = [
+        {id: 1, name: "Arun", department: "MCA", marks: 85},
+        {id: 2, name: "Priya", department: "BCA", marks: 90}
+      ];
+      $scope.nextId = 3;
+      $scope.form = {};
+      $scope.editing = false;
+      $scope.saveStudent = function() {
+        if ($scope.editing) {
+          const index = $scope.students.findIndex(x => x.id === $scope.form.id);
+          if (index !== -1) $scope.students[index] = angular.copy($scope.form);
+        } else {
+          $scope.students.push({id: $scope.nextId++, ...$scope.form});
+        }
+        $scope.cancel();
+      };
+      $scope.editStudent = function(s) {
+        $scope.form = angular.copy(s);
+        $scope.editing = true;
+      };
+      $scope.deleteStudent = function(id) {
+        $scope.students = $scope.students.filter(s => s.id !== id);
+      };
+      $scope.cancel = function() {
+        $scope.form = {};
+        $scope.editing = false;
+      };
+    });
+  </script>
+</body>
+</html>

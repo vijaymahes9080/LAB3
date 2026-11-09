@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="simpleQ1App">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Exam Q1: Expressions & Data Binding in AngularJS</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"><\/script>')</script>
+</head>
+<body ng-controller="ExprCtrl">
+
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">SIMPLE Q1</span>
+        <div class="header-title">
+          <h1>Expressions & Types of Data Binding</h1>
+          <p>Lab Exam Fundamental Question • Covers Programs 34 & 36</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Creative Hub</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card mb-4" style="background: rgba(15, 23, 42, 0.7);">
+      <strong class="text-info">Lab Exam Question:</strong>
+      <p style="margin-top: 4px; color: #cbd5e1;">
+        "Write an AngularJS program to demonstrate all types of expressions (Numeric, String, Boolean, Object, Array) and demonstrate One-Way vs Two-Way Data Binding."
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <!-- Section A: Expressions -->
+      <div class="card">
+        <div class="card-title">
+          <span>1. Types of Expressions in AngularJS</span>
+          <span class="badge badge-info">{{ }} Interpolation</span>
+        </div>
+        
+        <table class="table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border-color); text-align: left;">
+              <th style="padding: 8px;">Expression Type</th>
+              <th style="padding: 8px;">Syntax</th>
+              <th style="padding: 8px;">Evaluated Output</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 8px; font-weight: 600;">Numeric</td>
+              <td style="padding: 8px;"><code>{{ '{{' }} 15 * 4 + 10 {{ '}}' }}</code></td>
+              <td style="padding: 8px; color: #34d399; font-weight: 700;">{{ 15 * 4 + 10 }}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 8px; font-weight: 600;">String</td>
+              <td style="padding: 8px;"><code>{{ '{{' }} 'Hello ' + 'AngularJS' {{ '}}' }}</code></td>
+              <td style="padding: 8px; color: #38bdf8;">{{ 'Hello ' + 'AngularJS' }}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 8px; font-weight: 600;">Boolean</td>
+              <td style="padding: 8px;"><code>{{ '{{' }} 25 > 10 {{ '}}' }}</code></td>
+              <td style="padding: 8px; color: #fbbf24;">{{ 25 > 10 }}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 8px; font-weight: 600;">Object</td>
+              <td style="padding: 8px;"><code>{{ '{{' }} student.name {{ '}}' }}</code></td>
+              <td style="padding: 8px;">{{ student.name }} (Dept: {{ student.dept }})</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 8px; font-weight: 600;">Array Indexing</td>
+              <td style="padding: 8px;"><code>{{ '{{' }} marks[2] {{ '}}' }}</code></td>
+              <td style="padding: 8px; font-weight: 700;">{{ marks[2] }} (from [{{ marks.join(', ') }}])</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section B: Data Binding -->
+      <div class="card">
+        <div class="card-title">
+          <span>2. One-Way vs Two-Way Data Binding</span>
+          <span class="badge badge-success">ng-model</span>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+          <h4>A. One-Way Data Binding (Model ➔ View only):</h4>
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Values in <code>$scope</code> rendered via interpolation <code>{{ '{{' }} {{ '}}' }}</code>.</p>
+          <div style="background: rgba(15, 23, 42, 0.6); padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-top: 5px;">
+            Greeting: <strong>{{ greeting }}</strong>
+          </div>
+        </div>
+
+        <div>
+          <h4>B. Two-Way Data Binding (Model ⇄ View):</h4>
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Changes in the input control update the model, and changes in the model update the view simultaneously.</p>
+          <div class="form-group" style="margin-top: 8px;">
+            <label class="form-label">Type something in real-time:</label>
+            <input type="text" class="form-control" ng-model="liveText" placeholder="Type here...">
+          </div>
+          <div style="background: rgba(15, 23, 42, 0.6); padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+            You typed: <strong style="color: #34d399;">{{ liveText }}</strong> (Length: {{ liveText.length }} chars)
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    var app = angular.module('simpleQ1App', []);
+    app.controller('ExprCtrl', function($scope) {
+      $scope.student = { name: 'Vijay', dept: 'MCA' };
+      $scope.marks = [85, 90, 95, 88];
+      $scope.greeting = 'Welcome to Web Technologies Lab';
+      $scope.liveText = 'AngularJS Two-Way Binding';
+    });
+  </script>
+</body>
+</html>
+

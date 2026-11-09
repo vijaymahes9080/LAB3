@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="libraryApp">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiment 8 - Library Management</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+</head>
+<body ng-controller="LibraryController">
+  <h2>Experiment 8: Library Management</h2>
+  <form ng-submit="save()">
+    <input ng-model="book.title" placeholder="Book Title" required>
+    <input ng-model="book.author" placeholder="Author" required>
+    <input ng-model="book.isbn" placeholder="ISBN" required>
+    <button type="submit">{{editing ? "Update Book" : "Add Book"}}</button>
+    <button type="button" ng-click="cancel()" ng-if="editing">Cancel</button>
+  </form>
+  <p>{{message}}</p>
+  <input ng-model="query" placeholder="Search by title">
+  <button ng-click="load()">Search</button>
+  <table border="1" cellpadding="8">
+    <tr><th>Title</th><th>Author</th><th>ISBN</th><th>Actions</th></tr>
+    <tr ng-repeat="b in books">
+      <td>{{b.title}}</td><td>{{b.author}}</td><td>{{b.isbn}}</td>
+      <td><button ng-click="edit(b)">Edit</button><button ng-click="remove(b._id)">Delete</button></td>
+    </tr>
+  </table>
+  <script>
+    angular.module("libraryApp", []).controller("LibraryController", function($scope, $http) {
+      $scope.book = {}; $scope.books = []; $scope.query = ""; $scope.editing = false;
+      $scope.load = () => $http.get("/api/books", {params:{q:$scope.query}})
+        .then(r => $scope.books = r.data).catch(() => $scope.message = "Unable to load books");
+      $scope.save = () => {
+        const req = $scope.editing
+          ? $http.put("/api/books/" + $scope.book._id, $scope.book)
+          : $http.post("/api/books", $scope.book);
+        req.then(() => { $scope.message = "Book saved successfully"; $scope.cancel(); $scope.load(); })
+          .catch(r => $scope.message = r.data.error || "Operation failed");
+      };
+      $scope.edit = b => { $scope.book = angular.copy(b); $scope.editing = true; };
+      $scope.remove = id => {
+        if (!confirm("Delete this book?")) return;
+        $http.delete("/api/books/" + id).then(() => { $scope.message = "Book deleted"; $scope.load(); })
+          .catch(() => $scope.message = "Delete failed");
+      };
+      $scope.cancel = () => { $scope.book = {}; $scope.editing = false; };
+      $scope.load();
+    });
+  </script>
+</body>
+</html>

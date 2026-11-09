@@ -1,0 +1,19 @@
+{
+  "name": "angularjs-node-mongodb-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ten web technology lab experiments using AngularJS, Node.js, and MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "exp3": "node experiments/exp3.js",
+    "exp4": "node experiments/exp4.js",
+    "exp5": "node experiments/exp5.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.12.0"
+  }
+}

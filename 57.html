@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="enrolmentApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 57 - Course Enrolment Validation</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .err { color: #ef4444; font-size: 0.8rem; margin-top: 4px; }
+    input.ng-invalid.ng-dirty { border-color: #ef4444; }
+    input.ng-valid.ng-dirty { border-color: #10b981; }
+  </style>
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="EnrolmentCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#57</span>
+        <div class="header-title">
+          <h1>Course Enrolment Validation</h1>
+          <p>AngularJS Form Validation ($valid, $invalid, $dirty, $error)</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 700px;">
+    <!-- Diagnostics Bar -->
+    <div class="grid-2 mb-4">
+      <div class="stat-box">
+        <div class="stat-val" ng-class="enrolForm.$valid ? 'text-success' : 'text-danger'">{{ enrolForm.$valid ? 'VALID ✓' : 'INVALID ✗' }}</div>
+        <div class="stat-label">enrolForm.$valid</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" ng-class="enrolForm.$dirty ? 'text-warning' : 'text-muted'">{{ enrolForm.$dirty ? 'DIRTY' : 'PRISTINE' }}</div>
+        <div class="stat-label">enrolForm.$dirty</div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="card">
+      <div class="card-title"><span>Student Enrolment Form</span><span class="badge badge-info">Validation</span></div>
+      <form name="enrolForm" ng-submit="submitted = true" novalidate>
+        <div class="form-group">
+          <label class="form-label">Full Name *</label>
+          <input type="text" name="uName" class="form-control" ng-model="user.name" required ng-minlength="3" placeholder="Student Name">
+          <div class="err" ng-show="enrolForm.uName.$dirty && enrolForm.uName.$invalid">Name is required (min 3 characters).</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address *</label>
+          <input type="email" name="uEmail" class="form-control" ng-model="user.email" required placeholder="name@example.com">
+          <div class="err" ng-show="enrolForm.uEmail.$dirty && enrolForm.uEmail.$invalid">Valid email is required.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Mobile (10 Digits) *</label>
+          <input type="text" name="uPhone" class="form-control" ng-model="user.phone" required ng-pattern="/^[0-9]{10}$/" placeholder="10-digit mobile">
+          <div class="err" ng-show="enrolForm.uPhone.$dirty && enrolForm.uPhone.$invalid">Enter valid 10-digit phone number.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Course *</label>
+          <select name="uCourse" class="form-control" ng-model="user.course" required>
+            <option value="">-- Choose Course --</option>
+            <option>AngularJS & Modern Web Tech</option>
+            <option>Cloud Architecture & Microservices</option>
+            <option>Data Structures & Algorithms</option>
+          </select>
+          <div class="err" ng-show="enrolForm.uCourse.$dirty && enrolForm.uCourse.$invalid">Please select a course.</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;" ng-disabled="enrolForm.$invalid">
+          Complete Enrolment
+        </button>
+      </form>
+
+      <div ng-if="submitted" class="card" style="background: rgba(16,185,129,0.2); border-color: #10b981; margin-top: 16px; padding: 12px;">
+        <strong style="color: #6ee7b7;">✔ Registered!</strong>
+        <p style="color: #a7f3d0; font-size: 0.85rem; margin: 4px 0 0 0;">{{ user.name }} successfully enrolled in {{ user.course }}.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('enrolmentApp', [])
+      .controller('EnrolmentCtrl', function($scope) {
+        $scope.user = {};
+        $scope.submitted = false;
+      });
+  </script>
+</body>
+</html>

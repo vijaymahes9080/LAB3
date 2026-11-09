@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON Date and Function Example</title>
+</head>
+
+<body>
+    <h1>JSON Date and Function Demo</h1>
+    <p>Check the browser console (F12) for the results.</p>
+
+    <script>
+        const student = {
+            studentId: 101,
+            studentName: "Arun",
+            admissionDate: new Date(),
+            calculateMark: function(x) {
+                return x + 10;
+            }
+        };
+
+        const jsonString = JSON.stringify(student, null, 2);
+
+        console.log("--- Original JavaScript Object ---");
+        console.log(student);
+
+        console.log("\n--- JSON.stringify() Result ---");
+        console.log(jsonString);
+
+        const parsedStudent = JSON.parse(jsonString);
+
+        const dateFromJSON = new Date(parsedStudent.admissionDate);
+
+        console.log("\n--- After JSON.parse() ---");
+        console.log(
+            "Admission Date type in parsed JSON:",
+            typeof parsedStudent.admissionDate
+        );
+
+        console.log(
+            "Re-created JavaScript Date:",
+            dateFromJSON.getFullYear()
+        );
+
+        console.log(
+            "Function property (calculateMark):",
+            parsedStudent.calculateMark
+        );
+    </script>
+</body>
+</html>

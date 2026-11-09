@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head><title>Modules and Controllers</title></head>
+<body ng-controller="studentCtrl">
+<h2>AngularJS Module and Controller</h2>
+<p>Name: {{student.name}}</p>
+<p>Course: {{student.course}}</p>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script><script>
+angular.module("studentApp", [])
+.controller("studentCtrl", function($scope) {
+$scope.student = {name:"Sam", course:"Computer Science"};
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="bindApp" ng-controller="bindCtrl">
+<head><title>Attribute Binding</title></head>
+<body>
+<h2>Binding Data to Attributes</h2>
+<img ng-src="{{image}}" width="150">
+<br>
+<a ng-href="{{link}}">Go to Google</a>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script><script>
+angular.module("bindApp", [])
+.controller("bindCtrl", function($scope) {
+$scope.image =
+"https://th.bing.com/th/id/R.fa21749d39d8ff8622c2c237ceb5f748?rik=f3h%2b%2fFY2Mm6WVg&riu=http%3a%2f%2fwww.themarysue.com%2fwp- content%2fuploads%2f2015%2f04%2fspider- man.jpg&ehk=rp3sX0qoTecfB0bn3ODwXhKXeCl6JKb%2brMxg59H6n4E%3d&risl=&pid=ImgRaw&r=0";
+$scope.link = "https://www.google.com";
+});
+</script>
+</body>
+</html>

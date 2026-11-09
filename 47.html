@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="markAnalysisApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 47 - Student Mark Analysis</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="MarkAnalysisCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#47</span>
+        <div class="header-title">
+          <h1>Student Mark Analysis System</h1>
+          <p>Two-Way Binding & Dynamic Styling (ng-style)</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Student Header -->
+    <div class="card mb-4">
+      <div class="grid-2">
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label">Student Name</label>
+          <input type="text" class="form-control" ng-model="student.name">
+        </div>
+        <div class="form-group" style="margin: 0;">
+          <label class="form-label">Register Number</label>
+          <input type="text" class="form-control" ng-model="student.regNo">
+        </div>
+      </div>
+    </div>
+
+    <!-- Marks Table -->
+    <div class="card mb-4">
+      <div class="card-title"><span>Subject Marks Evaluation</span><span class="badge badge-info">Internal (40) + External (60)</span></div>
+      <div class="table-container">
+        <table class="custom-table">
+          <thead>
+            <tr><th>Subject</th><th>Internal (40)</th><th>External (60)</th><th>Total (100)</th><th>Progress (ng-style)</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="s in student.subjects">
+              <td><strong>{{ s.name }}</strong></td>
+              <td><input type="number" class="form-control" ng-model="s.internal" min="0" max="40" style="width: 80px;"></td>
+              <td><input type="number" class="form-control" ng-model="s.external" min="0" max="60" style="width: 80px;"></td>
+              <td class="font-heading text-info">{{ s.internal + s.external }}</td>
+              <td style="width: 160px;">
+                <div style="background: rgba(255,255,255,0.1); border-radius: 4px; height: 16px; overflow: hidden;">
+                  <div ng-style="{'width': (s.internal + s.external) + '%', 'background': (s.internal + s.external) >= 50 ? '#10b981' : '#ef4444'}" style="height: 100%;"></div>
+                </div>
+              </td>
+              <td>
+                <span class="badge" ng-class="(s.internal + s.external) >= 50 ? 'badge-success' : 'badge-danger'">
+                  {{ (s.internal + s.external) >= 50 ? 'PASS' : 'FAIL' }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="card">
+      <div class="grid-3">
+        <div class="stat-box"><div class="stat-val text-info">{{ getTotal() }} / 300</div><div class="stat-label">Total Marks</div></div>
+        <div class="stat-box"><div class="stat-val text-success">{{ (getTotal() / 3) | number:1 }}%</div><div class="stat-label">Percentage</div></div>
+        <div class="stat-box">
+          <div class="stat-val" ng-class="isPassed() ? 'text-success' : 'text-danger'">{{ isPassed() ? 'QUALIFIED' : 'ARREAR' }}</div>
+          <div class="stat-label">Semester Result</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('markAnalysisApp', [])
+      .controller('MarkAnalysisCtrl', function($scope) {
+        $scope.student = {
+          name: 'Kavitha Murugan', regNo: '21BCSE114',
+          subjects: [
+            { name: 'Web Technology', internal: 34, external: 52 },
+            { name: 'Cloud Computing', internal: 28, external: 44 },
+            { name: 'Data Structures', internal: 36, external: 55 }
+          ]
+        };
+
+        $scope.getTotal = function() {
+          return $scope.student.subjects.reduce(function(sum, s) { return sum + (Number(s.internal) || 0) + (Number(s.external) || 0); }, 0);
+        };
+        $scope.isPassed = function() {
+          return $scope.student.subjects.every(function(s) { return (s.internal + s.external) >= 50; });
+        };
+      });
+  </script>
+</body>
+</html>

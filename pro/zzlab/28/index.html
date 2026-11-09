@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON Array Access Demo</title>
+<style>
+body { font-family: Arial, sans-serif; }
+code { background-color: #eee; padding: 2px 4px; border-radius: 3px; }
+.output-box { border: 1px solid #ccc; padding: 10px; margin-top: 10px; }
+</style>
+</head>
+
+<body>
+
+<h1>Accessing JSON Array Elements</h1>
+
+<p>The JSON structure contains a list of <code>books</code>.</p>
+
+<div id="indexed-output">
+<h2>1. Access by Indexing</h2>
+</div>
+
+<div id="looped-output">
+<h2>2. Access by Looping</h2>
+<ul id="product-list">
+</ul>
+</div>
+
+<script>
+
+const jsonString = `{
+"storeName": "ABC Book Store",
+"location": "Chennai",
+"books": [
+{ "id": 201, "name": "Java Programming", "price": 450 },
+{ "id": 202, "name": "Python Programming", "price": 500 },
+{ "id": 203, "name": "Web Development", "price": 600 }
+]
+}`;
+
+const data = JSON.parse(jsonString);
+
+const booksArray = data.books;
+
+const secondBookName = booksArray[1].name;
+const secondBookPrice = booksArray[1].price;
+
+document.getElementById('indexed-output').innerHTML += `
+<p>Second book (Index 1) is:
+<strong>${secondBookName}</strong>.</p>
+
+<p>Its price is:
+<strong>₹${secondBookPrice}</strong>.</p>
+`;
+
+const listContainer = document.getElementById('product-list');
+
+for (let i = 1; i < booksArray.length; i++) {
+
+const book = booksArray[i];
+
+const listItem = document.createElement('li');
+
+listItem.textContent =
+`ID: ${book.id} - ${book.name} costs ₹${book.price}`;
+
+listContainer.appendChild(listItem);
+
+}
+
+</script>
+
+</body>
+</html>

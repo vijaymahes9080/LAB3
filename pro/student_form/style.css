@@ -1,0 +1,583 @@
+/* =======================================================
+   STUDENT REGISTRATION PORTAL - MODERN DESIGN SYSTEM
+   ======================================================= */
+
+:root {
+    --bg-primary: #f0f4f8;
+    --card-bg: #ffffff;
+    --text-main: #2d3748;
+    --text-muted: #718096;
+    --border-color: #cbd5e1;
+    --input-bg: #ffffff;
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --success-color: #16a34a;
+    --danger-color: #dc2626;
+    --focus-ring: rgba(37, 99, 235, 0.25);
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --card-bg: #1e293b;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --input-bg: #0f172a;
+    --primary-color: #3b82f6;
+    --primary-hover: #60a5fa;
+    --focus-ring: rgba(59, 130, 246, 0.35);
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+body {
+    margin: 0;
+    padding: 0 0 40px 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.nav-brand {
+    font-size: 18px;
+    color: var(--text-main);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-btn {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 8px 14px;
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+}
+
+.theme-toggle-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 7px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: var(--card-bg);
+}
+
+/* Container */
+.container {
+    width: 760px;
+    max-width: 92%;
+    margin: 0 auto;
+    padding: 35px 30px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-header h1 {
+    font-size: 26px;
+    margin: 0 0 6px 0;
+    color: var(--text-main);
+}
+
+.subtitle {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Progress Bar */
+.progress-wrapper {
+    margin-bottom: 25px;
+    background: var(--input-bg);
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-muted);
+}
+
+progress {
+    width: 100%;
+    height: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: none;
+    background-color: var(--border-color);
+}
+
+progress::-webkit-progress-bar {
+    background-color: var(--border-color);
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+    background: linear-gradient(90deg, #3b82f6, #10b981);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* Fieldsets */
+fieldset {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 22px;
+    background: var(--card-bg);
+}
+
+legend {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 15px;
+    padding: 0 10px;
+}
+
+/* Grid Layout */
+.form-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.form-col {
+    flex: 1;
+    min-width: 0;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--text-main);
+}
+
+.required {
+    color: var(--danger-color);
+    font-weight: bold;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="search"],
+input[type="file"],
+select,
+textarea {
+    width: 100%;
+    padding: 9px 12px;
+    margin-top: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    background-color: var(--input-bg);
+    color: var(--text-main);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.readonly-input {
+    background-color: var(--bg-primary) !important;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* File Upload & Avatar Preview */
+.file-upload-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.avatar-preview {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+    flex-shrink: 0;
+    background-color: var(--bg-primary);
+}
+
+.avatar-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.file-input-wrapper {
+    flex: 1;
+}
+
+.hint {
+    display: block;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Password & Strength Meter */
+.password-field-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 8px;
+    top: 55%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.6;
+}
+
+.toggle-password:hover {
+    opacity: 1;
+}
+
+.password-strength-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+meter {
+    flex: 1;
+    height: 8px;
+    border-radius: 4px;
+}
+
+.strength-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Radio & Checkbox options */
+.options {
+    margin-top: 8px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.options label {
+    margin-top: 0;
+    font-weight: normal;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 13.5px;
+}
+
+.options input[type="radio"],
+.options input[type="checkbox"] {
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+/* Multi-select */
+.multi-select {
+    height: 85px;
+    padding: 6px;
+}
+
+/* Range Slider */
+.range-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 8px;
+}
+
+.range-container input[type="range"] {
+    flex: 1;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.range-container output {
+    font-weight: bold;
+    color: var(--primary-color);
+    background: var(--bg-primary);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    min-width: 45px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+/* Color Picker */
+.color-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+input[type="color"] {
+    -webkit-appearance: none;
+    border: 1px solid var(--border-color);
+    width: 45px;
+    height: 38px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: none;
+    padding: 2px;
+}
+
+.color-label {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* Textarea & Char Counter */
+.textarea-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.char-count {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+textarea {
+    height: 85px;
+    resize: vertical;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    flex: 1;
+    min-width: 140px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-submit {
+    background: #16a34a;
+    color: #ffffff;
+}
+
+.btn-submit:hover {
+    background: #15803d;
+}
+
+.btn-reset {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+.btn-reset:hover {
+    background: #b91c1c;
+}
+
+.btn-secondary {
+    background: #475569;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background: #334155;
+}
+
+/* Error Messages */
+.error {
+    color: var(--danger-color);
+    font-size: 12px;
+    display: block;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+/* Student Directory / Records Table Styles */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    text-align: left;
+    background: var(--card-bg);
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+    background: var(--bg-primary);
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.data-table tr:hover {
+    background-color: rgba(37, 99, 235, 0.04);
+}
+
+.badge-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 11px;
+    border-radius: 12px;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-weight: 600;
+}
+
+/* Student ID Card Layout */
+.id-card {
+    width: 380px;
+    max-width: 100%;
+    margin: 30px auto;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    border: 1px solid #e2e8f0;
+    font-family: inherit;
+    color: #1e293b;
+}
+
+.id-header {
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.id-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.id-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: -55px;
+    border: 4px solid #ffffff;
+    background: #e2e8f0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.id-details {
+    margin-top: 15px;
+    text-align: left;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* Print Specific */
+@media print {
+    .navbar, .btn, .no-print {
+        display: none !important;
+    }
+    body {
+        background: white;
+    }
+    .id-card {
+        box-shadow: none;
+        border: 1px solid #999;
+    }
+}

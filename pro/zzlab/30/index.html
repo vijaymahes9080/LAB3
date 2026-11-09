@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON.stringify() Usage Demo</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+
+        .result-box {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-left: 3px solid #007bff;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Using JSON.stringify()</h1>
+
+    <div id="output"></div>
+
+    <script>
+        // 1. Array
+        const myArray = [10, "hello", true, null];
+        const stringifiedArray = JSON.stringify(myArray);
+
+        // 2. Date Object
+        const myDate = new Date();
+        const stringifiedDate = JSON.stringify(myDate);
+
+        // 3. Object containing a function
+        const myObjectWithFunction = {
+            id: 1,
+            name: "Test",
+            calculate: function(a, b) {
+                return a + b;
+            }
+        };
+
+        const stringifiedObject =
+            JSON.stringify(myObjectWithFunction);
+
+
+        function displayResult(title, original, stringified) {
+
+            const outputDiv = document.getElementById("output");
+
+            let originalDisplay;
+
+            if (original instanceof Date) {
+                originalDisplay = original.toString();
+            } else if (typeof original === "object" && original !== null) {
+                originalDisplay = JSON.stringify(original, null, 2);
+            } else {
+                originalDisplay = String(original);
+            }
+
+            const conclusion = title.includes("Function")
+                ? "The function was <strong>removed</strong> from the final JSON string."
+                : "The data was successfully converted into a JSON <strong>string representation</strong>.";
+
+            outputDiv.innerHTML += `
+                <div class="result-box">
+
+                    <h3>${title}</h3>
+
+                    <p class="label">Original Data Type:</p>
+                    <pre><code>${originalDisplay}</code></pre>
+
+                    <p class="label">Stringified JSON Output:</p>
+                    <pre><code>${stringified}</code></pre>
+
+                </div>
+            `;
+        }
+
+
+        // Display results
+        displayResult(
+            "1. Array ([ ])",
+            myArray,
+            stringifiedArray
+        );
+
+        displayResult(
+            "2. Date Object (new Date())",
+            myDate,
+            stringifiedDate
+        );
+
+        displayResult(
+            "3. Object with Function",
+            myObjectWithFunction,
+            stringifiedObject
+        );
+    </script>
+
+</body>
+</html>

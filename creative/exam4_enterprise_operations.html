@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="examEnterpriseApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Exam Q4: Enterprise Operations Dashboard & Secure Employee Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"><\/script>')</script>
+  <style>
+    .pulse-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #10b981; box-shadow: 0 0 10px #10b981; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { opacity: 0.4; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); } 100% { opacity: 0.4; transform: scale(0.9); } }
+    .meter-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.1); overflow: hidden; margin-top: 4px; }
+    .meter-fill { height: 100%; transition: width 0.3s ease; }
+    .toast-alert { position: fixed; bottom: 20px; right: 20px; background: rgba(30, 41, 59, 0.95); border: 1px solid #6366f1; border-radius: var(--radius-md); padding: 12px 20px; box-shadow: var(--shadow-lg); z-index: 1000; animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .avatar-circle { width: 40px; height: 40px; border-radius: 50%; background: #4f46e5; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; }
+  </style>
+</head>
+<body ng-controller="EnterpriseController" ng-cloak>
+
+  <!-- Real-Time Top Bar with $interval Clock & Telemetry Status -->
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">LAB EXAM Q4</span>
+        <div class="header-title">
+          <h1>Enterprise Operations Dashboard & Secure Employee Directory</h1>
+          <p>Combines Programs: 51 (Employee Filters), 55 (Modal Events), 56 ($interval/$timeout Telemetry) & 58 (Auth & Security)</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 15px; align-items: center;">
+        <div style="font-size: 0.85rem; text-align: right;">
+          <div style="color: #34d399;"><span class="pulse-dot"></span> LIVE TELEMETRY</div>
+          <div style="font-family: 'Fira Code', monospace; color: #cbd5e1;">{{ liveTime | date:'mediumTime' }}</div>
+        </div>
+        <div ng-if="currentUser">
+          <span class="badge badge-info">👤 {{ currentUser.username }} ({{ currentUser.role }})</span>
+          <button class="btn btn-secondary btn-sm" style="margin-left: 8px;" ng-click="logout()">Logout</button>
+        </div>
+        <a href="index.html" class="nav-btn">← Hub</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- VIEW 1: AUTHENTICATION GATE (If not logged in) -->
+    <div ng-if="!currentUser" style="max-width: 480px; margin: 40px auto;">
+      <div class="card">
+        <div class="flex-between mb-4">
+          <button class="btn btn-sm" style="flex: 1; margin-right: 5px;" ng-class="{'btn-primary': authTab === 'login', 'btn-secondary': authTab !== 'login'}" ng-click="authTab = 'login'">
+            Sign In
+          </button>
+          <button class="btn btn-sm" style="flex: 1; margin-left: 5px;" ng-class="{'btn-primary': authTab === 'register', 'btn-secondary': authTab !== 'register'}" ng-click="authTab = 'register'">
+            Create Account
+          </button>
+        </div>
+
+        <!-- Login Form -->
+        <form name="loginForm" ng-submit="login()" ng-if="authTab === 'login'" novalidate>
+          <div class="form-group">
+            <label class="form-label">Username / Staff ID</label>
+            <input type="text" class="form-control" ng-model="loginData.username" required placeholder="admin or employee">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" ng-model="loginData.password" required placeholder="Enter password">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;" ng-disabled="loginForm.$invalid">
+            Authenticate & Access Portal
+          </button>
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; text-align: center;">
+            Demo credentials: <strong>admin</strong> / <strong>Admin@123</strong>
+          </p>
+        </form>
+
+        <!-- Registration with Password Strength Meter -->
+        <form name="registerForm" ng-submit="register()" ng-if="authTab === 'register'" novalidate>
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" ng-model="regData.name" required placeholder="Vijay Kumar">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" ng-model="regData.email" required placeholder="vijay@company.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" ng-model="regData.password" ng-change="checkPasswordStrength()" required placeholder="Min 6 chars with mixed characters">
+            
+            <!-- Password Strength Bar -->
+            <div class="meter-bar">
+              <div class="meter-fill" ng-style="{'width': (pwdStrengthScore * 25) + '%', 'background': pwdStrengthColor}"></div>
+            </div>
+            <div class="flex-between mt-1" style="font-size: 0.75rem;">
+              <span>Entropy Rating:</span>
+              <strong ng-style="{'color': pwdStrengthColor}">{{ pwdStrengthText }}</strong>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" ng-model="regData.confirmPassword" required placeholder="Re-type password">
+            <span class="text-danger" style="font-size: 0.75rem;" ng-show="regData.confirmPassword && regData.password !== regData.confirmPassword">
+              Passwords do not match!
+            </span>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;" ng-disabled="registerForm.$invalid || regData.password !== regData.confirmPassword || pwdStrengthScore < 2">
+            Complete Registration
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- VIEW 2: AUTHENTICATED OPERATIONS DASHBOARD -->
+    <div ng-if="currentUser">
+
+      <!-- Real-Time System Telemetry Gauges ($interval Service) -->
+      <div class="grid-4 mb-4">
+        <div class="stat-box">
+          <div class="stat-val text-info">{{ telemetry.cpuUsage }}%</div>
+          <div class="stat-label">CPU Compute Load</div>
+          <div class="meter-bar"><div class="meter-fill" ng-style="{'width': telemetry.cpuUsage + '%', 'background': '#3b82f6'}"></div></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val text-success">{{ telemetry.memUsage }}%</div>
+          <div class="stat-label">Server RAM Allocation</div>
+          <div class="meter-bar"><div class="meter-fill" ng-style="{'width': telemetry.memUsage + '%', 'background': '#10b981'}"></div></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val text-warning">{{ telemetry.apiLatency }} ms</div>
+          <div class="stat-label">REST API Latency</div>
+          <div class="meter-bar"><div class="meter-fill" ng-style="{'width': (telemetry.apiLatency / 2) + '%', 'background': '#fbbf24'}"></div></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" style="color: #a855f7;">{{ telemetry.activeConnections }}</div>
+          <div class="stat-label">Live Socket Sessions</div>
+          <div class="meter-bar"><div class="meter-fill" style="width: 78%; background: #a855f7;"></div></div>
+        </div>
+      </div>
+
+      <!-- Employee Directory with Built-in & Custom Filters (Program 51) -->
+      <div class="card mb-4">
+        <div class="flex-between mb-3" style="flex-wrap: wrap; gap: 15px;">
+          <div class="card-title" style="margin-bottom: 0;">
+            <span>Staff Directory & Compensation Register</span>
+            <span class="badge badge-primary">{{ filteredEmployees.length }} Listed</span>
+          </div>
+
+          <!-- Multi-Search & Filter Toolbar -->
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <input type="text" class="form-control" style="width: 220px;" placeholder="Search name / role / skills..." ng-model="empSearch">
+            <select class="form-control" style="width: 170px;" ng-model="deptFilter">
+              <option value="">All Departments</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Product">Product</option>
+              <option value="DevOps & Cloud">DevOps & Cloud</option>
+              <option value="Quality Assurance">Quality Assurance</option>
+            </select>
+            <select class="form-control" style="width: 160px;" ng-model="orderProp">
+              <option value="-salary">Salary (High to Low)</option>
+              <option value="salary">Salary (Low to High)</option>
+              <option value="name">Employee Name (A-Z)</option>
+              <option value="experience">Years of Experience</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="table" style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); text-align: left;">
+                <th style="padding: 10px;">Employee</th>
+                <th style="padding: 10px;">Department</th>
+                <th style="padding: 10px;">Designation</th>
+                <th style="padding: 10px;">Experience Tier</th>
+                <th style="padding: 10px;">Joining Date</th>
+                <th style="padding: 10px;">Annual Salary</th>
+                <th style="padding: 10px; text-align: center;">ID Badge</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="emp in (filteredEmployees = (employees | filter:empSearch | filter:{dept: deptFilter} | orderBy:orderProp)) track by emp.id"
+                  style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 10px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="avatar-circle">{{ emp.name.charAt(0) }}</div>
+                    <div>
+                      <div style="font-weight: 600;">{{ emp.name | uppercase }}</div>
+                      <div style="font-size: 0.75rem; color: var(--text-muted);">EMP #{{ emp.id }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding: 10px;">{{ emp.dept }}</td>
+                <td style="padding: 10px; color: #60a5fa;">{{ emp.role }}</td>
+                <td style="padding: 10px;">
+                  <!-- Custom Filter: experienceLevel -->
+                  <span class="badge" ng-class="{'badge-success': emp.experience >= 5, 'badge-info': emp.experience >= 2 && emp.experience < 5, 'badge-warning': emp.experience < 2}">
+                    {{ emp.experience | experienceLevel }} ({{ emp.experience }} yrs)
+                  </span>
+                </td>
+                <td style="padding: 10px; font-size: 0.85rem;">{{ emp.doj | date:'mediumDate' }}</td>
+                <td style="padding: 10px; font-weight: 700; color: #34d399;">{{ emp.salary | currency:"₹ " }}</td>
+                <td style="padding: 10px; text-align: center;">
+                  <button class="btn btn-secondary btn-sm" ng-click="openBadgeModal(emp)">🔍 View Badge</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MODAL LIGHTBOX DIALOG (Program 55 - Keyboard & Mouse Events) -->
+    <div ng-if="selectedBadgeEmp" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 9999;" ng-click="closeBadgeModal()">
+      <div class="card" style="width: 380px; text-align: center; border: 2px solid #6366f1;" ng-click="$event.stopPropagation()">
+        <div class="avatar-circle" style="width: 70px; height: 70px; font-size: 1.8rem; margin: 0 auto 15px;">{{ selectedBadgeEmp.name.charAt(0) }}</div>
+        <h3 style="font-size: 1.3rem;">{{ selectedBadgeEmp.name }}</h3>
+        <p style="color: #60a5fa; font-size: 0.9rem;">{{ selectedBadgeEmp.role }}</p>
+        <div style="margin: 15px 0; padding: 12px; background: rgba(15,23,42,0.6); border-radius: var(--radius-sm); font-size: 0.85rem; text-align: left;">
+          <div><strong>Staff ID:</strong> EMP-{{ selectedBadgeEmp.id }}</div>
+          <div><strong>Department:</strong> {{ selectedBadgeEmp.dept }}</div>
+          <div><strong>Seniority:</strong> {{ selectedBadgeEmp.experience | experienceLevel }}</div>
+          <div><strong>Authorized Clearance:</strong> L3 Security Token</div>
+        </div>
+        <button class="btn btn-primary" style="width: 100%;" ng-click="closeBadgeModal()">Close Modal (Esc)</button>
+      </div>
+    </div>
+
+    <!-- Auto-Dismissing Toast Alert ($timeout Service) -->
+    <div class="toast-alert" ng-if="toastMessage">
+      {{ toastMessage }}
+    </div>
+
+  </main>
+
+  <script>
+    var app = angular.module('examEnterpriseApp', []);
+
+    // Custom Filter: experienceLevel
+    app.filter('experienceLevel', function() {
+      return function(years) {
+        if (years >= 8) return 'Principal / Architect';
+        if (years >= 5) return 'Senior Specialist';
+        if (years >= 2) return 'Mid-Level Associate';
+        return 'Junior / Trainee';
+      };
+    });
+
+    app.controller('EnterpriseController', function($scope, $interval, $timeout, $log) {
+      $scope.liveTime = new Date();
+      $scope.authTab = 'login';
+      $scope.currentUser = { username: 'admin', role: 'Operations Lead' }; // default logged in for convenient exam demo
+      $scope.orderProp = '-salary';
+
+      $scope.loginData = { username: 'admin', password: '' };
+      $scope.regData = { name: '', email: '', password: '', confirmPassword: '' };
+      $scope.pwdStrengthScore = 0;
+      $scope.pwdStrengthText = 'Weak';
+      $scope.pwdStrengthColor = '#ef4444';
+
+      $scope.telemetry = {
+        cpuUsage: 42,
+        memUsage: 64,
+        apiLatency: 38,
+        activeConnections: 1280
+      };
+
+      $scope.employees = [
+        { id: 101, name: 'Vijay Kumar', dept: 'Engineering', role: 'Full Stack Architect', experience: 6, salary: 1450000, doj: new Date('2021-03-15') },
+        { id: 102, name: 'Asha Sundaram', dept: 'Product', role: 'Product Strategy Lead', experience: 9, salary: 1800000, doj: new Date('2019-07-20') },
+        { id: 103, name: 'Ravi Teja', dept: 'DevOps & Cloud', role: 'Kubernetes Platform Engineer', experience: 4, salary: 1150000, doj: new Date('2022-01-10') },
+        { id: 104, name: 'Kiran Deep', dept: 'Quality Assurance', role: 'SDET Automation Specialist', experience: 3, salary: 850000, doj: new Date('2023-04-01') },
+        { id: 105, name: 'Divya Bharathi', dept: 'Engineering', role: 'Frontend UI/UX Specialist', experience: 5, salary: 1300000, doj: new Date('2021-11-12') },
+        { id: 106, name: 'Sanjay Dutt', dept: 'Engineering', role: 'Associate Backend Developer', experience: 1, salary: 550000, doj: new Date('2024-06-15') }
+      ];
+
+      // $interval service: Live clock and random telemetry fluctuation
+      var timer = $interval(function() {
+        $scope.liveTime = new Date();
+        $scope.telemetry.cpuUsage = Math.floor(35 + Math.random() * 25);
+        $scope.telemetry.memUsage = Math.floor(58 + Math.random() * 15);
+        $scope.telemetry.apiLatency = Math.floor(25 + Math.random() * 30);
+      }, 1000);
+
+      $scope.$on('$destroy', function() {
+        if (angular.isDefined(timer)) $interval.cancel(timer);
+      });
+
+      // $timeout service for notifications
+      $scope.showToast = function(msg) {
+        $scope.toastMessage = msg;
+        $timeout(function() {
+          $scope.toastMessage = null;
+        }, 3500);
+      };
+
+      $scope.login = function() {
+        if ($scope.loginData.username) {
+          $scope.currentUser = {
+            username: $scope.loginData.username,
+            role: $scope.loginData.username === 'admin' ? 'System Administrator' : 'Staff Member'
+          };
+          $scope.showToast('Authentication Successful. Welcome ' + $scope.currentUser.username + '!');
+        }
+      };
+
+      $scope.logout = function() {
+        $scope.currentUser = null;
+        $scope.showToast('Session terminated.');
+      };
+
+      // Password Entropy Checker
+      $scope.checkPasswordStrength = function() {
+        var pwd = $scope.regData.password || '';
+        var score = 0;
+        if (pwd.length >= 6) score++;
+        if (/[A-Z]/.test(pwd)) score++;
+        if (/[0-9]/.test(pwd)) score++;
+        if (/[^A-Za-z0-9]/.test(pwd)) score++;
+
+        $scope.pwdStrengthScore = score;
+        if (score === 0 || score === 1) {
+          $scope.pwdStrengthText = 'Weak';
+          $scope.pwdStrengthColor = '#ef4444';
+        } else if (score === 2) {
+          $scope.pwdStrengthText = 'Fair';
+          $scope.pwdStrengthColor = '#fbbf24';
+        } else if (score === 3) {
+          $scope.pwdStrengthText = 'Good';
+          $scope.pwdStrengthColor = '#3b82f6';
+        } else {
+          $scope.pwdStrengthText = 'Strong';
+          $scope.pwdStrengthColor = '#10b981';
+        }
+      };
+
+      $scope.register = function() {
+        $scope.showToast('Account registered for ' + $scope.regData.name + '. Please sign in.');
+        $scope.authTab = 'login';
+      };
+
+      // Modal Lightbox Handlers
+      $scope.openBadgeModal = function(emp) {
+        $scope.selectedBadgeEmp = emp;
+      };
+
+      $scope.closeBadgeModal = function() {
+        $scope.selectedBadgeEmp = null;
+      };
+
+      // Global Escape listener for modal
+      window.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && $scope.selectedBadgeEmp) {
+          $scope.$apply(function() {
+            $scope.closeBadgeModal();
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

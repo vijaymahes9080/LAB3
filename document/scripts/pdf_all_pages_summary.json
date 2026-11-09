@@ -1,0 +1,1226 @@
+[
+  {
+    "page": 1,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "3",
+      "INDEX",
+      "S. No. DATE TITLE Page No."
+    ]
+  },
+  {
+    "page": 2,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "4",
+      "26 04.09.2025 ProgramtocreateaJavaScriptarraybyparsinga",
+      "JSONstringandaccessthearrayvalues"
+    ]
+  },
+  {
+    "page": 3,
+    "ex_no": "EX.NO:01",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:01",
+      "DATE:",
+      "26.7.2025"
+    ]
+  },
+  {
+    "page": 4,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thus the above program was executed successfully."
+    ]
+  },
+  {
+    "page": 5,
+    "ex_no": "EX.NO:02",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:02",
+      "DATE:",
+      "26.7.2025"
+    ]
+  },
+  {
+    "page": 6,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thus the above program was executed successfully."
+    ]
+  },
+  {
+    "page": 7,
+    "ex_no": "EX.NO:03",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:03",
+      "DATE:",
+      "28.7.2025"
+    ]
+  },
+  {
+    "page": 8,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thustheaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 9,
+    "ex_no": "EX.NO:04",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:04",
+      "DATE:",
+      "28.7.2025"
+    ]
+  },
+  {
+    "page": 10,
+    "ex_no": "EX.NO:05",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:05",
+      "DATE:",
+      "29.7.2025"
+    ]
+  },
+  {
+    "page": 11,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thus the above program was executed successfully."
+    ]
+  },
+  {
+    "page": 12,
+    "ex_no": "EX.NO:06",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:06",
+      "DATE:",
+      "29.7.2025"
+    ]
+  },
+  {
+    "page": 13,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thustheaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 14,
+    "ex_no": "EX.NO:07",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:07",
+      "DATE:",
+      "30.7.2025"
+    ]
+  },
+  {
+    "page": 15,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "}",
+      "input:focus{border-color:#6b8cff;box-shadow:04px14pxrgba(107,140,255,0.12);}",
+      "/*Button*/"
+    ]
+  },
+  {
+    "page": 16,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thustheaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 17,
+    "ex_no": "EX.NO:08",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:08",
+      "DATE:",
+      "30.7.2025"
+    ]
+  },
+  {
+    "page": 18,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thustheaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 19,
+    "ex_no": "EX.NO:09",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:09",
+      "DATE:",
+      "30.7.2025"
+    ]
+  },
+  {
+    "page": 20,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "<div style=\"padding:8px;background:#fff;border-radius:8px;box-shadow:0 8px 18px",
+      "rgba(0,0,0,.06);margin-top:6px\">",
+      "<ahref=\"#\"style=\"display:block;padding:6px8px;color:#234\">Item1</a>"
+    ]
+  },
+  {
+    "page": 21,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thustheaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 22,
+    "ex_no": "EX.NO:10",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:10",
+      "DATE:",
+      "02.08.2025"
+    ]
+  },
+  {
+    "page": 23,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "<!--Third-party(Lodash)-->",
+      "<divclass=\"card\">",
+      "<strong>Third-party(Lodash)</strong>"
+    ]
+  },
+  {
+    "page": 24,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "//---Geolocation---",
+      "document.getElementById('geoBtn').onclick=()=>{",
+      "constout=document.getElementById('loc');"
+    ]
+  },
+  {
+    "page": 25,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "worker.onmessage=m=>{wout.textContent='Sum='+m.data;worker.terminate();};",
+      "wout.textContent='Working...';worker.postMessage(1000000);",
+      "};"
+    ]
+  },
+  {
+    "page": 26,
+    "ex_no": "EX.NO:11",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:11",
+      "DATE:3.8.25",
+      "User Registration Form with JavaScript Validation"
+    ]
+  },
+  {
+    "page": 27,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT:",
+      "RESULT:",
+      "Theaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 28,
+    "ex_no": "EX.NO:12",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:12",
+      "DATE:3.8.25",
+      "Simple Webpage using HTML + CSS + JS + PHP + MySQL"
+    ]
+  },
+  {
+    "page": 29,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "padding:10px;",
+      "margin-top:10px;",
+      "border-radius:5px;"
+    ]
+  },
+  {
+    "page": 30,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "<divclass=\"container\">",
+      "<h2>SaveUser</h2>",
+      "<formaction=\"save.php\"method=\"post\"onsubmit=\"returnvalidateForm()\">"
+    ]
+  },
+  {
+    "page": 31,
+    "ex_no": "EX.NO:13",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:13",
+      "DATE:3.8.25",
+      "Simple Webpage using HTML + CSS + JS + PHP + MySQL"
+    ]
+  },
+  {
+    "page": 32,
+    "ex_no": "EX.NO:14",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:14",
+      "DATE:3.8.25",
+      "XML with Internal DTD"
+    ]
+  },
+  {
+    "page": 33,
+    "ex_no": "EX.NO:15",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:15",
+      "DATE:4.8.25",
+      "XML with External DTD"
+    ]
+  },
+  {
+    "page": 34,
+    "ex_no": "EX.NO:16",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:16",
+      "DATE:4.8.25",
+      "Display XML Table in HTML Document"
+    ]
+  },
+  {
+    "page": 35,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT:",
+      "RESULT:",
+      "Theaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 36,
+    "ex_no": "EX.NO:17",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:17",
+      "DATE:4.8.25",
+      "Send HTML Form Data to XML (Using JavaScript)"
+    ]
+  },
+  {
+    "page": 37,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "x.open(\"POST\",\"savexml.php\",true);",
+      "x.setRequestHeader(\"Content-Type\",\"application/x-www-form-urlencoded\");",
+      "x.send(\"xmlData=\"+encodeURIComponent(xml));"
+    ]
+  },
+  {
+    "page": 38,
+    "ex_no": "EX.NO:18",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:18",
+      "DATE:4.8.25",
+      "Display XML Data into HTML Form"
+    ]
+  },
+  {
+    "page": 39,
+    "ex_no": "EX.NO:19",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:19",
+      "DATE:4.8.25",
+      "XML Schema (XSD) for Simple Data Type"
+    ]
+  },
+  {
+    "page": 40,
+    "ex_no": "EX.NO:20",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:20",
+      "DATE:4.8.25",
+      "XML Schema (XSD) for Complex Data Type"
+    ]
+  },
+  {
+    "page": 41,
+    "ex_no": "EX.NO:21",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:21",
+      "DATE:",
+      "06.8.2025"
+    ]
+  },
+  {
+    "page": 42,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thustheaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 43,
+    "ex_no": "EX.NO:22",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:22",
+      "DATE:",
+      "06.8.2025"
+    ]
+  },
+  {
+    "page": 44,
+    "ex_no": "EX.NO:23",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:23",
+      "DATE:",
+      "24.8.2025"
+    ]
+  },
+  {
+    "page": 45,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "}",
+      "echo\"</pre>\";",
+      "}else{"
+    ]
+  },
+  {
+    "page": 46,
+    "ex_no": "EX.NO:24",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:24",
+      "DATE:",
+      "29.8.2025"
+    ]
+  },
+  {
+    "page": 47,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thustheaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 48,
+    "ex_no": "EX.NO:25",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:25",
+      "DATE:",
+      "04.9.2025"
+    ]
+  },
+  {
+    "page": 49,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "<body>",
+      "<divclass=\"container\">",
+      "<h2>JavaScriptObjectAccessDemonstration</h2>"
+    ]
+  },
+  {
+    "page": 50,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "constage=2024-book.year;",
+      "document.getElementById('output-title').textContent=bookTitle+\"(Code:book.title)\";",
+      "document.getElementById('output-author').textContent=bookAuthor+\"(Code:book.author)\";"
+    ]
+  },
+  {
+    "page": 51,
+    "ex_no": "EX.NO:26",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:26",
+      "DATE:",
+      "04.9.2025"
+    ]
+  },
+  {
+    "page": 52,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thustheaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 53,
+    "ex_no": "EX.NO:27",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:27",
+      "DATE:",
+      "04.9.2025"
+    ]
+  },
+  {
+    "page": 54,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "document.getElementById('indexed-output').innerHTML+=`",
+      "<p>Secondproduct(Index1)is:<strong>${secondProductName}</strong>.</p>",
+      "<p>Itspriceis:<strong>$${secondProductPrice}</strong>.</p>"
+    ]
+  },
+  {
+    "page": 55,
+    "ex_no": "EX.NO:28",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:28",
+      "DATE:",
+      "05.9.2025"
+    ]
+  },
+  {
+    "page": 56,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT :",
+      "RESULT :",
+      "Thustheaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 57,
+    "ex_no": "EX.NO:29",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:29",
+      "DATE:",
+      "05.9.2025"
+    ]
+  },
+  {
+    "page": 58,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "<pclass=\"label\">Conclusion:</p>",
+      "<p>",
+      "${"
+    ]
+  },
+  {
+    "page": 59,
+    "ex_no": "EX.NO:30",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "EX.NO:30",
+      "DATE:",
+      "06.9.2025"
+    ]
+  },
+  {
+    "page": 60,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "dataObject.submissionDate=newDate().toISOString();",
+      "constjsonString=JSON.stringify(dataObject,null,2);",
+      "console.log(\"JSONDatatobeSaved:\",jsonString);"
+    ]
+  },
+  {
+    "page": 61,
+    "ex_no": "",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "EX. NO: 31",
+      "DATE:",
+      "07.09.2025"
+    ]
+  },
+  {
+    "page": 62,
+    "ex_no": "",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "EX. NO: 32",
+      "DATE:",
+      "07.09.2025"
+    ]
+  },
+  {
+    "page": 63,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT:",
+      "Record saved as record_1764424134.json",
+      "RESULT:"
+    ]
+  },
+  {
+    "page": 64,
+    "ex_no": "",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "EX. NO: 33",
+      "DATE:",
+      "07.09.2025"
+    ]
+  },
+  {
+    "page": 65,
+    "ex_no": "",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "EX. NO: 34",
+      "DATE:",
+      "08.09.2025"
+    ]
+  },
+  {
+    "page": 66,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      ".ng-valid{border:2pxsolidgreen;}",
+      ".ng-invalid{border:2pxsolidred;}",
+      ".ng-dirty{background-color:#d4d3d0;}"
+    ]
+  },
+  {
+    "page": 67,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT:",
+      "RESULT:",
+      "Thus,theaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 68,
+    "ex_no": "",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "EX. NO: 35",
+      "DATE:",
+      "08.09.2025"
+    ]
+  },
+  {
+    "page": 69,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT:",
+      "RESULT:",
+      "Thus,theaboveprogramwasexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 70,
+    "ex_no": "",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "EX. NO: 36",
+      "DATE:",
+      "08.09.2025"
+    ]
+  },
+  {
+    "page": 71,
+    "ex_no": "",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "EX. NO: 37",
+      "DATE:",
+      "09.09.2025"
+    ]
+  },
+  {
+    "page": 72,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "$scope.today=newDate();",
+      "$scope.text=\"Hello\";",
+      "})"
+    ]
+  },
+  {
+    "page": 73,
+    "ex_no": "",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "EX. NO: 38",
+      "DATE:",
+      "09.09.2025"
+    ]
+  },
+  {
+    "page": 74,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "<buttonng-click=\"patchData()\">$http.patch()</button>",
+      "<h3>Response:</h3>",
+      "<pre>{{response|json}}</pre>"
+    ]
+  },
+  {
+    "page": 75,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "}).then(function(res){",
+      "$scope.response=res.data;",
+      "});"
+    ]
+  },
+  {
+    "page": 76,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "$http.patch(url,{title:\"PatchedTitle\"}).then(function(res){",
+      "$scope.response=res.data;",
+      "});"
+    ]
+  },
+  {
+    "page": 77,
+    "ex_no": "",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "EX. NO: 39",
+      "DATE:",
+      "09.09.2025"
+    ]
+  },
+  {
+    "page": 78,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "<tbody>",
+      "<trng-repeat=\"sinstudentstrackby$index\">",
+      "<td>{{$index+1}}</td>"
+    ]
+  },
+  {
+    "page": 79,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "[\"name\" => \"Asha\", \"age\" => 21, \"course\" => \"ECE\"],",
+      "[\"name\" => \"Ravi\", \"age\" => 22, \"course\" => \"ME\"],",
+      "[\"name\" => \"Kiran\", \"age\" => 19, \"course\" => \"IT\"]"
+    ]
+  },
+  {
+    "page": 80,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "<tr><th>#</th><th>Name</th><th>Age</th><th>Course</th></tr>",
+      "</thead>",
+      "<tbody>"
+    ]
+  },
+  {
+    "page": 81,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "console.error(err);",
+      "});",
+      "});"
+    ]
+  },
+  {
+    "page": 82,
+    "ex_no": "",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "EX. NO: 40",
+      "DATE:",
+      "09.09.2025"
+    ]
+  },
+  {
+    "page": 83,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT:",
+      "RESULT:",
+      "Thus,theaboveprogramwasexecutedsuccessfully"
+    ]
+  },
+  {
+    "page": 84,
+    "ex_no": "EX.NO:41",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "AIM:",
+      "ToImplementthefollowingAngularJSevendirectivesng-blurng-changeng-clickng-",
+      "dblclickng-focusng-keydownng-keyupng-keypressng-mousedownng-mouseenterng-mouseleave"
+    ]
+  },
+  {
+    "page": 85,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "ng-blur=\"focusText='Blurred'\">",
+      "<divclass=\"event-text\">{{focusText}}</div>",
+      "</div>"
+    ]
+  },
+  {
+    "page": 86,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "ng-mouseup=\"mouseText='MouseUp'\"",
+      "ng-mouseenter=\"mouseText='MouseEnter'\"",
+      "ng-mouseleave=\"mouseText='MouseLeave'\""
+    ]
+  },
+  {
+    "page": 87,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "if(now-last>200){",
+      "$scope.mouseText=\"MouseMove\";",
+      "last=now;"
+    ]
+  },
+  {
+    "page": 88,
+    "ex_no": "EX.NO:42",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "AIM:",
+      "ToDesignanyuserregistrationform(shouldincludeallinputtypes)inAngularJSand",
+      "validateallthefieldsintheform."
+    ]
+  },
+  {
+    "page": 89,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "<!--NAME-->",
+      "<label>Name*</label>",
+      "<inputtype=\"text\"name=\"name\"ng-model=\"user.name\"requiredng-pattern=\"/^[A-Za-z]+$/\">"
+    ]
+  },
+  {
+    "page": 90,
+    "ex_no": "",
+    "aim": "",
+    "has_output": false,
+    "has_program": false,
+    "first_3": [
+      "<divclass=\"error\"ng-if=\"regForm.dob.$touched&&regForm.dob.$error.required\">",
+      "Selectdateofbirth.",
+      "</div>"
+    ]
+  },
+  {
+    "page": 91,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT:",
+      "RESULT:",
+      "Thustheprogramhasbeenexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 92,
+    "ex_no": "EX.NO:43",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "AIM:",
+      "ToImplementtheusageofcoremoduleinNode.JS",
+      "SOURCE CODE:"
+    ]
+  },
+  {
+    "page": 93,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "console.log('\u2714HTTPServerrunningathttp://localhost:3000');",
+      "});",
+      "OUTPUT:"
+    ]
+  },
+  {
+    "page": 94,
+    "ex_no": "EX.NO:44",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "AIM:",
+      "ToImplementLocalmoduleinNode.JSandThird-partyModuleinNode.JS.",
+      "SOURCE CODE:"
+    ]
+  },
+  {
+    "page": 95,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "OUTPUT:",
+      "RESULT:",
+      "Thustheprogramhasbeenexecutedsuccessfully."
+    ]
+  },
+  {
+    "page": 96,
+    "ex_no": "EX.NO:45",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "AIM:",
+      "ToImplementanyfivemethodsofHTTPmodule.",
+      "SOURCE CODE:"
+    ]
+  },
+  {
+    "page": 97,
+    "ex_no": "EX.NO:46",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "AIM:",
+      "ToImplementthemethodsinfilesystemmodule.",
+      "SOURCE CODE:"
+    ]
+  },
+  {
+    "page": 98,
+    "ex_no": "EX.NO:47",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "AIM:",
+      "ToimplementaprogramtoIllustrateURLmoduleusingNodeJs",
+      "SOURCE CODE:"
+    ]
+  },
+  {
+    "page": 99,
+    "ex_no": "EX.NO:48",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "AIM:",
+      "ToIllustrateEventhandlinginNode.JS.",
+      "SOURCE CODE:"
+    ]
+  },
+  {
+    "page": 100,
+    "ex_no": "EX.NO:49",
+    "aim": "AIM:",
+    "has_output": false,
+    "has_program": true,
+    "first_3": [
+      "AIM:",
+      "ToimplementaprogramforFileuploadinginNode.JS",
+      "SOURCE CODE:"
+    ]
+  },
+  {
+    "page": 101,
+    "ex_no": "",
+    "aim": "",
+    "has_output": true,
+    "has_program": false,
+    "first_3": [
+      "//Thefilecontentisinthesecondpart",
+      "constfilePart=parts[1];",
+      "//Extractfilename"
+    ]
+  },
+  {
+    "page": 102,
+    "ex_no": "EX.NO:50",
+    "aim": "AIM:",
+    "has_output": true,
+    "has_program": true,
+    "first_3": [
+      "AIM:",
+      "ToimplementaprogramforSendingEmailinNode.JS",
+      "SOURCE CODE:"
+    ]
+  }
+]

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="examFullstackApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Exam Q6: Full-Stack REST API & AngularJS CRUD Interface</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"><\/script>')</script>
+  <style>
+    .api-badge { font-family: 'Fira Code', monospace; font-size: 0.75rem; padding: 2px 6px; border-radius: 4px; }
+    .method-get { background: #1e3a8a; color: #93c5fd; }
+    .method-post { background: #064e3b; color: #6ee7b7; }
+    .method-put { background: #78350f; color: #fde68a; }
+    .method-del { background: #7f1d1d; color: #fca5a5; }
+    .console-terminal { background: #090d16; border: 1px solid #1e293b; border-radius: var(--radius-sm); padding: 12px; font-family: 'Fira Code', monospace; font-size: 0.8rem; max-height: 180px; overflow-y: auto; color: #a5f3fc; }
+  </style>
+</head>
+<body ng-controller="FullstackController" ng-cloak>
+
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">LAB EXAM Q6</span>
+        <div class="header-title">
+          <h1>Full-Stack Integrated REST API Client & Server Management Suite</h1>
+          <p>Combines: Experiments 1-10 (Syllabus 76-85) + Program 39 ($http) + Program 402 (Server Table)</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <span class="badge" ng-class="serverOnline ? 'badge-success' : 'badge-warning'">
+          {{ serverOnline ? '● Live REST API Connected' : '○ Standalone Mock Mode Active' }}
+        </span>
+        <a href="index.html" class="nav-btn">← Hub</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="grid-2 mb-4" style="align-items: start;">
+      
+      <!-- Student REST Entry Form -->
+      <div class="card">
+        <div class="card-title">
+          <span>{{ isEditing ? 'Edit Student (PUT /api/students/:id)' : 'Enroll Student (POST /api/students)' }}</span>
+          <span class="api-badge" ng-class="isEditing ? 'method-put' : 'method-post'">{{ isEditing ? 'PUT' : 'POST' }}</span>
+        </div>
+
+        <form name="crudForm" ng-submit="submitStudent()" novalidate>
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Student ID</label>
+              <input type="text" class="form-control" ng-model="formStudent.id" ng-disabled="isEditing" required placeholder="e.g. 105">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" ng-model="formStudent.name" required placeholder="Student Name">
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-control" ng-model="formStudent.email" required placeholder="name@univ.edu">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Department</label>
+              <select class="form-control" ng-model="formStudent.department" required>
+                <option value="Computer Applications">Computer Applications</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Data Science">Data Science</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Cumulative GPA (0 - 10)</label>
+              <input type="number" step="0.1" min="0" max="10" class="form-control" ng-model="formStudent.gpa" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Enrollment Status</label>
+              <select class="form-control" ng-model="formStudent.status">
+                <option value="Active">Active</option>
+                <option value="On Probation">On Probation</option>
+                <option value="Graduated">Graduated</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button type="submit" class="btn btn-primary" style="flex: 1;" ng-disabled="crudForm.$invalid">
+              {{ isEditing ? 'Update Record via HTTP PUT' : 'Create Record via HTTP POST' }}
+            </button>
+            <button type="button" class="btn btn-secondary" ng-click="cancelEdit()" ng-if="isEditing">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Network Console Log -->
+      <div class="card">
+        <div class="card-title">
+          <span>HTTP Network Activity & Terminal Log</span>
+          <button class="btn btn-secondary btn-sm" ng-click="clearLogs()">Clear Console</button>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">
+          Live representation of <code>$http.get()</code>, <code>$http.post()</code>, <code>$http.put()</code> and <code>$http.delete()</code>.
+        </p>
+        <div class="console-terminal">
+          <div ng-repeat="log in networkLogs track by $index">
+            <span style="color: #64748b;">[{{ log.time }}]</span>
+            <span class="api-badge" ng-class="getMethodClass(log.method)">{{ log.method }}</span>
+            <span style="color: #cbd5e1;">{{ log.url }}</span> ➔
+            <span ng-style="{'color': log.status < 300 ? '#34d399' : '#f87171'}">{{ log.status }} {{ log.statusText }}</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 15px; padding: 10px; background: rgba(15,23,42,0.6); border-radius: var(--radius-sm); font-size: 0.8rem;">
+          <div class="text-info">💡 Backend Server Quick Launch:</div>
+          <code style="display: block; margin-top: 4px;">node fullstack_server.js</code>
+          <span style="color: var(--text-muted);">Starts real-time REST server on port 3001 with JSON database file persistence.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Data Table -->
+    <div class="card">
+      <div class="flex-between mb-3" style="flex-wrap: wrap; gap: 15px;">
+        <div class="card-title" style="margin-bottom: 0;">
+          <span>Database Student Roster</span>
+          <span class="badge badge-primary">{{ students.length }} Records Synchronized</span>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <input type="text" class="form-control" style="width: 250px;" placeholder="Search students..." ng-model="tableSearch" ng-change="onSearchChange()">
+          <button class="btn btn-secondary btn-sm" ng-click="fetchStudents()">↻ Refresh from API</button>
+        </div>
+      </div>
+
+      <table class="table" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border-color); text-align: left;">
+            <th style="padding: 10px;">ID</th>
+            <th style="padding: 10px;">Student Name</th>
+            <th style="padding: 10px;">Email</th>
+            <th style="padding: 10px;">Department</th>
+            <th style="padding: 10px;">GPA</th>
+            <th style="padding: 10px;">Status</th>
+            <th style="padding: 10px; text-align: center;">REST Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="s in students | filter:tableSearch track by s.id" style="border-bottom: 1px solid var(--border-color);">
+            <td style="padding: 10px; font-family: 'Fira Code', monospace; font-weight: 700;">#{{ s.id }}</td>
+            <td style="padding: 10px; font-weight: 600;">{{ s.name }}</td>
+            <td style="padding: 10px; color: var(--text-muted); font-size: 0.85rem;">{{ s.email }}</td>
+            <td style="padding: 10px;">{{ s.department }}</td>
+            <td style="padding: 10px; font-weight: 700; color: #fbbf24;">{{ s.gpa }}</td>
+            <td style="padding: 10px;">
+              <span class="badge" ng-class="{'badge-success': s.status === 'Active', 'badge-warning': s.status === 'On Probation', 'badge-info': s.status === 'Graduated'}">
+                {{ s.status }}
+              </span>
+            </td>
+            <td style="padding: 10px; text-align: center;">
+              <button class="btn btn-secondary btn-sm" ng-click="editStudent(s)">Edit (PUT)</button>
+              <button class="btn btn-danger btn-sm" ng-click="deleteStudent(s.id)">Delete (DEL)</button>
+            </td>
+          </tr>
+          <tr ng-if="students.length === 0">
+            <td colspan="7" style="text-align: center; padding: 25px; color: var(--text-muted);">
+              No student records found. Click Enroll to create one.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <script>
+    var app = angular.module('examFullstackApp', []);
+
+    app.controller('FullstackController', function($scope, $http) {
+      const API_BASE = 'http://localhost:3001/api/students';
+
+      $scope.students = [];
+      $scope.networkLogs = [];
+      $scope.serverOnline = false;
+      $scope.isEditing = false;
+      $scope.formStudent = { id: '', name: '', email: '', department: 'Computer Applications', gpa: 8.5, status: 'Active' };
+
+      // In-memory fallback dataset if backend server is not running
+      var mockDatabase = [
+        { id: '101', name: 'Vijay Kumar', email: 'vijay@univ.edu', department: 'Computer Applications', gpa: 9.2, status: 'Active' },
+        { id: '102', name: 'Asha Sundaram', email: 'asha@univ.edu', department: 'Computer Science', gpa: 8.8, status: 'Active' },
+        { id: '103', name: 'Ravi Teja', email: 'ravi@univ.edu', department: 'Information Technology', gpa: 7.5, status: 'On Probation' },
+        { id: '104', name: 'Priya Raman', email: 'priya@univ.edu', department: 'Data Science', gpa: 9.6, status: 'Active' }
+      ];
+
+      function logNetwork(method, url, status, statusText) {
+        var d = new Date();
+        var time = d.toTimeString().split(' ')[0];
+        $scope.networkLogs.unshift({
+          time: time,
+          method: method,
+          url: url,
+          status: status,
+          statusText: statusText
+        });
+        if ($scope.networkLogs.length > 20) $scope.networkLogs.pop();
+      }
+
+      $scope.getMethodClass = function(method) {
+        if (method === 'GET') return 'method-get';
+        if (method === 'POST') return 'method-post';
+        if (method === 'PUT') return 'method-put';
+        if (method === 'DELETE') return 'method-del';
+        return '';
+      };
+
+      $scope.clearLogs = function() {
+        $scope.networkLogs = [];
+      };
+
+      // 1. Fetch Students (GET)
+      $scope.fetchStudents = function() {
+        $http.get(API_BASE)
+          .then(function(res) {
+            $scope.students = res.data;
+            $scope.serverOnline = true;
+            logNetwork('GET', '/api/students', res.status, 'OK (Live REST Server)');
+          })
+          .catch(function(err) {
+            $scope.serverOnline = false;
+            $scope.students = angular.copy(mockDatabase);
+            logNetwork('GET', '/api/students', 200, 'Fallback: Standalone Memory Mock');
+          });
+      };
+
+      // 2. Submit Student (POST or PUT)
+      $scope.submitStudent = function() {
+        if ($scope.isEditing) {
+          // PUT Request
+          $http.put(API_BASE + '/' + $scope.formStudent.id, $scope.formStudent)
+            .then(function(res) {
+              logNetwork('PUT', '/api/students/' + $scope.formStudent.id, res.status, 'Updated');
+              $scope.fetchStudents();
+              $scope.cancelEdit();
+            })
+            .catch(function() {
+              // Mock fallback update
+              var idx = mockDatabase.findIndex(function(x) { return x.id === $scope.formStudent.id; });
+              if (idx !== -1) mockDatabase[idx] = angular.copy($scope.formStudent);
+              logNetwork('PUT', '/api/students/' + $scope.formStudent.id, 200, 'Updated (Local Mock)');
+              $scope.students = angular.copy(mockDatabase);
+              $scope.cancelEdit();
+            });
+        } else {
+          // POST Request
+          $http.post(API_BASE, $scope.formStudent)
+            .then(function(res) {
+              logNetwork('POST', '/api/students', res.status, 'Created');
+              $scope.fetchStudents();
+              $scope.resetForm();
+            })
+            .catch(function() {
+              // Mock fallback create
+              mockDatabase.push(angular.copy($scope.formStudent));
+              logNetwork('POST', '/api/students', 201, 'Created (Local Mock)');
+              $scope.students = angular.copy(mockDatabase);
+              $scope.resetForm();
+            });
+        }
+      };
+
+      // 3. Delete Student (DELETE)
+      $scope.deleteStudent = function(id) {
+        if (!confirm('Execute HTTP DELETE for Student #' + id + '?')) return;
+        $http.delete(API_BASE + '/' + id)
+          .then(function(res) {
+            logNetwork('DELETE', '/api/students/' + id, res.status, 'Deleted');
+            $scope.fetchStudents();
+          })
+          .catch(function() {
+            var idx = mockDatabase.findIndex(function(x) { return x.id === id; });
+            if (idx !== -1) mockDatabase.splice(idx, 1);
+            logNetwork('DELETE', '/api/students/' + id, 200, 'Deleted (Local Mock)');
+            $scope.students = angular.copy(mockDatabase);
+          });
+      };
+
+      $scope.editStudent = function(s) {
+        $scope.formStudent = angular.copy(s);
+        $scope.isEditing = true;
+      };
+
+      $scope.cancelEdit = function() {
+        $scope.isEditing = false;
+        $scope.resetForm();
+      };
+
+      $scope.resetForm = function() {
+        $scope.formStudent = {
+          id: String(Math.floor(100 + Math.random() * 900)),
+          name: '',
+          email: '',
+          department: 'Computer Applications',
+          gpa: 8.5,
+          status: 'Active'
+        };
+      };
+
+      // Initial Fetch
+      $scope.resetForm();
+      $scope.fetchStudents();
+    });
+  </script>
+</body>
+</html>
+

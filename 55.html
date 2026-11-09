@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="galleryApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 55 - Image Gallery</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .gallery-preview { background: rgba(15,23,42,0.8); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; text-align: center; margin-bottom: 20px; }
+    .thumb-card { background: var(--bg-card); border: 2px solid transparent; border-radius: var(--radius-md); padding: 12px; text-align: center; cursor: pointer; }
+    .thumb-card:hover, .thumb-card.active { border-color: var(--primary); transform: translateY(-3px); }
+  </style>
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="GalleryCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#55</span>
+        <div class="header-title">
+          <h1>Interactive Image Gallery</h1>
+          <p>AngularJS DOM Event Directives (ng-mouseover, ng-click)</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 850px;">
+    <!-- Featured Image Preview -->
+    <div class="gallery-preview">
+      <div style="font-size: 4.5rem; margin-bottom: 8px;">{{ active.icon }}</div>
+      <h2 style="color: #fff; margin-bottom: 4px;">{{ active.title }}</h2>
+      <p class="text-muted" style="margin-bottom: 16px;">{{ active.desc }}</p>
+      <div style="display: flex; justify-content: center; gap: 10px;">
+        <button class="btn btn-secondary btn-sm" ng-click="nav(-1)">← Previous</button>
+        <button class="btn btn-primary btn-sm" ng-click="active.likes = active.likes + 1">❤️ Likes ({{ active.likes }})</button>
+        <button class="btn btn-secondary btn-sm" ng-click="nav(1)">Next →</button>
+      </div>
+    </div>
+
+    <!-- Thumbnails Strip -->
+    <div class="card">
+      <div class="card-title"><span>Image Thumbnails</span><span class="badge badge-info">Hover or Click</span></div>
+      <div class="grid-4" style="gap: 14px;">
+        <div class="thumb-card" ng-repeat="img in images" ng-class="{'active': active === img}" ng-mouseover="$parent.active = img" ng-click="$parent.active = img">
+          <div style="font-size: 2.2rem; margin-bottom: 4px;">{{ img.icon }}</div>
+          <strong style="color: #fff; font-size: 0.85rem; display: block;">{{ img.title }}</strong>
+          <span class="text-muted" style="font-size: 0.75rem;">❤️ {{ img.likes }}</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('galleryApp', [])
+      .controller('GalleryCtrl', function($scope) {
+        $scope.images = [
+          { id: 1, title: 'Cloud Infra', icon: '☁️', desc: 'Scalable containerized clusters and microservices.', likes: 14 },
+          { id: 2, title: 'Web Tech', icon: '🌐', desc: 'Modern responsive SPAs engineered using AngularJS.', likes: 27 },
+          { id: 3, title: 'Databases', icon: '🗄️', desc: 'High-availability relational and distributed datastores.', likes: 9 },
+          { id: 4, title: 'Cybersecurity', icon: '🛡️', desc: 'Enterprise cryptographic controls and access models.', likes: 31 }
+        ];
+        $scope.active = $scope.images[0];
+
+        $scope.nav = function(dir) {
+          var idx = ($scope.images.indexOf($scope.active) + dir + $scope.images.length) % $scope.images.length;
+          $scope.active = $scope.images[idx];
+        };
+      });
+  </script>
+</body>
+</html>

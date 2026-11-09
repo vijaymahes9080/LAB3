@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial- scale=1">
+<title>Mini Web APIs Demo</title>
+<style>
+body{font-family:Arial;margin:18px;background:#f7fbff;color:#123}
+.box{width:80px;height:80px;background:#6bbcff;border-radius:8px;display:grid;place-items:center;color:#fff;cursor:grab}
+.drop{width:200px;height:100px;border:2px dashed #9ab;border-radius:8px;display:grid;place-items:center;margin-top:8px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.card{background:#fff;padding:10px;border-radius:8px;box-shadow:0 6px 18px rgba(0,30,80,.06);min-width:240px}
+small{color:#556;font-size:12px}
+</style>
+</head>
+<body>
+<h3>Compact Web APIs demo</h3>
+<div class="row">
+<!-- Drag & Drop -->
+<div class="card">
+<strong>Drag & Drop</strong>
+<div id="drag" class="box" draggable="true">DRAG</div>
+<div id="drop" class="drop">Drop here</div>
+<small id="dmsg"></small>
+</div>
+<!-- Geolocation -->
+<div class="card">
+<strong>Geolocation</strong>
+<button id="geoBtn">Get Location</button>
+<div id="loc">—</div>
+<small>Uses navigator.geolocation</small>
+</div>
+<!-- Third-party (Lodash) -->
+<div class="card">
+<strong>Third-party (Lodash)</strong>
+<input id="txt" placeholder="type name"><button id="cap">Cap</button>
+<div id="capout">—</div>
+<small>CDN script + _.capitalize</small>
+</div>
+<!-- Validation + Storage -->
+<div class="card">
+<strong>Validation & Storage</strong>
+<form id="f">
+<input id="name" placeholder="name (letters only)" required pattern="^[A-Za-z ]+$"><br><br>
+<input id="age" placeholder="age (18-99)" required pattern="^(1[89]|[2-9][0-9])$"><br><br>
+<button>Submit</button>
+</form>
+<div><button id="save" type="button">Save name to localStorage</button> <button id="load" type="button">Load</button></div>
+<div id="stored">—</div>
+</div>
+<!-- History API -->
+<div class="card">
+<strong>History API</strong>
+<div id="page">Page A</div>
+<button id="goB" type="button">Go to B</button>
+<small>Use browser Back to return</small>
+</div>
+<!-- Web Worker -->
+<div class="card">
+<strong>Web Worker</strong>
+<button id="startw" type="button">Start Worker (calc)</button>
+<div id="wout">—</div>
+<small>Worker sums 1..N in background</small>
+</div>
+</div>
+<!-- Lodash CDN (third-party) -->
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<script>
+// --- Drag & Drop ---
+const drag = document.getElementById('drag'), drop = document.getElementById('drop'), dmsg = document.getElementById('dmsg');
+drag.addEventListener('dragstart', e => e.dataTransfer.setData('text/plain','dragged'));
+drop.addEventListener('dragover', e => e.preventDefault());
+drop.addEventListener('drop', e => { e.preventDefault(); dmsg.textContent = 'Dropped!'; });
+
+// --- Geolocation ---
+document.getElementById('geoBtn').onclick = () => {
+  const out = document.getElementById('loc');
+  if (!navigator.geolocation) return out.textContent = 'Not supported';
+  navigator.geolocation.getCurrentPosition(
+    p => out.textContent = `Lat:${p.coords.latitude.toFixed(4)}, Lon:${p.coords.longitude.toFixed(4)}`,
+    () => out.textContent = 'Denied / error'
+  );
+};
+
+// --- Lodash usage (third-party) ---
+document.getElementById('cap').onclick = () => {
+  const v = document.getElementById('txt').value || '';
+  document.getElementById('capout').textContent = _.capitalize(v);
+};
+
+// --- Validation + Storage ---
+const form = document.getElementById('f');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  if (!form.checkValidity()) { alert('Fix fields'); return; }
+  alert('Form OK — name: ' + document.getElementById('name').value);
+});
+document.getElementById('save').onclick = () => {
+  const n = document.getElementById('name').value;
+  if(n) localStorage.setItem('demo_name', n);
+  document.getElementById('stored').textContent = 'Saved';
+};
+document.getElementById('load').onclick = () => {
+  document.getElementById('stored').textContent = localStorage.getItem('demo_name') || 'Noname';
+};
+
+// --- History API ---
+const page = document.getElementById('page');
+document.getElementById('goB').onclick = () => {
+  history.pushState({page:'B'}, 'B', '?page=B');
+  page.textContent = 'Page B';
+};
+window.addEventListener('popstate', e => {
+  page.textContent = (e.state && e.state.page==='B') ? 'Page B' : 'Page A';
+});
+
+// --- Web Worker via Blob ---
+const wout = document.getElementById('wout');
+document.getElementById('startw').onclick = () => {
+  // small worker that sums numbers up to N (N=1000000)
+  const code = `self.onmessage=e=>{const n=e.data;let s=0;for(let i=1;i<=n;i++)s+=i;self.postMessage(s)}`;
+  const worker = new Worker(URL.createObjectURL(new Blob([code],{type:'text/javascript'})));
+  wout.textContent = 'Working...';
+  worker.onmessage = m => { wout.textContent = 'Sum=' + m.data; worker.terminate(); };
+  worker.postMessage(1000000);
+};
+</script>
+</body>
+</html>
+

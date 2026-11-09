@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="httpApp">
+<head>
+<meta charset="UTF-8">
+<title>$http Services Example</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script><style>
+body { font-family: Arial; margin: 30px; }
+button { margin: 5px; padding: 8px 12px; cursor: pointer; }
+pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+</style>
+</head>
+<body ng-controller="httpCtrl">
+<h2>$http Services in AngularJS</h2>
+<p>Click the buttons below to simulate different $http methods.</p>
+<button ng-click="getData()">$http.get()</button>
+<button ng-click="headData()">$http.head()</button>
+<button ng-click="postData()">$http.post()</button>
+<button ng-click="putData()">$http.put()</button>
+<button ng-click="deleteData()">$http.delete()</button>
+<button ng-click="jsonpData()">$http.jsonp()</button>
+<button ng-click="patchData()">$http.patch()</button>
+<h3>Response:</h3>
+<pre>{{response | json}}</pre>
+<script>
+// AngularJS App and Controller
+angular.module("httpApp", [])
+.controller("httpCtrl", function($scope, $http) {
+const url = "https://jsonplaceholder.typicode.com/posts/1"; // free test API
+// GET Method
+$scope.getData = function() {
+$http.get(url).then(function(res) {
+$scope.response = res.data;
+});
+};
+// HEAD Method
+$scope.headData = function() {
+$http.head(url).then(function(res) {
+$scope.response = res.headers();
+});
+};
+// POST Method
+$scope.postData = function() {
+$http.post("https://jsonplaceholder.typicode.com/posts", {
+title: "New Post", body: "Sample content", userId: 1
+}).then(function(res) {
+$scope.response = res.data;
+});
+};
+// PUT Method
+$scope.putData = function() {
+$http.put(url, { title: "Updated Post", body: "Edited content", userId: 1 })
+.then(function(res) {
+$scope.response = res.data;
+});
+};
+// DELETE Method
+$scope.deleteData = function() {
+$http.delete(url).then(function(res) {
+$scope.response = { message: "Data deleted successfully!" };
+});
+};
+// JSONP Method
+$scope.jsonpData = function() {
+$http.jsonp("https://api.github.com/users/angular?callback=JSON_CALLBACK")
+.then(function(res) {
+$scope.response = res.data;
+});
+};
+// PATCH Method
+$scope.patchData = function() {
+$http.patch(url, { title: "Patched Title" }).then(function(res) {
+$scope.response = res.data;
+});
+};
+});
+</script>
+</body>
+</html>

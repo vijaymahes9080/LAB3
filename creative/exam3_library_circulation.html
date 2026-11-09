@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="examLibraryApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Exam Q3: Multi-Controller Library ERP & Cascading Catalog System</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"><\/script>')</script>
+  <style>
+    .module-card { border-top: 4px solid #6366f1; }
+    .badge-borrowed { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-available { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .nested-scope-box { background: rgba(15, 23, 42, 0.5); border-left: 3px solid #06b6d4; padding: 12px; margin-top: 10px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Master Application Header -->
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">LAB EXAM Q3</span>
+        <div class="header-title">
+          <h1>Institutional Library Multi-Controller & Cascading Catalog ERP</h1>
+          <p>Combines Programs: 37, 43, 46 (Multi-Controllers & Service), 50 (Nested Scopes) & 53 (Cascading ng-options)</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <span class="badge badge-info">Modular Architecture</span>
+        <a href="index.html" class="nav-btn">← Creative Hub</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" ng-controller="DeanLibraryCtrl">
+
+    <!-- TOP LEVEL: HIERARCHICAL SCOPE DEMONSTRATION (Program 50) -->
+    <div class="card mb-4" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));">
+      <div class="flex-between">
+        <div>
+          <span class="badge badge-primary">Dean Scope: {{ universityName }}</span>
+          <h2 style="font-size: 1.3rem; margin-top: 6px;">Central Library Governance & Budget Allocation</h2>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 0.8rem; color: var(--text-muted);">Annual Library Grant</div>
+          <strong style="font-size: 1.2rem; color: #34d399;">{{ centralBudget | currency:"₹ " }}</strong>
+        </div>
+      </div>
+
+      <!-- Nested Controller: Department Scope accessing $parent -->
+      <div class="nested-scope-box" ng-controller="DeptBranchCtrl">
+        <div class="flex-between">
+          <div>
+            <strong>Branch Unit: {{ branchName }}</strong>
+            <span style="font-size: 0.8rem; color: var(--text-muted); margin-left: 10px;">
+              Inheriting University: <em>{{ $parent.universityName }}</em> (via prototypal inheritance)
+            </span>
+          </div>
+          <div>
+            Allocated Department Fund: <strong class="text-warning">{{ deptBudget | currency:"₹ " }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4-TIER CASCADING REPOSITORY SELECTION (Program 53) -->
+    <div class="card mb-4" ng-controller="CascadingSelectionCtrl">
+      <div class="card-title">
+        <span>4-Tier Dependent Cascading Catalog Lookup</span>
+        <span class="badge badge-info">ng-options & ng-change</span>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">
+        Select Level ➔ Department ➔ Semester ➔ Recommended Textbook automatically populates via dependent cascading options.
+      </p>
+
+      <div class="grid-4">
+        <div class="form-group">
+          <label class="form-label">1. Academic Level</label>
+          <select class="form-control" ng-model="selectedLevel" ng-options="l.id as l.name for l in academicLevels" ng-change="onLevelChange()">
+            <option value="">-- Choose Level --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">2. Department</label>
+          <select class="form-control" ng-model="selectedDept" ng-options="d.id as d.name for d in departments" ng-change="onDeptChange()" ng-disabled="!selectedLevel">
+            <option value="">-- Choose Department --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">3. Semester</label>
+          <select class="form-control" ng-model="selectedSemester" ng-options="s for s in semesters" ng-change="onSemesterChange()" ng-disabled="!selectedDept">
+            <option value="">-- Choose Semester --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">4. Prescribed Subject</label>
+          <select class="form-control" ng-model="selectedSubject" ng-options="sub.name for sub in availableSubjects" ng-disabled="!selectedSemester">
+            <option value="">-- Choose Course --</option>
+          </select>
+        </div>
+      </div>
+
+      <div ng-if="selectedSubject" style="background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-top: 10px;">
+        <span class="text-info">📚 Standard Prescribed Resource:</span>
+        <strong>{{ selectedSubject.name }}</strong> | Recommended Author: <em>{{ selectedSubject.book }}</em> (Call No: <code>{{ selectedSubject.callNo }}</code>)
+      </div>
+    </div>
+
+    <!-- MULTI-CONTROLLERS COORDINATED VIA SHARED SINGLETON SERVICE (Program 46) -->
+    <div class="grid-2 mb-4" style="align-items: start;">
+
+      <!-- Controller 1: Book Inventory Controller -->
+      <div class="card module-card" ng-controller="BookInventoryCtrl">
+        <div class="card-title">
+          <span>Book Inventory Domain (Controller 1)</span>
+          <span class="badge badge-success">{{ books.length }} Titles</span>
+        </div>
+
+        <form ng-submit="addBook()" style="margin-bottom: 15px;">
+          <div class="grid-2">
+            <input type="text" class="form-control" placeholder="Book Title" ng-model="newBook.title" required>
+            <input type="text" class="form-control" placeholder="Author" ng-model="newBook.author" required>
+          </div>
+          <div class="grid-2 mt-2">
+            <input type="text" class="form-control" placeholder="ISBN / Call No" ng-model="newBook.isbn" required>
+            <input type="number" class="form-control" placeholder="Copies Available" min="1" ng-model="newBook.copies" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm mt-2" style="width: 100%;">+ Register New Book</button>
+        </form>
+
+        <div style="max-height: 250px; overflow-y: auto;">
+          <table class="table" style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); text-align: left;">
+                <th style="padding: 6px;">Title</th>
+                <th style="padding: 6px;">Author</th>
+                <th style="padding: 6px;">Available</th>
+                <th style="padding: 6px;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="b in books track by b.isbn" style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 6px; font-weight: 600;">{{ b.title }}</td>
+                <td style="padding: 6px; color: var(--text-muted);">{{ b.author }}</td>
+                <td style="padding: 6px;">
+                  <span class="badge" ng-class="b.available > 0 ? 'badge-available' : 'badge-borrowed'">
+                    {{ b.available }} / {{ b.total }}
+                  </span>
+                </td>
+                <td style="padding: 6px;">
+                  <button class="btn btn-danger btn-sm" style="padding: 2px 6px; font-size: 0.75rem;" ng-click="removeBook(b)">Del</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Controller 2: Member Circulation & Fine Controller -->
+      <div class="card module-card" ng-controller="CirculationCtrl">
+        <div class="card-title">
+          <span>Circulation & Overdue Controller (Controller 2)</span>
+          <span class="badge badge-warning">{{ activeIssues.length }} Issued</span>
+        </div>
+
+        <form ng-submit="issueBook()" style="margin-bottom: 15px;">
+          <div class="form-group">
+            <label class="form-label">Select Registered Student</label>
+            <select class="form-control" ng-model="issueForm.member" required>
+              <option value="">-- Choose Student Member --</option>
+              <option ng-repeat="m in members" value="{{ m.name }}">{{ m.name }} ({{ m.rollNo }})</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Select Book for Issue</label>
+            <select class="form-control" ng-model="issueForm.bookIsbn" required>
+              <option value="">-- Choose Available Book --</option>
+              <option ng-repeat="b in availableBooks()" value="{{ b.isbn }}">{{ b.title }} (Copies: {{ b.available }})</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm" style="width: 100%;">Issue Book to Member</button>
+        </form>
+
+        <div style="max-height: 230px; overflow-y: auto;">
+          <table class="table" style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); text-align: left;">
+                <th style="padding: 6px;">Borrower</th>
+                <th style="padding: 6px;">Book</th>
+                <th style="padding: 6px;">Days Elapsed</th>
+                <th style="padding: 6px;">Fine</th>
+                <th style="padding: 6px;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in activeIssues track by $index" style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 6px; font-weight: 500;">{{ item.member }}</td>
+                <td style="padding: 6px;">{{ item.bookTitle }}</td>
+                <td style="padding: 6px;">{{ item.daysBorrowed }} days</td>
+                <td style="padding: 6px; font-weight: 600;" ng-class="item.fine > 0 ? 'text-danger' : 'text-success'">
+                  {{ item.fine | currency:"₹ " }}
+                </td>
+                <td style="padding: 6px;">
+                  <button class="btn btn-secondary btn-sm" style="padding: 2px 6px; font-size: 0.75rem;" ng-click="returnBook(item)">Return</button>
+                </td>
+              </tr>
+              <tr ng-if="activeIssues.length === 0">
+                <td colspan="5" style="text-align: center; padding: 15px; color: var(--text-muted);">
+                  No books currently on loan.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controller 3: Real-Time Synced Analytics Controller -->
+    <div class="card" ng-controller="LibraryStatsCtrl">
+      <div class="flex-between">
+        <div>
+          <span class="badge badge-primary">Library Telemetry Service</span>
+          <h3 style="margin-top: 5px;">Cross-Controller Real-Time Synchronized Statistics</h3>
+        </div>
+        <div style="display: flex; gap: 20px;">
+          <div>Total Titles: <strong class="text-info">{{ getBookCount() }}</strong></div>
+          <div>Active Loans: <strong class="text-warning">{{ getIssuedCount() }}</strong></div>
+          <div>Overdue Fines Collected: <strong class="text-success">{{ getTotalFineCollected() | currency:"₹ " }}</strong></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    var app = angular.module('examLibraryApp', []);
+
+    // SHARED SINGLETON SERVICE (Program 46)
+    app.factory('LibrarySharedService', function() {
+      var books = [
+        { isbn: 'CS101', title: 'Modern Full-Stack Engineering', author: 'Dr. Vijay K', available: 4, total: 5 },
+        { isbn: 'CS102', title: 'AngularJS Enterprise Patterns', author: 'Brad Green', available: 2, total: 3 },
+        { isbn: 'CS103', title: 'Node.js Microservices Architecture', author: 'David Herron', available: 5, total: 5 },
+        { isbn: 'CS104', title: 'MongoDB & NoSQL Design', author: 'Kristina Chodorow', available: 1, total: 2 }
+      ];
+
+      var members = [
+        { rollNo: '24MCA101', name: 'Vijay Kumar' },
+        { rollNo: '24MCA102', name: 'Asha Sundaram' },
+        { rollNo: '24MCA103', name: 'Ravi Teja' }
+      ];
+
+      var activeIssues = [
+        { member: 'Vijay Kumar', bookIsbn: 'CS101', bookTitle: 'Modern Full-Stack Engineering', daysBorrowed: 18, fine: 15 },
+        { member: 'Asha Sundaram', bookIsbn: 'CS102', bookTitle: 'AngularJS Enterprise Patterns', daysBorrowed: 5, fine: 0 }
+      ];
+
+      var finesCollected = 120;
+
+      return {
+        getBooks: function() { return books; },
+        getMembers: function() { return members; },
+        getIssues: function() { return activeIssues; },
+        getFinesCollected: function() { return finesCollected; },
+        addFineCollected: function(amt) { finesCollected += amt; },
+        addBook: function(b) { books.push(b); },
+        removeBook: function(b) {
+          var idx = books.indexOf(b);
+          if (idx !== -1) books.splice(idx, 1);
+        },
+        issueBook: function(member, bookIsbn) {
+          var b = books.find(function(x) { return x.isbn === bookIsbn; });
+          if (b && b.available > 0) {
+            b.available--;
+            activeIssues.push({
+              member: member,
+              bookIsbn: b.isbn,
+              bookTitle: b.title,
+              daysBorrowed: 0,
+              fine: 0
+            });
+            return true;
+          }
+          return false;
+        },
+        returnBook: function(issue) {
+          var idx = activeIssues.indexOf(issue);
+          if (idx !== -1) {
+            var b = books.find(function(x) { return x.isbn === issue.bookIsbn; });
+            if (b) b.available++;
+            if (issue.fine > 0) finesCollected += issue.fine;
+            activeIssues.splice(idx, 1);
+          }
+        }
+      };
+    });
+
+    // Top-Level Dean Controller (Scope Inheritance)
+    app.controller('DeanLibraryCtrl', function($scope) {
+      $scope.universityName = 'The Gandhigram Rural Institute (Deemed to be University)';
+      $scope.centralBudget = 1500000;
+    });
+
+    // Nested Branch Controller (Prototypal Inheritance & $parent)
+    app.controller('DeptBranchCtrl', function($scope) {
+      $scope.branchName = 'Department of Computer Science & Applications Library';
+      $scope.deptBudget = 350000;
+    });
+
+    // Cascading Dropdown Controller (Program 53)
+    app.controller('CascadingSelectionCtrl', function($scope) {
+      $scope.academicLevels = [
+        { id: 'PG', name: 'Post-Graduate (MCA / M.Sc)' },
+        { id: 'UG', name: 'Under-Graduate (B.Sc / BCA)' }
+      ];
+
+      var dataset = {
+        'PG': {
+          'CA': {
+            name: 'Computer Applications (MCA)',
+            semesters: [1, 2, 3, 4],
+            courses: {
+              1: [
+                { name: 'Advanced Data Structures', book: 'Mark Allen Weiss', callNo: '005.73 WEI' },
+                { name: 'Web Technology & AngularJS', book: 'Brad Green', callNo: '006.7 GRE' }
+              ],
+              2: [
+                { name: 'Full Stack & Node.js', book: 'David Herron', callNo: '005.2 HER' },
+                { name: 'Cloud Computing & DevOps', book: 'Rajkumar Buyya', callNo: '004.6 BUY' }
+              ]
+            }
+          },
+          'DS': {
+            name: 'Data Science (M.Sc)',
+            semesters: [1, 2],
+            courses: {
+              1: [{ name: 'Statistical Foundations', book: 'Sheldon Ross', callNo: '519.5 ROS' }]
+            }
+          }
+        },
+        'UG': {
+          'CS': {
+            name: 'Computer Science (B.Sc)',
+            semesters: [1, 2, 3, 4, 5, 6],
+            courses: {
+              1: [{ name: 'Programming in C/C++', book: 'E Balagurusamy', callNo: '005.13 BAL' }]
+            }
+          }
+        }
+      };
+
+      $scope.onLevelChange = function() {
+        $scope.departments = [];
+        $scope.semesters = [];
+        $scope.availableSubjects = [];
+        $scope.selectedDept = null;
+        $scope.selectedSemester = null;
+        $scope.selectedSubject = null;
+
+        if ($scope.selectedLevel && dataset[$scope.selectedLevel]) {
+          var depts = dataset[$scope.selectedLevel];
+          for (var key in depts) {
+            $scope.departments.push({ id: key, name: depts[key].name });
+          }
+        }
+      };
+
+      $scope.onDeptChange = function() {
+        $scope.semesters = [];
+        $scope.availableSubjects = [];
+        $scope.selectedSemester = null;
+        $scope.selectedSubject = null;
+
+        if ($scope.selectedLevel && $scope.selectedDept) {
+          $scope.semesters = dataset[$scope.selectedLevel][$scope.selectedDept].semesters;
+        }
+      };
+
+      $scope.onSemesterChange = function() {
+        $scope.availableSubjects = [];
+        $scope.selectedSubject = null;
+
+        if ($scope.selectedLevel && $scope.selectedDept && $scope.selectedSemester) {
+          var deptObj = dataset[$scope.selectedLevel][$scope.selectedDept];
+          $scope.availableSubjects = (deptObj.courses && deptObj.courses[$scope.selectedSemester]) || [];
+        }
+      };
+    });
+
+    // Book Inventory Controller (Uses Shared Service)
+    app.controller('BookInventoryCtrl', function($scope, LibrarySharedService) {
+      $scope.books = LibrarySharedService.getBooks();
+      $scope.newBook = { title: '', author: '', isbn: '', copies: 3 };
+
+      $scope.addBook = function() {
+        LibrarySharedService.addBook({
+          isbn: $scope.newBook.isbn,
+          title: $scope.newBook.title,
+          author: $scope.newBook.author,
+          available: $scope.newBook.copies,
+          total: $scope.newBook.copies
+        });
+        $scope.newBook = { title: '', author: '', isbn: '', copies: 3 };
+      };
+
+      $scope.removeBook = function(b) {
+        LibrarySharedService.removeBook(b);
+      };
+    });
+
+    // Member Circulation Controller (Uses Shared Service)
+    app.controller('CirculationCtrl', function($scope, LibrarySharedService) {
+      $scope.members = LibrarySharedService.getMembers();
+      $scope.activeIssues = LibrarySharedService.getIssues();
+      $scope.issueForm = { member: '', bookIsbn: '' };
+
+      $scope.availableBooks = function() {
+        return LibrarySharedService.getBooks().filter(function(b) { return b.available > 0; });
+      };
+
+      $scope.issueBook = function() {
+        if ($scope.issueForm.member && $scope.issueForm.bookIsbn) {
+          var success = LibrarySharedService.issueBook($scope.issueForm.member, $scope.issueForm.bookIsbn);
+          if (!success) alert('Book copy not currently available!');
+          $scope.issueForm = { member: '', bookIsbn: '' };
+        }
+      };
+
+      $scope.returnBook = function(issue) {
+        LibrarySharedService.returnBook(issue);
+      };
+    });
+
+    // Library Telemetry / Stats Controller (Uses Shared Service)
+    app.controller('LibraryStatsCtrl', function($scope, LibrarySharedService) {
+      $scope.getBookCount = function() { return LibrarySharedService.getBooks().length; };
+      $scope.getIssuedCount = function() { return LibrarySharedService.getIssues().length; };
+      $scope.getTotalFineCollected = function() { return LibrarySharedService.getFinesCollected(); };
+    });
+  </script>
+</body>
+</html>
+

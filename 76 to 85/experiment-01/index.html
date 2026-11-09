@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiment 1 - Student Records and Filter</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+</head>
+<body ng-controller="StudentController">
+  <h2>Experiment 1: Student Records</h2>
+  <p>Search by student name, department, or another displayed field.</p>
+  <input ng-model="searchText" placeholder="Search students">
+  <table border="1" cellpadding="8">
+    <tr><th>ID</th><th>Name</th><th>Department</th><th>Marks</th></tr>
+    <tr ng-repeat="s in students | filter:searchText">
+      <td>{{s.id}}</td><td>{{s.name}}</td><td>{{s.department}}</td><td>{{s.marks}}</td>
+    </tr>
+  </table>
+  <script>
+    angular.module("studentApp", []).controller("StudentController", function($scope) {
+      $scope.searchText = "";
+      $scope.students = [
+        {id: 1, name: "Arun", department: "MCA", marks: 85},
+        {id: 2, name: "Priya", department: "BCA", marks: 90},
+        {id: 3, name: "Kumar", department: "MCA", marks: 78},
+        {id: 4, name: "Meena", department: "BSc CS", marks: 88}
+      ];
+    });
+  </script>
+</body>
+</html>

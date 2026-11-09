@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="employeeApp">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiment 9 - Employee Management</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+</head>
+<body ng-controller="EmployeeController">
+  <h2>Experiment 9: Employee Management</h2>
+  <form ng-submit="save()">
+    <input ng-model="employee.employeeId" placeholder="Employee ID" required>
+    <input ng-model="employee.name" placeholder="Employee Name" required>
+    <input ng-model="employee.department" placeholder="Department" required>
+    <button type="submit">{{editing ? "Update" : "Add Employee"}}</button>
+    <button type="button" ng-click="cancel()" ng-if="editing">Cancel</button>
+  </form>
+  <p>{{message}}</p><button ng-click="load()">Refresh Records</button>
+  <table border="1" cellpadding="8">
+    <tr><th>Employee ID</th><th>Name</th><th>Department</th><th>Actions</th></tr>
+    <tr ng-repeat="e in employees">
+      <td>{{e.employeeId}}</td><td>{{e.name}}</td><td>{{e.department}}</td>
+      <td><button ng-click="edit(e)">Edit</button><button ng-click="remove(e._id)">Delete</button></td>
+    </tr>
+  </table>
+  <script>
+    angular.module("employeeApp", []).controller("EmployeeController", function($scope, $http) {
+      $scope.employee = {}; $scope.employees = []; $scope.editing = false;
+      $scope.load = () => $http.get("/api/employees").then(r => $scope.employees = r.data)
+        .catch(() => $scope.message = "Unable to retrieve employees");
+      $scope.save = () => {
+        const req = $scope.editing
+          ? $http.put("/api/employees/" + $scope.employee._id, $scope.employee)
+          : $http.post("/api/employees", $scope.employee);
+        req.then(() => { $scope.message = "Employee saved successfully"; $scope.cancel(); $scope.load(); })
+          .catch(r => $scope.message = r.data.error || "Save failed");
+      };
+      $scope.edit = e => { $scope.employee = angular.copy(e); $scope.editing = true; };
+      $scope.remove = id => {
+        if (!confirm("Delete this employee?")) return;
+        $http.delete("/api/employees/" + id).then(() => { $scope.message = "Employee deleted"; $scope.load(); })
+          .catch(() => $scope.message = "Delete failed");
+      };
+      $scope.cancel = () => { $scope.employee = {}; $scope.editing = false; };
+      $scope.load();
+    });
+  </script>
+</body>
+</html>

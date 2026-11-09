@@ -1,0 +1,17 @@
+{
+  "id": 1,
+  "rollNo": "CSB-2026",
+  "name": "Alex Johnson",
+  "age": 21,
+  "dob": "2005-04-12",
+  "gender": "Male",
+  "email": "alex@example.com",
+  "phone": "9876543210",
+  "course": "B.Sc Computer Science",
+  "skills": ["HTML", "CSS", "JavaScript", "PHP"],
+  "city": "Chennai",
+  "batchTime": "09:00",
+  "address": "124 Tech Park Road, Velachery, Chennai - 600042",
+  "savedAsSeparateFile": true,
+  "generatedAt": "2026-09-06 11:20:00"
+}

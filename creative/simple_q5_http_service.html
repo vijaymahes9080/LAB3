@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="simpleQ5App">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Exam Q5: $http Services in AngularJS</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"><\/script>')</script>
+</head>
+<body ng-controller="HttpSimpleCtrl">
+
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">SIMPLE Q5</span>
+        <div class="header-title">
+          <h1>AngularJS $http Services & Asynchronous Requests</h1>
+          <p>Lab Exam Fundamental Question • Covers Program 39 & 402</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Creative Hub</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card mb-4" style="background: rgba(15, 23, 42, 0.7);">
+      <strong class="text-info">Lab Exam Question:</strong>
+      <p style="margin-top: 4px; color: #cbd5e1;">
+        "Write an AngularJS program to illustrate the usage of the $http service methods ($http.get, $http.post, $http.put, $http.delete) and render the returned server response dynamically."
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <!-- Controls -->
+      <div class="card">
+        <div class="card-title">
+          <span>Dispatch HTTP Methods</span>
+          <span class="badge badge-info">AJAX Calls</span>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">
+          Click any button below to trigger the corresponding <code>$http</code> method:
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <button class="btn btn-primary" ng-click="makeGet()">
+            1. Trigger $http.get() ➔ Fetch Student Record
+          </button>
+          <button class="btn btn-secondary" ng-click="makePost()">
+            2. Trigger $http.post() ➔ Create New Record
+          </button>
+          <button class="btn btn-secondary" ng-click="makePut()">
+            3. Trigger $http.put() ➔ Update Record
+          </button>
+          <button class="btn btn-danger" ng-click="makeDelete()">
+            4. Trigger $http.delete() ➔ Remove Record
+          </button>
+        </div>
+
+        <div style="margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);">
+          Active Endpoint Target: <code>https://jsonplaceholder.typicode.com/posts/1</code>
+        </div>
+      </div>
+
+      <!-- Response Panel -->
+      <div class="card">
+        <div class="card-title">
+          <span>Server Response Viewer</span>
+          <span class="badge badge-success">{{ lastStatus || 'Ready' }}</span>
+        </div>
+
+        <div style="font-size: 0.85rem; margin-bottom: 10px; color: #38bdf8;">
+          Last Method: <strong>{{ lastMethod || 'None' }}</strong>
+        </div>
+
+        <pre style="background: #090d16; padding: 12px; border-radius: 6px; font-family: monospace; font-size: 0.85rem; max-height: 250px; overflow-y: auto; color: #a5f3fc; border: 1px solid var(--border-color);">{{ responseData | json }}</pre>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    var app = angular.module('simpleQ5App', []);
+    app.controller('HttpSimpleCtrl', function($scope, $http) {
+      const url = 'https://jsonplaceholder.typicode.com/posts/1';
+
+      $scope.responseData = { message: 'Click any button to dispatch an asynchronous $http request.' };
+
+      $scope.makeGet = function() {
+        $scope.lastMethod = '$http.get()';
+        $http.get(url)
+          .then(function(res) {
+            $scope.responseData = res.data;
+            $scope.lastStatus = 'HTTP ' + res.status + ' OK';
+          })
+          .catch(function(err) {
+            $scope.responseData = { error: 'Network request completed with simulation fallback', status: 200, mockData: { id: 101, name: 'Vijay', course: 'MCA' } };
+            $scope.lastStatus = 'Mock 200 OK';
+          });
+      };
+
+      $scope.makePost = function() {
+        $scope.lastMethod = '$http.post()';
+        $http.post('https://jsonplaceholder.typicode.com/posts', { title: 'New Student Post', body: 'Web Tech Lab', userId: 101 })
+          .then(function(res) {
+            $scope.responseData = res.data;
+            $scope.lastStatus = 'HTTP ' + res.status + ' Created';
+          })
+          .catch(function() {
+            $scope.responseData = { id: 101, title: 'New Student Post', body: 'Created via POST', createdAt: new Date() };
+            $scope.lastStatus = 'Mock 201 Created';
+          });
+      };
+
+      $scope.makePut = function() {
+        $scope.lastMethod = '$http.put()';
+        $http.put(url, { id: 1, title: 'Updated Student Record', body: 'Modified in Lab' })
+          .then(function(res) {
+            $scope.responseData = res.data;
+            $scope.lastStatus = 'HTTP ' + res.status + ' Updated';
+          })
+          .catch(function() {
+            $scope.responseData = { id: 1, title: 'Updated Record', status: 'Updated successfully' };
+            $scope.lastStatus = 'Mock 200 Updated';
+          });
+      };
+
+      $scope.makeDelete = function() {
+        $scope.lastMethod = '$http.delete()';
+        $http.delete(url)
+          .then(function(res) {
+            $scope.responseData = { message: 'Resource deleted successfully!', status: res.status };
+            $scope.lastStatus = 'HTTP ' + res.status + ' Deleted';
+          })
+          .catch(function() {
+            $scope.responseData = { message: 'Mock delete confirmed', recordId: 1 };
+            $scope.lastStatus = 'Mock 200 Deleted';
+          });
+      };
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="examStoreApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Exam Q2: Dynamic E-Commerce Catalog & GST Billing ERP</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"><\/script>')</script>
+  <style>
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+    .catalog-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
+    .catalog-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-glow); border-color: rgba(99, 102, 241, 0.4); }
+    .item-img { width: 100%; height: 140px; border-radius: var(--radius-sm); object-fit: cover; background: #1e293b; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+    .star-active { color: #f59e0b; font-size: 1.1rem; }
+    .star-empty { color: #475569; font-size: 1.1rem; }
+    .badge-instock { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-lowstock { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-outstock { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+    
+    @media print {
+      body * { visibility: hidden; }
+      #printableInvoice, #printableInvoice * { visibility: visible; }
+      #printableInvoice { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; padding: 20px; }
+    }
+  </style>
+</head>
+<body ng-controller="StoreController" ng-cloak>
+
+  <!-- Navigation Bar -->
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">LAB EXAM Q2</span>
+        <div class="header-title">
+          <h1>Smart E-Commerce Catalog, POS Billing & Order Dispatch ERP</h1>
+          <p>Combines Programs: 38 (Filters), 41 (Attributes), 45 (Billing), 48 (Custom Directives) & 54 (Events)</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <span class="badge badge-primary">Cart Items: {{ getCartItemCount() }}</span>
+        <button class="btn btn-secondary btn-sm" ng-click="currentTab = 'catalog'" ng-class="{'btn-primary': currentTab === 'catalog'}">Catalog</button>
+        <button class="btn btn-secondary btn-sm" ng-click="currentTab = 'cart'" ng-class="{'btn-primary': currentTab === 'cart'}">Invoice & POS ({{ cart.length }})</button>
+        <button class="btn btn-secondary btn-sm" ng-click="currentTab = 'orders'" ng-class="{'btn-primary': currentTab === 'orders'}">Order Queue</button>
+        <a href="index.html" class="nav-btn">← Hub</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- TAB 1: PRODUCT CATALOG & CUSTOM DIRECTIVES -->
+    <div ng-show="currentTab === 'catalog'">
+      <div class="card mb-4">
+        <div class="flex-between" style="flex-wrap: wrap; gap: 15px;">
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <input type="text" class="form-control" style="width: 250px;" placeholder="Search catalog items..." ng-model="catalogSearch">
+            <select class="form-control" style="width: 170px;" ng-model="selectedCategory">
+              <option value="">All Categories</option>
+              <option value="Laptops">Laptops</option>
+              <option value="Accessories">Accessories</option>
+              <option value="Audio">Audio</option>
+              <option value="Smart Gadgets">Smart Gadgets</option>
+            </select>
+          </div>
+          <div style="color: var(--text-muted); font-size: 0.9rem;">
+            Showing {{ filteredProducts.length }} products
+          </div>
+        </div>
+      </div>
+
+      <div class="product-grid">
+        <div class="catalog-item" ng-repeat="p in (filteredProducts = (products | filter:catalogSearch | filter:{category: selectedCategory})) track by p.id">
+          <div>
+            <div class="item-img">{{ p.emoji }}</div>
+            <div class="flex-between mb-1">
+              <span class="badge badge-info" style="font-size: 0.7rem;">{{ p.category }}</span>
+              <!-- Custom Directive 1: Stock Status Tag -->
+              <product-stock-tag stock="p.stock"></product-stock-tag>
+            </div>
+            <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 4px;">{{ p.name }}</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">{{ p.description }}</p>
+            
+            <!-- Custom Directive 2: Star Rating -->
+            <star-rating rating="p.rating"></star-rating>
+          </div>
+
+          <div style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px;" class="flex-between">
+            <div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Unit Price</div>
+              <strong style="font-size: 1.15rem; color: #34d399;">{{ p.price | currency:"₹ " }}</strong>
+            </div>
+            <button class="btn btn-primary btn-sm" ng-click="addToCart(p)" ng-disabled="p.stock <= 0">
+              {{ p.stock > 0 ? '+ Add to Cart' : 'Out of Stock' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: DYNAMIC BILLING & POS INVOICE -->
+    <div ng-show="currentTab === 'cart'">
+      <div class="grid-2" style="align-items: start;">
+        
+        <!-- Cart Line Items Management -->
+        <div class="card">
+          <div class="card-title">
+            <span>Point of Sale (POS) Line Items</span>
+            <span class="badge badge-primary">{{ cart.length }} Unique Item(s)</span>
+          </div>
+
+          <table class="table" style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color); text-align: left; font-size: 0.85rem;">
+                <th style="padding: 8px;">Product</th>
+                <th style="padding: 8px;">Price</th>
+                <th style="padding: 8px; width: 100px;">Qty</th>
+                <th style="padding: 8px;">Subtotal</th>
+                <th style="padding: 8px; text-align: center;">Del</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in cart track by $index" style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 8px;">
+                  <strong>{{ item.name }}</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">GST: {{ item.gstRate }}%</div>
+                </td>
+                <td style="padding: 8px;">{{ item.price | currency:"₹ " }}</td>
+                <td style="padding: 8px;">
+                  <input type="number" class="form-control" style="padding: 4px 8px; font-size: 0.85rem;" min="1" max="{{ item.maxStock }}" ng-model="item.qty">
+                </td>
+                <td style="padding: 8px; font-weight: 600;">{{ (item.price * item.qty) | currency:"₹ " }}</td>
+                <td style="padding: 8px; text-align: center;">
+                  <button class="btn btn-danger btn-sm" style="padding: 2px 8px;" ng-click="removeFromCart($index)">×</button>
+                </td>
+              </tr>
+              <tr ng-if="cart.length === 0">
+                <td colspan="5" style="text-align: center; padding: 25px; color: var(--text-muted);">
+                  Your cart is empty. Add items from the Catalog tab.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top: 20px;">
+            <div class="form-group">
+              <label class="form-label">Customer Name</label>
+              <input type="text" class="form-control" ng-model="customer.name" placeholder="Customer Name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Promotional Discount (%)</label>
+              <input type="number" class="form-control" min="0" max="50" ng-model="customer.discount">
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculated Summary & Printable Invoice -->
+        <div class="card" id="printableInvoice">
+          <div class="card-title">
+            <span>Tax Invoice / Statement</span>
+            <span class="badge badge-success">Live Computed</span>
+          </div>
+
+          <div style="font-size: 0.85rem; margin-bottom: 15px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
+            <div class="flex-between">
+              <span>Customer: <strong>{{ customer.name || 'Walk-in Client' }}</strong></span>
+              <span>Date: <strong>{{ today | date:'mediumDate' }}</strong></span>
+            </div>
+            <div class="flex-between mt-1">
+              <span>Invoice No: <strong>INV-{{ invoiceNumber }}</strong></span>
+              <span>Currency: <strong>INR (₹)</strong></span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 15px;">
+            <div class="flex-between mb-1" style="font-size: 0.9rem;">
+              <span>Gross Total:</span>
+              <span>{{ calculateGross() | currency:"₹ " }}</span>
+            </div>
+            <div class="flex-between mb-1" style="font-size: 0.9rem; color: #f87171;">
+              <span>Discount ({{ customer.discount || 0 }}%):</span>
+              <span>- {{ calculateDiscountAmount() | currency:"₹ " }}</span>
+            </div>
+            <div class="flex-between mb-1" style="font-size: 0.9rem; color: #60a5fa;">
+              <span>Taxable Value:</span>
+              <span>{{ calculateTaxable() | currency:"₹ " }}</span>
+            </div>
+            <div class="flex-between mb-1" style="font-size: 0.9rem; color: #fbbf24;">
+              <span>Total GST (CGST + SGST):</span>
+              <span>+ {{ calculateTotalGST() | currency:"₹ " }}</span>
+            </div>
+            <div class="flex-between pt-2 mt-2" style="border-top: 2px solid var(--border-color); font-size: 1.25rem; font-weight: 800; color: #34d399;">
+              <span>Grand Payable Total:</span>
+              <span>{{ calculateGrandTotal() | currency:"₹ " }}</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button class="btn btn-primary" style="flex: 1;" ng-disabled="cart.length === 0" ng-click="checkoutOrder()">
+              🚀 Finalize & Place Order
+            </button>
+            <button class="btn btn-secondary" onclick="window.print()" ng-disabled="cart.length === 0">
+              🖨️ Print Invoice
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: INTERACTIVE ORDER DISPATCH WORKFLOW (Events & Inline Edit) -->
+    <div ng-show="currentTab === 'orders'">
+      <div class="card">
+        <div class="card-title">
+          <span>Interactive Order Dispatch & Fulfillment Queue</span>
+          <span class="badge badge-info">Double-click or Keydown to edit status</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">
+          Demonstrating Program 54 event directives: <code>ng-dblclick</code> to trigger inline editing, <code>ng-keydown</code> (Enter to save, Esc to cancel), and <code>ng-blur</code>.
+        </p>
+
+        <table class="table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border-color); text-align: left;">
+              <th style="padding: 10px;">Order ID</th>
+              <th style="padding: 10px;">Customer</th>
+              <th style="padding: 10px;">Total Amount</th>
+              <th style="padding: 10px;">Fulfillment Status (Double-Click to Edit)</th>
+              <th style="padding: 10px; text-align: center;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="ord in orders track by ord.id" style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 10px; font-family: 'Fira Code', monospace;">{{ ord.id }}</td>
+              <td style="padding: 10px; font-weight: 600;">{{ ord.customer }}</td>
+              <td style="padding: 10px; color: #34d399; font-weight: 700;">{{ ord.amount | currency:"₹ " }}</td>
+              <td style="padding: 10px;">
+                <div ng-if="!ord.editing" ng-dblclick="startEditOrder(ord)" title="Double click to edit status" style="cursor: pointer;">
+                  <span class="badge" ng-class="{'badge-success': ord.status === 'Dispatched', 'badge-warning': ord.status === 'Processing', 'badge-danger': ord.status === 'Cancelled'}">
+                    {{ ord.status }} ✏️
+                  </span>
+                </div>
+                <div ng-if="ord.editing">
+                  <select class="form-control" style="width: 160px; display: inline-block;" ng-model="ord.status" ng-blur="finishEditOrder(ord)" ng-keydown="handleKey($event, ord)">
+                    <option value="Processing">Processing</option>
+                    <option value="Dispatched">Dispatched</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </div>
+              </td>
+              <td style="padding: 10px; text-align: center;">
+                <button class="btn btn-secondary btn-sm" ng-click="startEditOrder(ord)" ng-if="!ord.editing">Change Status</button>
+                <button class="btn btn-primary btn-sm" ng-click="finishEditOrder(ord)" ng-if="ord.editing">Save</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    var app = angular.module('examStoreApp', []);
+
+    // Custom Directive 1: Stock Status Badge
+    app.directive('productStockTag', function() {
+      return {
+        restrict: 'E',
+        scope: { stock: '=' },
+        template: '<span class="badge" ng-class="stockClass">{{ stockText }}</span>',
+        link: function(scope) {
+          scope.$watch('stock', function(val) {
+            if (val > 5) {
+              scope.stockText = val + ' In Stock';
+              scope.stockClass = 'badge-instock';
+            } else if (val > 0) {
+              scope.stockText = 'Only ' + val + ' Left!';
+              scope.stockClass = 'badge-lowstock';
+            } else {
+              scope.stockText = 'Out of Stock';
+              scope.stockClass = 'badge-outstock';
+            }
+          });
+        }
+      };
+    });
+
+    // Custom Directive 2: Star Rating Component
+    app.directive('starRating', function() {
+      return {
+        restrict: 'E',
+        scope: { rating: '=' },
+        template: '<div style="margin-top: 4px;">' +
+                  '<span ng-repeat="s in [1,2,3,4,5]" ng-class="s <= rating ? \'star-active\' : \'star-empty\'">★</span>' +
+                  ' <small style="color: var(--text-muted); font-size: 0.75rem;">({{ rating }}.0)</small>' +
+                  '</div>'
+      };
+    });
+
+    app.controller('StoreController', function($scope) {
+      $scope.currentTab = 'catalog';
+      $scope.today = new Date();
+      $scope.invoiceNumber = Math.floor(1000 + Math.random() * 9000);
+
+      $scope.products = [
+        { id: 101, name: 'UltraPro Developer Laptop', category: 'Laptops', price: 84999, stock: 7, rating: 5, emoji: '💻', gstRate: 18, description: 'Core i7 14th Gen, 32GB RAM, 1TB NVMe SSD' },
+        { id: 102, name: 'Mechanical Ergonomic Keyboard', category: 'Accessories', price: 5499, stock: 12, rating: 4, emoji: '⌨️', gstRate: 18, description: 'Hot-swappable RGB mechanical switches' },
+        { id: 103, name: 'Precision Wireless Mouse', category: 'Accessories', price: 2199, stock: 3, rating: 4, emoji: '🖱️', gstRate: 18, description: '4000 DPI darkfield laser sensor' },
+        { id: 104, name: 'Noise-Cancelling Studio Headset', category: 'Audio', price: 9999, stock: 6, rating: 5, emoji: '🎧', gstRate: 18, description: 'Active ANC, 40-hour battery life' },
+        { id: 105, name: 'Smart Fitness Tracker Pro', category: 'Smart Gadgets', price: 3499, stock: 0, rating: 3, emoji: '⌚', gstRate: 12, description: 'OLED screen, SpO2 & Heart Rate monitoring' },
+        { id: 106, name: '4K Ultra-Wide Monitor 32"', category: 'Laptops', price: 31999, stock: 4, rating: 5, emoji: '🖥️', gstRate: 18, description: 'IPS 144Hz HDR400 professional display' }
+      ];
+
+      $scope.cart = [
+        { id: 101, name: 'UltraPro Developer Laptop', price: 84999, qty: 1, maxStock: 7, gstRate: 18 },
+        { id: 102, name: 'Mechanical Ergonomic Keyboard', price: 5499, qty: 2, maxStock: 12, gstRate: 18 }
+      ];
+
+      $scope.customer = {
+        name: 'Vijay Technologies Pvt Ltd',
+        discount: 5
+      };
+
+      $scope.orders = [
+        { id: 'ORD-8821', customer: 'Ravi Teja', amount: 90498, status: 'Dispatched', editing: false },
+        { id: 'ORD-8822', customer: 'Asha Sundaram', amount: 11798, status: 'Processing', editing: false },
+        { id: 'ORD-8823', customer: 'Kiran Kumar', amount: 5499, status: 'Processing', editing: false }
+      ];
+
+      $scope.getCartItemCount = function() {
+        var count = 0;
+        angular.forEach($scope.cart, function(i) { count += i.qty; });
+        return count;
+      };
+
+      $scope.addToCart = function(product) {
+        var existing = $scope.cart.find(function(i) { return i.id === product.id; });
+        if (existing) {
+          if (existing.qty < product.stock) {
+            existing.qty++;
+          } else {
+            alert('Cannot exceed available stock limit (' + product.stock + ')');
+          }
+        } else {
+          $scope.cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            qty: 1,
+            maxStock: product.stock,
+            gstRate: product.gstRate
+          });
+        }
+      };
+
+      $scope.removeFromCart = function(index) {
+        $scope.cart.splice(index, 1);
+      };
+
+      // Financial Calculations
+      $scope.calculateGross = function() {
+        var total = 0;
+        angular.forEach($scope.cart, function(item) { total += (item.price * item.qty); });
+        return total;
+      };
+
+      $scope.calculateDiscountAmount = function() {
+        var discRate = ($scope.customer.discount || 0) / 100;
+        return $scope.calculateGross() * discRate;
+      };
+
+      $scope.calculateTaxable = function() {
+        return $scope.calculateGross() - $scope.calculateDiscountAmount();
+      };
+
+      $scope.calculateTotalGST = function() {
+        var taxable = $scope.calculateTaxable();
+        // Weighted average GST rate across cart items
+        if ($scope.calculateGross() === 0) return 0;
+        var totalTax = 0;
+        var gross = $scope.calculateGross();
+        angular.forEach($scope.cart, function(item) {
+          var itemTotal = item.price * item.qty;
+          var itemRatio = itemTotal / gross;
+          var itemTaxable = taxable * itemRatio;
+          totalTax += itemTaxable * (item.gstRate / 100);
+        });
+        return totalTax;
+      };
+
+      $scope.calculateGrandTotal = function() {
+        return $scope.calculateTaxable() + $scope.calculateTotalGST();
+      };
+
+      $scope.checkoutOrder = function() {
+        var newOrder = {
+          id: 'ORD-' + $scope.invoiceNumber,
+          customer: $scope.customer.name || 'Walk-in Client',
+          amount: $scope.calculateGrandTotal(),
+          status: 'Processing',
+          editing: false
+        };
+        $scope.orders.unshift(newOrder);
+
+        // Deduct from stock
+        angular.forEach($scope.cart, function(cartItem) {
+          var prod = $scope.products.find(function(p) { return p.id === cartItem.id; });
+          if (prod) prod.stock -= cartItem.qty;
+        });
+
+        alert('Order ORD-' + $scope.invoiceNumber + ' registered successfully!');
+        $scope.cart = [];
+        $scope.invoiceNumber = Math.floor(1000 + Math.random() * 9000);
+        $scope.currentTab = 'orders';
+      };
+
+      // Event handlers for inline editing
+      $scope.startEditOrder = function(ord) {
+        ord.editing = true;
+      };
+
+      $scope.finishEditOrder = function(ord) {
+        ord.editing = false;
+      };
+
+      $scope.handleKey = function(event, ord) {
+        if (event.keyCode === 13) { // Enter key
+          ord.editing = false;
+        } else if (event.keyCode === 27) { // Escape key
+          ord.editing = false;
+        }
+      };
+    });
+  </script>
+</body>
+</html>
+

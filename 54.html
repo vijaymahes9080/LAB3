@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 54 - To-Do Management</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>.task-done { text-decoration: line-through; color: var(--text-muted); }</style>
+  <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="TodoCtrl">
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#54</span>
+        <div class="header-title">
+          <h1>Interactive To-Do Application</h1>
+          <p>AngularJS DOM Event Directives (ng-click, ng-keydown)</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 750px;">
+    <!-- Add Task -->
+    <div class="card mb-4">
+      <div class="card-title"><span>Add Task</span><span class="badge badge-info">Press Enter or Add</span></div>
+      <div style="display: flex; gap: 10px;">
+        <input type="text" class="form-control" ng-model="newText" ng-keydown="$event.keyCode === 13 && add()" placeholder="What needs to be done?">
+        <button class="btn btn-primary" ng-click="add()">Add Task</button>
+      </div>
+    </div>
+
+    <!-- Task List -->
+    <div class="card">
+      <div class="card-title"><span>Active Tasks</span><span class="badge badge-success">{{ remaining() }} Remaining of {{ tasks.length }}</span></div>
+      <div class="table-container">
+        <table class="custom-table">
+          <thead><tr><th style="width: 50px;">Done</th><th>Task Description</th><th style="width: 90px;">Action</th></tr></thead>
+          <tbody>
+            <tr ng-repeat="t in tasks">
+              <td><input type="checkbox" ng-model="t.done" style="transform: scale(1.3); cursor: pointer;"></td>
+              <td><span ng-class="{'task-done': t.done}">{{ t.text }}</span></td>
+              <td><button class="btn btn-danger btn-sm" ng-click="tasks.splice($index, 1)">Remove</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="btn btn-secondary btn-sm" ng-click="clear()">Clear Completed</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('todoApp', [])
+      .controller('TodoCtrl', function($scope) {
+        $scope.tasks = [
+          { text: 'Complete AngularJS Lab Manual', done: false },
+          { text: 'Review Program 54 DOM Events', done: true },
+          { text: 'Submit Practical Record to HOD', done: false }
+        ];
+
+        $scope.add = function() {
+          if ($scope.newText && $scope.newText.trim()) {
+            $scope.tasks.push({ text: $scope.newText.trim(), done: false });
+            $scope.newText = '';
+          }
+        };
+        $scope.clear = function() { $scope.tasks = $scope.tasks.filter(function(t) { return !t.done; }); };
+        $scope.remaining = function() { return $scope.tasks.filter(function(t) { return !t.done; }).length; };
+      });
+  </script>
+</body>
+</html>

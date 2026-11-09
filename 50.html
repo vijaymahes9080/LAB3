@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="nestedScopeApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Program 50 - Department Scopes</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/angular.min.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">#50</span>
+        <div class="header-title">
+          <h1>Department Nested Scopes</h1>
+          <p>Scope Hierarchy, Prototypal Inheritance & $parent Access</p>
+        </div>
+      </div>
+      <a href="index.html" class="nav-btn">← Lab Index</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Parent Scope (DeanCtrl) -->
+    <div class="card mb-4" ng-controller="DeanCtrl" style="border: 2px solid var(--primary);">
+      <div class="card-title"><span>Level 1: Parent Scope (DeanCtrl)</span><span class="badge badge-info">Parent</span></div>
+      <div class="grid-3 mb-3">
+        <div class="form-group">
+          <label class="form-label">College Name (Parent)</label>
+          <input type="text" class="form-control" ng-model="collegeName">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Dean Name</label>
+          <input type="text" class="form-control" ng-model="deanName">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Institutional Budget (₹)</label>
+          <input type="number" class="form-control" ng-model="budget">
+        </div>
+      </div>
+
+      <!-- Child Scope (DeptCtrl nested inside DeanCtrl) -->
+      <div class="card" ng-controller="DeptCtrl" style="background: rgba(15,23,42,0.85); border: 2px solid var(--secondary); margin-top: 20px;">
+        <div class="card-title"><span>Level 2: Child Scope (DeptCtrl)</span><span class="badge badge-success">Child Scope</span></div>
+        <div class="grid-2 mb-3">
+          <div class="form-group">
+            <label class="form-label">Department Name (Child)</label>
+            <input type="text" class="form-control" ng-model="deptName">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Department HOD</label>
+            <input type="text" class="form-control" ng-model="hodName">
+          </div>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: var(--radius-sm);">
+          <h4 style="color: #38bdf8; margin-bottom: 8px;">Scope Inheritance Inspector:</h4>
+          <ul style="list-style: none; line-height: 2;">
+            <li>🏛️ <strong>Inherited College:</strong> {{ collegeName }} <em>(from DeanCtrl)</em></li>
+            <li>👨‍🏫 <strong>Inherited Dean:</strong> {{ deanName }} <em>(from DeanCtrl)</em></li>
+            <li>💻 <strong>Dept Property:</strong> {{ deptName }} - HOD: {{ hodName }}</li>
+            <li>💰 <strong>Parent Budget via $parent.budget:</strong> ₹{{ $parent.budget | number }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    angular.module('nestedScopeApp', [])
+      .controller('DeanCtrl', function($scope) {
+        $scope.collegeName = 'Gandhigram Rural Institute';
+        $scope.deanName = 'Dr. S. Radhakrishnan';
+        $scope.budget = 5000000;
+      })
+      .controller('DeptCtrl', function($scope) {
+        $scope.deptName = 'Computer Science & Engineering';
+        $scope.hodName = 'Dr. K. Raman';
+      });
+  </script>
+</body>
+</html>

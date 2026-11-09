@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="tableApp">
+<head>
+<meta charset="utf-8" />
+<title>ng-repeat — Static Table</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script><style>
+body { font-family: Arial, sans-serif; margin: 30px; }
+table { border-collapse: collapse; width: 80%; max-width: 800px; }
+th, td { padding: 10px 12px; border: 1px solid #ccc; text-align: left; }
+thead { background: #2c7be5; color: white; }
+tbody tr:nth-child(even) { background: #f6f8fb; }
+caption { font-size: 1.2em; margin-bottom: 8px; font-weight: bold; }
+</style>
+</head>
+<body ng-controller="TableCtrl">
+<table>
+<caption>Student List (Static)</caption>
+<thead>
+<tr><th>#</th><th>Name</th><th>Age</th><th>Course</th></tr>
+</thead>
+<tbody>
+<tr ng-repeat="s in students track by $index">
+<td>{{ $index + 1 }}</td>
+<td>{{ s.name }}</td>
+<td>{{ s.age }}</td>
+<td>{{ s.course }}</td>
+</tr>
+</tbody>
+</table>
+<script>
+angular.module('tableApp', [])
+.controller('TableCtrl', function($scope) {
+$scope.students = [
+{ name: 'Sam', age: 20, course: 'CSE' }, { name: 'Asha', age: 21, course: 'ECE' }, { name: 'Ravi', age: 22, course: 'ME' }, { name: 'Kiran', age: 19, course: 'IT' }
+];
+});
+</script>
+</body>
+</html>

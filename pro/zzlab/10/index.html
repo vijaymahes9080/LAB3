@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Demo</title>
+    <style>
+        body{
+            font-family: Arial;
+            margin:20px;
+        }
+
+        a{
+            text-decoration:none;
+            margin:10px;
+            color:blue;
+        }
+
+        .box{
+            width:60px;
+            height:60px;
+            border:3px solid red;
+            display:inline-block;
+            text-align:center;
+            line-height:60px;
+            margin:10px;
+        }
+
+        .shadow{
+            padding:15px;
+            width:120px;
+            box-shadow:3px 3px 5px gray;
+            margin:10px 0;
+        }
+
+        .circle{
+            width:60px;
+            height:60px;
+            background:orange;
+            border-radius:50%;
+        }
+
+        /* Triangle using borders */
+        .triangle{
+            width:0;
+            height:0;
+            border-left:30px solid transparent;
+            border-right:30px solid transparent;
+            border-bottom:55px solid green;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Navigation Bar</h2>
+
+<a href="#">Home</a>
+<a href="#">About</a>
+<a href="#">Contact</a>
+<a href="https://www.google.com/">ANOTHER WEBSITE</a>
+
+<h2>Border</h2>
+
+<div class="box">Box</div>
+
+<h2>Shadow</h2>
+
+<div class="shadow">Shadow Box</div>
+
+<h2>Shape</h2>
+
+<div class="circle"></div> <hr>
+<div class="triangle"></div>
+</body>
+</html>

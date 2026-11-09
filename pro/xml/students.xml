@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE students SYSTEM "students.dtd">
+<students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="students.xsd">
+    <student status="enrolled">
+        <id>1</id>
+        <rollNo>CSB-2026</rollNo>
+        <name>Alex Johnson</name>
+        <age>21</age>
+        <dob>2005-04-12</dob>
+        <gender>Male</gender>
+        <email>alex@example.com</email>
+        <phone>9876543210</phone>
+        <course>BSc CS</course>
+        <skills>HTML, CSS, JavaScript, PHP</skills>
+        <city>Chennai</city>
+        <batch_time>09:00</batch_time>
+        <address>124 Tech Park Road, Velachery, Chennai</address>
+    </student>
+    <student status="enrolled">
+        <id>2</id>
+        <rollNo>MCA-2026</rollNo>
+        <name>Sophia Miller</name>
+        <age>23</age>
+        <dob>2003-08-25</dob>
+        <gender>Female</gender>
+        <email>sophia@example.com</email>
+        <phone>9123456780</phone>
+        <course>MCA</course>
+        <skills>Python, MySQL, PHP</skills>
+        <city>Bangalore</city>
+        <batch_time>14:00</batch_time>
+        <address>78 Silicon Valley Residency, Indiranagar, Bangalore</address>
+    </student>
+</students>

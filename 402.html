@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="tableAppServer">
+<head>
+<meta charset="utf-8" />
+<title>ng-repeat — Table from PHP (JSON)</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<style>
+body { font-family: Arial, sans-serif; margin: 30px; }
+table { border-collapse: collapse; width: 90%; max-width: 900px; }
+th, td { padding: 10px 12px; border: 1px solid #ddd; text-align: left; }
+thead { background: #28a745; color: #fff; }
+tbody tr:hover { background: #eef9f0; }
+caption { font-weight: bold; margin-bottom: 8px; }
+.loading { color: #666; margin-top: 12px; }
+.error { color: red; margin-top: 12px; }
+</style>
+</head>
+<body ng-controller="ServerTableCtrl">
+<table ng-if="students.length">
+<caption>Student List (From PHP)</caption>
+<thead>
+<tr><th>#</th><th>Name</th><th>Age</th><th>Course</th></tr>
+</thead>
+<tbody>
+<tr ng-repeat="s in students track by $index">
+<td>{{ $index + 1 }}</td>
+<td>{{ s.name }}</td>
+<td>{{ s.age }}</td>
+<td>{{ s.course }}</td>
+</tr>
+</tbody>
+</table>
+<div class="loading" ng-if="loading">Loading data from server...</div>
+<div class="error" ng-if="error">{{ error }}</div>
+<script>
+angular.module('tableAppServer', [])
+.controller('ServerTableCtrl', function($scope, $http) {
+$scope.students = [];
+$scope.loading = true;
+$scope.error = null;
+// Adjust path if PHP file is in a different folder
+$http.get('students.php')
+.then(function(response){
+$scope.students = response.data;
+$scope.loading = false;
+})
+.catch(function(err){
+$scope.error = 'Failed to load data. Check students.php and server.';
+$scope.loading = false;
+console.error(err);
+});
+});
+</script>
+</body>
+</html>

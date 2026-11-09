@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="authApp">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Program 58 - User Login</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .err {
+      color: #ef4444;
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+  </style>
+
+  <script src="js/angular.min.js"></script>
+</head>
+
+<body ng-controller="AuthCtrl">
+
+  <header class="app-header">
+    <div class="container header-content">
+
+      <div class="header-left">
+
+        <span class="badge-id">#58</span>
+
+        <div class="header-title">
+          <h1>User Login System</h1>
+          <p>Gmail Login & Password Validation</p>
+        </div>
+
+      </div>
+
+      <a href="index.html" class="nav-btn">
+        ← Lab Index
+      </a>
+
+    </div>
+  </header>
+
+
+  <main class="container" style="max-width: 550px;">
+
+    <!-- Logged In State -->
+    <div
+      class="card text-center"
+      ng-if="currentUser"
+      style="border-color: #10b981;">
+
+      <div style="font-size: 2.8rem;">
+        👤
+      </div>
+
+      <h2 style="color: #fff; margin: 8px 0 4px 0;">
+        Welcome!
+      </h2>
+
+      <p class="text-muted">
+        {{ currentUser.email }}
+      </p>
+
+      <span class="badge badge-success mt-2">
+        Active Session
+      </span>
+
+      <div style="margin-top: 20px;">
+
+        <button
+          class="btn btn-secondary"
+          ng-click="logout()">
+          Sign Out
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Login Form -->
+    <div class="card" ng-if="!currentUser">
+
+      <form
+        name="lForm"
+        ng-submit="login()"
+        novalidate>
+
+        <!-- Email -->
+        <div class="form-group">
+
+          <label class="form-label">
+            Gmail Address *
+          </label>
+
+          <input
+            type="email"
+            name="email"
+            class="form-control"
+            ng-model="log.email"
+            required
+            pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+            placeholder="name@gmail.com">
+
+
+          <!-- Email Required Error -->
+          <div
+            class="err"
+            ng-show="lForm.email.$touched &&
+                     lForm.email.$error.required">
+
+            Email is required.
+
+          </div>
+
+
+          <!-- Gmail Validation Error -->
+          <div
+            class="err"
+            ng-show="lForm.email.$touched &&
+                     lForm.email.$error.pattern">
+
+            Please enter a valid Gmail address ending with @gmail.com.
+
+          </div>
+
+        </div>
+
+
+        <!-- Password -->
+        <div class="form-group">
+
+          <label class="form-label">
+            Password *
+          </label>
+
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            ng-model="log.password"
+            required
+            minlength="6"
+            maxlength="10"
+            placeholder="Enter password">
+
+
+          <!-- Password Required -->
+          <div
+            class="err"
+            ng-show="lForm.password.$touched &&
+                     lForm.password.$error.required">
+
+            Password is required.
+
+          </div>
+
+
+          <!-- Minimum Length -->
+          <div
+            class="err"
+            ng-show="lForm.password.$touched &&
+                     lForm.password.$error.minlength">
+
+            Password must be at least 6 characters.
+
+          </div>
+
+
+          <!-- Maximum Length -->
+          <div
+            class="err"
+            ng-show="lForm.password.$touched &&
+                     lForm.password.$error.maxlength">
+
+            Password must not exceed 10 characters.
+
+          </div>
+
+        </div>
+
+
+        <!-- Login Error -->
+        <div
+          class="err mb-3"
+          ng-if="logErr">
+
+          {{ logErr }}
+
+        </div>
+
+
+        <!-- Login Button -->
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="width: 100%;"
+          ng-disabled="lForm.$invalid">
+
+          Sign In
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </main>
+
+
+  <script>
+
+    angular.module('authApp', [])
+
+      .controller('AuthCtrl', function($scope) {
+
+        /*
+         * Login fields
+         */
+        $scope.log = {
+          email: '',
+          password: ''
+        };
+
+
+        /*
+         * Login account
+         *
+         * Email must be @gmail.com
+         * Password is 6-10 characters
+         */
+        $scope.users = [
+          {
+            email: 'student@gmail.com',
+            password: 'password1'
+          }
+        ];
+
+
+        /*
+         * Login
+         */
+        $scope.login = function() {
+
+          $scope.logErr = '';
+
+          var u = $scope.users.find(function(user) {
+
+            return user.email === $scope.log.email &&
+                   user.password === $scope.log.password;
+
+          });
+
+
+          if (u) {
+
+            $scope.currentUser = u;
+
+            $scope.log = {};
+
+          } else {
+
+            $scope.logErr =
+              'Invalid Gmail address or password.';
+
+          }
+
+        };
+
+
+        /*
+         * Logout
+         */
+        $scope.logout = function() {
+
+          $scope.currentUser = null;
+
+          $scope.log = {
+            email: '',
+            password: ''
+          };
+
+          $scope.logErr = '';
+
+        };
+
+      });
+
+  </script>
+
+</body>
+</html>

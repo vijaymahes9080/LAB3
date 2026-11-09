@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="examAcademicApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Exam Q1: Integrated Student Academic & Analytics System</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/angular.min.js"></script>
+  <script>window.angular || document.write('<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"><\/script>')</script>
+  <style>
+    .badge-pass { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-fail { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+    .badge-dist { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .audit-box { max-height: 180px; overflow-y: auto; font-family: 'Fira Code', monospace; font-size: 0.8rem; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 10px; }
+    .audit-entry { padding: 4px 0; border-bottom: 1px dashed rgba(255, 255, 255, 0.08); }
+    .progress-track { height: 10px; border-radius: 5px; background: rgba(255, 255, 255, 0.1); overflow: hidden; margin-top: 6px; }
+    .progress-fill { height: 100%; transition: width 0.3s ease; }
+    .stat-badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; text-transform: uppercase; }
+  </style>
+</head>
+<body ng-controller="AcademicController">
+
+  <!-- Header Section -->
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="header-left">
+        <span class="badge-id">LAB EXAM Q1</span>
+        <div class="header-title">
+          <h1>Comprehensive Academic Performance & Result Analytics Portal</h1>
+          <p>Combines Programs: 34, 35, 36, 42, 44, 47, 49, 52 & 57</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <span class="badge badge-success">Syllabus Fusion Level: High</span>
+        <a href="index.html" class="nav-btn">← Creative Exam Hub</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Top Statistical Summary Ribbon -->
+    <div class="grid-4 mb-4">
+      <div class="stat-box">
+        <div class="stat-val text-info">{{ students.length }}</div>
+        <div class="stat-label">Total Registered Students</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val text-success">{{ getPassPercentage() | number:1 }}%</div>
+        <div class="stat-label">Batch Pass Rate</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val text-warning">{{ getDistinctionCount() }}</div>
+        <div class="stat-label">Distinction Honorees</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" style="color: #a855f7;">{{ getAverageGPA() | number:2 }}</div>
+        <div class="stat-label">Batch Average GPA</div>
+      </div>
+    </div>
+
+    <div class="grid-2 mb-4" style="align-items: start;">
+
+      <!-- Registration & Dynamic Assessment Form -->
+      <div class="card">
+        <div class="card-title">
+          <span>Student Admission & Marks Entry</span>
+          <span class="badge" ng-class="{'badge-success': studentForm.$valid, 'badge-warning': studentForm.$invalid}">
+            {{ studentForm.$valid ? 'Form Valid' : 'Incomplete Fields' }}
+          </span>
+        </div>
+
+        <form name="studentForm" ng-submit="saveStudent()" novalidate>
+          <div class="form-group">
+            <label class="form-label">Student Full Name *</label>
+            <input type="text" name="name" class="form-control" ng-model="currentStudent.name" required placeholder="e.g. Vijay Kumar">
+            <span class="text-danger" style="font-size: 0.75rem;" ng-show="studentForm.name.$dirty && studentForm.name.$invalid">Name is mandatory.</span>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Roll Number *</label>
+              <input type="text" name="rollNo" class="form-control" ng-model="currentStudent.rollNo" required ng-pattern="/^[A-Z0-9]{5,10}$/" placeholder="e.g. 24MCA101">
+              <span class="text-danger" style="font-size: 0.75rem;" ng-show="studentForm.rollNo.$dirty && studentForm.rollNo.$invalid">Must be 5-10 alphanumeric characters.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Department *</label>
+              <select class="form-control" ng-model="currentStudent.department" required>
+                <option value="">-- Choose Department --</option>
+                <option value="Computer Applications">Computer Applications</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Data Science">Data Science</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Attendance Percentage (0 - 100)%</label>
+            <input type="range" class="form-control" min="40" max="100" ng-model="currentStudent.attendance">
+            <div class="flex-between" style="font-size: 0.8rem; margin-top: 4px;">
+              <span>Current Attendance: <strong>{{ currentStudent.attendance }}%</strong></span>
+              <span class="stat-badge" ng-class="currentStudent.attendance >= 75 ? 'badge-pass' : 'badge-fail'">
+                {{ currentStudent.attendance >= 75 ? 'Eligible for Exam' : 'Condonation / Ineligible' }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Component Marks (Theory, Internal, Practical) -->
+          <div class="form-group">
+            <label class="form-label">Assessment Subject Scores (0 to 100)</label>
+            <div class="grid-3">
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted);">Web Tech (M1)</label>
+                <input type="number" class="form-control" min="0" max="100" ng-model="currentStudent.m1" required>
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted);">Node Backend (M2)</label>
+                <input type="number" class="form-control" min="0" max="100" ng-model="currentStudent.m2" required>
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted);">Cloud & DB (M3)</label>
+                <input type="number" class="form-control" min="0" max="100" ng-model="currentStudent.m3" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Expressions & Preview Inside Card -->
+          <div style="background: rgba(15, 23, 42, 0.5); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 16px;">
+            <div class="flex-between">
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Calculated Aggregate:</span>
+              <strong>{{ (currentStudent.m1 + currentStudent.m2 + currentStudent.m3) }} / 300 ({{ ((currentStudent.m1 + currentStudent.m2 + currentStudent.m3) / 3) | number:1 }}%)</strong>
+            </div>
+            <div class="flex-between mt-1">
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Calculated GPA:</span>
+              <strong class="text-warning">{{ calculateGPA(currentStudent) | number:2 }} / 10.0</strong>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px;">
+            <button type="submit" class="btn btn-primary" style="flex: 1;" ng-disabled="studentForm.$invalid">
+              {{ isEditing ? 'Update Student Record' : 'Enroll & Evaluate Student' }}
+            </button>
+            <button type="button" class="btn btn-secondary" ng-click="resetForm()">Reset</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Real-time Watcher Audit Log & Attendance Directives Showcase -->
+      <div class="card">
+        <div class="card-title">
+          <span>Live $scope.$watch Activity Stream</span>
+          <span class="badge badge-info">Deep Watcher</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">
+          Demonstrating <code>$scope.$watch</code> (Program 49) tracking live score edits and computing risk triggers instantly.
+        </p>
+
+        <div class="audit-box mb-3">
+          <div class="audit-entry" ng-repeat="log in auditLogs track by $index">
+            <span style="color: #6366f1;">[{{ log.time }}]</span> {{ log.message }}
+          </div>
+        </div>
+
+        <div class="card-title" style="margin-top: 15px;">
+          <span>Attendance Directive Conditions</span>
+          <span class="badge badge-info">ng-switch & ng-if</span>
+        </div>
+        <div style="padding: 12px; background: rgba(15, 23, 42, 0.4); border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+          <div ng-switch="getAttendanceTier(currentStudent.attendance)">
+            <div ng-switch-when="EXCELLENT" style="color: #34d399;">
+              🌟 <strong>Exemplary Attendance (90%+)</strong>: Full internal credit awarded.
+            </div>
+            <div ng-switch-when="GOOD" style="color: #60a5fa;">
+              ✅ <strong>Standard Attendance (75-89%)</strong>: Eligible for Hall Ticket generation.
+            </div>
+            <div ng-switch-when="WARNING" style="color: #fbbf24;">
+              ⚠️ <strong>Shortage Warning (65-74%)</strong>: Requires Dean condonation approval.
+            </div>
+            <div ng-switch-default style="color: #f87171;">
+              🛑 <strong>Critical Attendance Shortage (&lt;65%)</strong>: Red-listed; detention protocol active.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student Performance Register & Analytics Table -->
+    <div class="card">
+      <div class="flex-between mb-3" style="flex-wrap: wrap; gap: 15px;">
+        <div class="card-title" style="margin-bottom: 0;">
+          <span>Master Academic Evaluation Register</span>
+          <span class="badge badge-primary">{{ filteredStudents.length }} of {{ students.length }} Records</span>
+        </div>
+
+        <!-- Filter Controls -->
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <input type="text" class="form-control" style="width: 200px;" placeholder="Filter by name / roll..." ng-model="searchFilter">
+          <select class="form-control" style="width: 170px;" ng-model="selectedDept">
+            <option value="">All Departments</option>
+            <option value="Computer Applications">Computer Applications</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="Data Science">Data Science</option>
+          </select>
+          <select class="form-control" style="width: 150px;" ng-model="sortOrder">
+            <option value="-gpa">Sort: GPA High to Low</option>
+            <option value="gpa">Sort: GPA Low to High</option>
+            <option value="name">Sort: Name (A-Z)</option>
+            <option value="rollNo">Sort: Roll Number</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border-color); text-align: left;">
+              <th style="padding: 10px;">#</th>
+              <th style="padding: 10px;">Roll No</th>
+              <th style="padding: 10px;">Student Name</th>
+              <th style="padding: 10px;">Department</th>
+              <th style="padding: 10px;">Marks (M1/M2/M3)</th>
+              <th style="padding: 10px;">Aggregate %</th>
+              <th style="padding: 10px;">GPA</th>
+              <th style="padding: 10px;">Result / Standing</th>
+              <th style="padding: 10px; text-align: center;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="s in (filteredStudents = (students | filter:searchFilter | filter:{department: selectedDept} | orderBy:sortOrder)) track by s.rollNo"
+                style="border-bottom: 1px solid var(--border-color); transition: background 0.2s;"
+                ng-class="{'row-even': $even, 'row-odd': $odd}">
+              <td style="padding: 10px;">{{ $index + 1 }}</td>
+              <td style="padding: 10px; font-family: 'Fira Code', monospace; font-weight: 600;">{{ s.rollNo }}</td>
+              <td style="padding: 10px; font-weight: 500;">{{ s.name | uppercase }}</td>
+              <td style="padding: 10px; color: var(--text-muted); font-size: 0.85rem;">{{ s.department }}</td>
+              <td style="padding: 10px; font-size: 0.85rem;">
+                {{ s.m1 }} | {{ s.m2 }} | {{ s.m3 }}
+                <div class="progress-track">
+                  <div class="progress-fill" ng-style="{'width': ((s.m1 + s.m2 + s.m3)/3) + '%', 'background': getScoreColor((s.m1 + s.m2 + s.m3)/3)}"></div>
+                </div>
+              </td>
+              <td style="padding: 10px; font-weight: 600;">{{ ((s.m1 + s.m2 + s.m3)/3) | number:1 }}%</td>
+              <td style="padding: 10px; font-weight: 700; color: #fbbf24;">{{ s.gpa | number:2 }}</td>
+              <td style="padding: 10px;">
+                <span class="stat-badge" ng-class="s.standingClass">
+                  {{ s.standing }}
+                </span>
+                <span ng-if="s.arrears > 0" class="stat-badge badge-fail" style="margin-left: 4px;">
+                  {{ s.arrears }} Arrear(s)
+                </span>
+              </td>
+              <td style="padding: 10px; text-align: center;">
+                <button class="btn btn-secondary btn-sm" ng-click="editStudent(s)">Edit</button>
+                <button class="btn btn-danger btn-sm" ng-click="deleteStudent(s)">Delete</button>
+              </td>
+            </tr>
+            <tr ng-if="filteredStudents.length === 0">
+              <td colspan="9" style="text-align: center; padding: 25px; color: var(--text-muted);">
+                No matching student records found matching the active filter criteria.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    var app = angular.module('examAcademicApp', []);
+
+    app.controller('AcademicController', function($scope) {
+      // Pre-seeded university cohort dataset
+      $scope.students = [
+        { rollNo: '24MCA101', name: 'Vijay Kumar', department: 'Computer Applications', attendance: 92, m1: 88, m2: 91, m3: 85 },
+        { rollNo: '24MCA102', name: 'Asha Sundaram', department: 'Computer Applications', attendance: 84, m1: 78, m2: 82, m3: 80 },
+        { rollNo: '24CS201',  name: 'Sam Wilson', department: 'Computer Science', attendance: 76, m1: 42, m2: 55, m3: 60 },
+        { rollNo: '24CS202',  name: 'Priya Raman', department: 'Computer Science', attendance: 95, m1: 94, m2: 96, m3: 92 },
+        { rollNo: '24IT301',  name: 'Karthik Raja', department: 'Information Technology', attendance: 68, m1: 35, m2: 48, m3: 52 },
+        { rollNo: '24DS401',  name: 'Divya Bharathi', department: 'Data Science', attendance: 88, m1: 85, m2: 89, m3: 87 }
+      ];
+
+      $scope.auditLogs = [];
+      $scope.sortOrder = '-gpa';
+      $scope.searchFilter = '';
+      $scope.selectedDept = '';
+      $scope.isEditing = false;
+
+      // Evaluation Helper
+      $scope.calculateGPA = function(s) {
+        if (!s) return 0;
+        var avg = ((s.m1 || 0) + (s.m2 || 0) + (s.m3 || 0)) / 3;
+        return (avg / 10).toFixed(2);
+      };
+
+      $scope.refreshMetrics = function(s) {
+        var avg = (s.m1 + s.m2 + s.m3) / 3;
+        s.gpa = parseFloat((avg / 10).toFixed(2));
+        var arrears = 0;
+        if (s.m1 < 50) arrears++;
+        if (s.m2 < 50) arrears++;
+        if (s.m3 < 50) arrears++;
+        s.arrears = arrears;
+
+        if (arrears > 0) {
+          s.standing = 'RA (Re-Appear)';
+          s.standingClass = 'badge-fail';
+        } else if (avg >= 85) {
+          s.standing = 'First Class Distinction';
+          s.standingClass = 'badge-dist';
+        } else if (avg >= 60) {
+          s.standing = 'First Class';
+          s.standingClass = 'badge-pass';
+        } else {
+          s.standing = 'Second Class';
+          s.standingClass = 'badge-pass';
+        }
+      };
+
+      // Populate metrics for initial array
+      angular.forEach($scope.students, function(item) {
+        $scope.refreshMetrics(item);
+      });
+
+      $scope.currentStudent = {
+        name: 'Arun Mozhi',
+        rollNo: '24MCA105',
+        department: 'Computer Applications',
+        attendance: 85,
+        m1: 75,
+        m2: 80,
+        m3: 78
+      };
+
+      $scope.getScoreColor = function(avg) {
+        if (avg >= 80) return '#10b981';
+        if (avg >= 50) return '#3b82f6';
+        return '#ef4444';
+      };
+
+      $scope.getAttendanceTier = function(pct) {
+        if (pct >= 90) return 'EXCELLENT';
+        if (pct >= 75) return 'GOOD';
+        if (pct >= 65) return 'WARNING';
+        return 'CRITICAL';
+      };
+
+      $scope.saveStudent = function() {
+        if ($scope.isEditing) {
+          var idx = $scope.students.findIndex(function(x) { return x.rollNo === $scope.currentStudent.rollNo; });
+          if (idx !== -1) {
+            $scope.students[idx] = angular.copy($scope.currentStudent);
+            $scope.refreshMetrics($scope.students[idx]);
+            $scope.logAction('Updated marks & profile for student: ' + $scope.currentStudent.rollNo);
+          }
+          $scope.isEditing = false;
+        } else {
+          var exists = $scope.students.some(function(x) { return x.rollNo === $scope.currentStudent.rollNo; });
+          if (exists) {
+            alert('A student with Roll Number ' + $scope.currentStudent.rollNo + ' already exists!');
+            return;
+          }
+          var fresh = angular.copy($scope.currentStudent);
+          $scope.refreshMetrics(fresh);
+          $scope.students.push(fresh);
+          $scope.logAction('Admitted new student ' + fresh.name + ' (' + fresh.rollNo + ')');
+        }
+        $scope.resetForm();
+      };
+
+      $scope.editStudent = function(s) {
+        $scope.currentStudent = angular.copy(s);
+        $scope.isEditing = true;
+      };
+
+      $scope.deleteStudent = function(s) {
+        if (confirm('Are you sure you want to remove ' + s.name + ' (' + s.rollNo + ')?')) {
+          var idx = $scope.students.indexOf(s);
+          if (idx !== -1) {
+            $scope.students.splice(idx, 1);
+            $scope.logAction('Deleted record for: ' + s.rollNo);
+          }
+        }
+      };
+
+      $scope.resetForm = function() {
+        $scope.currentStudent = {
+          name: '',
+          rollNo: '',
+          department: '',
+          attendance: 80,
+          m1: 70,
+          m2: 70,
+          m3: 70
+        };
+        $scope.isEditing = false;
+        if ($scope.studentForm) {
+          $scope.studentForm.$setPristine();
+          $scope.studentForm.$setUntouched();
+        }
+      };
+
+      $scope.logAction = function(msg) {
+        var d = new Date();
+        var timestamp = d.getHours().toString().padStart(2, '0') + ':' +
+                        d.getMinutes().toString().padStart(2, '0') + ':' +
+                        d.getSeconds().toString().padStart(2, '0');
+        $scope.auditLogs.unshift({ time: timestamp, message: msg });
+        if ($scope.auditLogs.length > 25) $scope.auditLogs.pop();
+      };
+
+      // Demonstrating $scope.$watch for deep monitoring
+      $scope.$watch('currentStudent', function(newVal, oldVal) {
+        if (newVal && oldVal && newVal !== oldVal) {
+          if (newVal.m1 !== oldVal.m1 || newVal.m2 !== oldVal.m2 || newVal.m3 !== oldVal.m3) {
+            var diffM1 = newVal.m1 - oldVal.m1;
+            $scope.logAction('Active Mark Change Detected: M1(' + (newVal.m1 || 0) + '), M2(' + (newVal.m2 || 0) + '), M3(' + (newVal.m3 || 0) + ')');
+          }
+        }
+      }, true);
+
+      // Aggregate Stats
+      $scope.getPassPercentage = function() {
+        if ($scope.students.length === 0) return 0;
+        var passed = $scope.students.filter(function(s) { return s.arrears === 0; }).length;
+        return (passed / $scope.students.length) * 100;
+      };
+
+      $scope.getDistinctionCount = function() {
+        return $scope.students.filter(function(s) { return s.standing === 'First Class Distinction'; }).length;
+      };
+
+      $scope.getAverageGPA = function() {
+        if ($scope.students.length === 0) return 0;
+        var total = 0;
+        angular.forEach($scope.students, function(s) { total += s.gpa; });
+        return total / $scope.students.length;
+      };
+
+      $scope.logAction('Application initialized. 6 cohort records loaded.');
+    });
+  </script>
+</body>
+</html>
+

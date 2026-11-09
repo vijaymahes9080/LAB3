@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+<meta charset="UTF-8">
+<title>ng-model Directive Classes</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script><style>
+body { font-family: Arial; margin: 30px; }
+input {
+display: block;
+margin: 10px 10px;
+padding: 8px;
+width: 250px;
+border: 2px solid gray;
+border-radius: 5px;
+}
+/* Visual cues for each class */
+.ng-empty { background-color: #f8d7da; }
+.ng-not-empty { background-color: #d4edda; }
+.ng-touched { border-color: blue; }
+.ng-untouched { border-color: orange; }
+.ng-valid { border: 2px solid green; }
+.ng-invalid { border: 2px solid red; }
+.ng-dirty { background-color: #d4d3d0; }
+.ng-pristine { background-color: #e2e3e5; }
+</style>
+</head>
+<body>
+<h2>AngularJS ng-model Directive Classes</h2>
+<form name="myForm">
+<label>Enter your name (required):</label>
+<input type="text" name="username" ng-model="user.name" required>
+<p><b>Form State:</b></p>
+<ul>
+<li>ng-empty: {{ myForm.username.$error.required }}</li>
+<li>ng-not-empty: {{ !myForm.username.$error.required }}</li>
+<li>ng-touched: {{ myForm.username.$touched }}</li>
+<li>ng-untouched: {{ myForm.username.$untouched }}</li>
+<li>ng-valid: {{ myForm.username.$valid }}</li>
+<li>ng-invalid: {{ myForm.username.$invalid }}</li>
+<li>ng-dirty: {{ myForm.username.$dirty }}</li>
+<li>ng-pristine: {{ myForm.username.$pristine }}</li>
+<li>ng-pending: {{ myForm.username.$pending }}</li>
+</ul>
+</form>
+<p>Type something and click outside the box to see the class changes. </p>
+</body>
+</html>

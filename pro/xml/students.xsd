@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- =======================================================
+     students.xsd - XML Schema Definition for Student Records
+     ======================================================= -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <!-- Root Element -->
+    <xs:element name="students">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="student" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            
+                            <!-- ID -->
+                            <xs:element name="id" type="xs:positiveInteger"/>
+                            
+                            <!-- Roll Number -->
+                            <xs:element name="rollNo">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="[A-Z]{3}-[0-9]{4}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+
+                            <!-- Name -->
+                            <xs:element name="name">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:minLength value="2"/>
+                                        <xs:maxLength value="100"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+
+                            <!-- Age -->
+                            <xs:element name="age">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:integer">
+                                        <xs:minInclusive value="15"/>
+                                        <xs:maxInclusive value="70"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+
+                            <!-- Date of Birth -->
+                            <xs:element name="dob" type="xs:date"/>
+
+                            <!-- Gender -->
+                            <xs:element name="gender">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Male"/>
+                                        <xs:enumeration value="Female"/>
+                                        <xs:enumeration value="Other"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+
+                            <!-- Email with Regex Pattern -->
+                            <xs:element name="email">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="[^@]+@[^\.]+\..+"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+
+                            <!-- Phone (10 digits) -->
+                            <xs:element name="phone">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="[0-9]{10}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+
+                            <!-- Course -->
+                            <xs:element name="course">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="BSc CS"/>
+                                        <xs:enumeration value="BCA"/>
+                                        <xs:enumeration value="BTech IT"/>
+                                        <xs:enumeration value="MCA"/>
+                                        <xs:enumeration value="MSc CS"/>
+                                        <xs:enumeration value="MTech CSE"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+
+                            <!-- Skills -->
+                            <xs:element name="skills" type="xs:string"/>
+
+                            <!-- City / Campus -->
+                            <xs:element name="city" type="xs:string"/>
+
+                            <!-- Batch Time -->
+                            <xs:element name="batch_time" type="xs:string"/>
+
+                            <!-- Address -->
+                            <xs:element name="address" type="xs:string"/>
+
+                        </xs:sequence>
+
+                        <!-- Attribute -->
+                        <xs:attribute name="status" type="xs:string" default="enrolled"/>
+
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

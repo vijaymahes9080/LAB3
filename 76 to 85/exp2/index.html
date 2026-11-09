@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Experiment 2 - Student CRUD</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 40px;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+    .container {
+      max-width: 800px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid #e2e8f0;
+    }
+    h2 {
+      margin-top: 0;
+      color: #0f172a;
+      border-bottom: 2px solid #2563eb;
+      padding-bottom: 10px;
+    }
+    .badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1d4ed8;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+      background: #f1f5f9;
+      padding: 16px;
+      border-radius: 8px;
+    }
+    input {
+      flex: 1 1 180px;
+      padding: 10px 14px;
+      font-size: 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      outline: none;
+    }
+    input:focus {
+      border-color: #2563eb;
+    }
+    button {
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px;
+      border: none;
+      transition: background-color 0.2s;
+    }
+    button[type="submit"] {
+      background: #2563eb;
+      color: white;
+    }
+    button[type="submit"]:hover {
+      background: #1d4ed8;
+    }
+    .btn-cancel {
+      background: #64748b;
+      color: white;
+    }
+    .btn-cancel:hover {
+      background: #475569;
+    }
+    .btn-edit {
+      background: #f59e0b;
+      color: white;
+      padding: 6px 12px;
+      margin-right: 6px;
+    }
+    .btn-edit:hover {
+      background: #d97706;
+    }
+    .btn-delete {
+      background: #ef4444;
+      color: white;
+      padding: 6px 12px;
+    }
+    .btn-delete:hover {
+      background: #dc2626;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #1e293b;
+      color: #ffffff;
+      font-weight: 600;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    tr:hover {
+      background-color: #f1f5f9;
+    }
+  </style>
+</head>
+<body ng-controller="StudentController">
+  <div class="container">
+    <div class="badge">Experiment 2: Client-side CRUD Operations</div>
+    <h2>Student Management</h2>
+
+    <form ng-submit="saveStudent()">
+      <input ng-model="form.name" placeholder="Name" required>
+      <input ng-model="form.department" placeholder="Department" required>
+      <input type="number" ng-model="form.marks" placeholder="Marks" required>
+      <button type="submit">{{editing ? "Update Student" : "Add Student"}}</button>
+      <button type="button" class="btn-cancel" ng-click="cancel()" ng-if="editing">Cancel</button>
+    </form>
+
+    <table border="1" cellpadding="8">
+      <tr>
+        <th>ID</th><th>Name</th><th>Department</th><th>Marks</th><th>Actions</th>
+      </tr>
+      <tr ng-repeat="s in students track by s.id">
+        <td>{{s.id}}</td>
+        <td>{{s.name}}</td>
+        <td>{{s.department}}</td>
+        <td>{{s.marks}}</td>
+        <td>
+          <button type="button" class="btn-edit" ng-click="editStudent(s)">Edit</button>
+          <button type="button" class="btn-delete" ng-click="deleteStudent(s.id)">Delete</button>
+        </td>
+      </tr>
+      <tr ng-if="students.length === 0">
+        <td colspan="5" style="text-align:center; color:#64748b; padding:18px;">No records available. Add one using the form above.</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    angular.module("studentApp", [])
+      .controller("StudentController", function($scope) {
+        $scope.students = [
+          {id: 1, name: "Arun", department: "MCA", marks: 85},
+          {id: 2, name: "Priya", department: "BCA", marks: 90}
+        ];
+        $scope.nextId = 3;
+        $scope.form = {};
+        $scope.editing = false;
+
+        $scope.saveStudent = function() {
+          if ($scope.editing) {
+            var s = $scope.students.find(x => x.id === $scope.form.id);
+            if (s) Object.assign(s, $scope.form);
+          } else {
+            $scope.students.push({
+              id: $scope.nextId++,
+              name: $scope.form.name,
+              department: $scope.form.department,
+              marks: $scope.form.marks
+            });
+          }
+          $scope.cancel();
+        };
+
+        $scope.editStudent = function(s) {
+          $scope.form = angular.copy(s);
+          $scope.editing = true;
+        };
+
+        $scope.deleteStudent = function(id) {
+          $scope.students = $scope.students.filter(s => s.id !== id);
+        };
+
+        $scope.cancel = function() {
+          $scope.form = {};
+          $scope.editing = false;
+        };
+      });
+  </script>
+</body>
+</html>

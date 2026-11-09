@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="registrationApp">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiment 7 - Student Registration</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+</head>
+<body ng-controller="RegistrationController">
+  <h2>Experiment 7: Student Registration</h2>
+  <form ng-submit="register()">
+    <input ng-model="student.rollNo" placeholder="Roll Number" required>
+    <input ng-model="student.name" placeholder="Student Name" required>
+    <input ng-model="student.department" placeholder="Department" required>
+    <button type="submit">Register</button>
+  </form>
+  <p>{{message}}</p><button ng-click="load()">Refresh</button>
+  <table border="1" cellpadding="8">
+    <tr><th>Roll No</th><th>Name</th><th>Department</th></tr>
+    <tr ng-repeat="s in students"><td>{{s.rollNo}}</td><td>{{s.name}}</td><td>{{s.department}}</td></tr>
+  </table>
+  <script>
+    angular.module("registrationApp", []).controller("RegistrationController", function($scope, $http) {
+      $scope.student = {}; $scope.students = [];
+      $scope.load = () => $http.get("/api/students").then(r => $scope.students = r.data)
+        .catch(() => $scope.message = "Could not load students");
+      $scope.register = () => $http.post("/api/students", $scope.student).then(() => {
+        $scope.message = "Student registered successfully"; $scope.student = {}; $scope.load();
+      }).catch(r => $scope.message = r.data.error || "Registration failed");
+      $scope.load();
+    });
+  </script>
+</body>
+</html>

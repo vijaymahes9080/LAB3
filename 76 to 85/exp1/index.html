@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Experiment 1 - Student Records</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 40px;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+    .container {
+      max-width: 700px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid #e2e8f0;
+    }
+    h2 {
+      margin-top: 0;
+      color: #0f172a;
+      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 10px;
+    }
+    .badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px 16px;
+      font-size: 15px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #1e293b;
+      color: #ffffff;
+      font-weight: 600;
+    }
+    tr:nth-child(even) {
+      background-color: #f1f5f9;
+    }
+    tr:hover {
+      background-color: #e2e8f0;
+    }
+  </style>
+</head>
+<body ng-controller="StudentController">
+  <div class="container">
+    <div class="badge">Experiment 1: Display & Filter Records</div>
+    <h2>Student Records</h2>
+    <input type="text" ng-model="searchText" placeholder="🔍 Search students by Name, Department, Marks...">
+
+    <table border="1" cellpadding="8">
+      <tr>
+        <th>ID</th><th>Name</th><th>Department</th><th>Marks</th>
+      </tr>
+      <tr ng-repeat="s in students | filter:searchText">
+        <td>{{s.id}}</td>
+        <td>{{s.name}}</td>
+        <td>{{s.department}}</td>
+        <td>{{s.marks}}</td>
+      </tr>
+      <tr ng-if="(students | filter:searchText).length === 0">
+        <td colspan="4" style="text-align:center; color:#64748b; padding:18px;">No matching students found</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    angular.module("studentApp", [])
+      .controller("StudentController", function($scope) {
+        $scope.searchText = "";
+        $scope.students = [
+          {id: 1, name: "Arun", department: "MCA", marks: 85},
+          {id: 2, name: "Priya", department: "BCA", marks: 90},
+          {id: 3, name: "Kumar", department: "MCA", marks: 78},
+          {id: 4, name: "Meena", department: "BSc CS", marks: 88}
+        ];
+      });
+  </script>
+</body>
+</html>
